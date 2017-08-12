@@ -1,12 +1,12 @@
 import * as React from "react";
 
-class App extends React.Component<{}, {}> {
+class HomePage extends React.Component {
   public render() {
     return (
       <div className="container">
         <div className="row">
           <div className="col">
-            <h1>App</h1>
+            <h1>Home</h1>
           </div>
         </div>
       </div>
@@ -14,4 +14,4 @@ class App extends React.Component<{}, {}> {
   }
 }
 
-export default App;
+export default HomePage;
