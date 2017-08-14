@@ -13,12 +13,16 @@
     "popper.js": "^1.11.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.2",
-    "react-scripts-ts": "2.5.0"
+    "react-scripts-ts": "2.5.0",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.4",
+    "@types/react-redux": "^5.0.1",
     "@types/react-router-dom": "^4.0.7",
+    "@types/redux-immutable-state-invariant": "^2.0.0",
     "enzyme": "^2.9.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",
