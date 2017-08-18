@@ -1,5 +1,6 @@
 import ITestCallAction from "./example/ITestCallAction";
+import ITestCallAsyncSuccessAction from "./example/ITestCallAsyncSuccessAction";
 
-type ActionTypes = ITestCallAction;
+type ActionTypes = ITestCallAction | ITestCallAsyncSuccessAction;
 
 export default ActionTypes;

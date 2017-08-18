@@ -16,7 +16,8 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.2",
     "react-scripts-ts": "2.5.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.4",
@@ -24,6 +25,7 @@
     "@types/react-router-dom": "^4.0.7",
     "@types/redux-immutable-state-invariant": "^2.0.0",
     "@types/redux-mock-store": "^0.0.10",
+    "@types/whatwg-fetch": "^0.0.33",
     "enzyme": "^2.9.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",
