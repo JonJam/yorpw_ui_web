@@ -1,6 +1,7 @@
 import { createStore } from "redux";
 // import { createStore, applyMiddleware } from 'redux';
 import rootReducer from "../reducers/rootReducer";
+import IStoreState from "./IStoreState";
 // import thunk from 'redux-thunk';
 
 // export default function configureStore(initialState) {
@@ -12,5 +13,5 @@ import rootReducer from "../reducers/rootReducer";
 // }
 
 export default function configureStore() {
-  return createStore(rootReducer);
+  return createStore<IStoreState>(rootReducer);
 }

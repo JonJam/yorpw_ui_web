@@ -1,43 +1,45 @@
-// import * as React from "react";
-// import { bindActionCreators } from "redux";
-// import State from "../../store/State";
-// import exampleActions from "../../actions/example/exampleActions";
-// import { connect } from "react-redux";
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { testCall } from "../../actions/example/exampleActions";
+import ITestCallAction from "../../actions/example/ITestCallAction";
+import IStoreState from "../../store/IStoreState";
 
-// interface SitePagesProps {
-//   msg: string;
-// }
+interface ISitePagesProps {
+  msg: string;
+  testCall: (message: string) => ITestCallAction;
+}
 
-// class HomePage extends React.Component<SitePagesProps> {
-//   public render() {
-//     return (
-//       <div className="container">
-//         <div className="row">
-//           <div className="col">
-//             <h1>Home</h1>
-//             <div>
-//               <p>Message is:</p>
-//               <p>
-//                 {this.props.msg}
-//               </p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+class SitesPage extends React.Component<ISitePagesProps> {
+  public render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h1>Home</h1>
+            <div>
+              <p>Message is:</p>
+              <p>
+                {this.props.msg}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-// function mapStateToProps(state: State) {
-//   return {
-//     msg: state.example
-//   };
-// }
+function mapStateToProps(state: IStoreState) {
+  return {
+    msg: state.example
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(exampleActions, dispatch);
-//   }
-// }
+function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
+  return {
+    testCall: bindActionCreators(testCall, dispatch)
+  };
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(SitesPage);

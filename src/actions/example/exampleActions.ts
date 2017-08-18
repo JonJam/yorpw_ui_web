@@ -1,11 +1,11 @@
 import keys from "../ActionTypeKeys";
-import TestCallAction from "./TestCallAction";
+import ITestCallAction from "./ITestCallAction";
 
-export function testCall(message: string): TestCallAction {
+export function testCall(message: string): ITestCallAction {
   return {
-    type: keys.TEST_CALL,
     payload: {
       msg: message
-    }
+    },
+    type: keys.TEST_CALL
   };
 }

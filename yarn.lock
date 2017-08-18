@@ -71,6 +71,12 @@
   dependencies:
     redux "^3.6.0"
 
+"@types/redux-mock-store@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@types/redux-mock-store/-/redux-mock-store-0.0.10.tgz#53b89a6d83c9970e492f14e1aeffdedf13633bd8"
+  dependencies:
+    redux "^3.6.0"
+
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -5126,6 +5132,10 @@ redux-immutable-state-invariant@^2.0.0:
   dependencies:
     invariant "^2.1.0"
     json-stringify-safe "^5.0.1"
+
+redux-mock-store@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.2.3.tgz#1b3ad299da91cb41ba30d68e3b6f024475fb9e1b"
 
 redux@^3.6.0, redux@^3.7.2:
   version "3.7.2"

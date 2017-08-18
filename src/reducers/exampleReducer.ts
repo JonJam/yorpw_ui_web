@@ -1,7 +1,6 @@
-import ActionTypes from "../actions/ActionTypes";
 import ActionTypeKeys from "../actions/ActionTypeKeys";
-import TestCallAction from "../actions/example/TestCallAction";
-
+import ActionTypes from "../actions/ActionTypes";
+import ITestCallAction from "../actions/example/ITestCallAction";
 import initialState from "./initialState";
 
 export default function exampleReducer(
@@ -16,6 +15,6 @@ export default function exampleReducer(
   }
 }
 
-function onTestCall(action: TestCallAction) {
+function onTestCall(action: ITestCallAction) {
   return action.payload.msg;
 }

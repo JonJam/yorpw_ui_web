@@ -1,5 +1,5 @@
-import ExampleAction from "./example/testCallAction";
+import ITestCallAction from "./example/ITestCallAction";
 
-type ActionTypes = ExampleAction;
+type ActionTypes = ITestCallAction;
 
 export default ActionTypes;
