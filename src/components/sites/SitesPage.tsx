@@ -10,7 +10,19 @@ interface ISitePagesProps {
   testCall: (message: string) => ITestCallAction;
 }
 
-class SitesPage extends React.Component<ISitePagesProps> {
+interface ISitePagesState {
+  message: string;
+}
+
+class SitesPage extends React.Component<ISitePagesProps, ISitePagesState> {
+  constructor(props: ISitePagesProps) {
+    super(props);
+
+    this.state = {
+      message: props.msg
+    };
+  }
+
   public render() {
     return (
       <div className="container">
@@ -22,12 +34,36 @@ class SitesPage extends React.Component<ISitePagesProps> {
               <p>
                 {this.props.msg}
               </p>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  defaultValue={this.state.message}
+                  onChange={this.handleTextChange}
+                />
+                <input type="submit" value="submit" />
+              </form>
             </div>
           </div>
         </div>
       </div>
     );
   }
+
+  private handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const newValue = this.state.message;
+
+    this.props.testCall(newValue);
+  };
+
+  private handleTextChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const newValue = event.currentTarget.value;
+
+    this.setState({
+      message: newValue
+    });
+  };
 }
 
 function mapStateToProps(state: IStoreState) {
