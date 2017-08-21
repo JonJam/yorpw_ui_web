@@ -8,7 +8,7 @@ import IStoreState from "../../store/IStoreState";
 interface ISitePagesProps {
   msg: string;
   testCall: (message: string) => ITestCallAction;
-  // TODO ADD ACTION HERE
+  testCallAsync: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface ISitePagesState {
@@ -63,8 +63,9 @@ class SitesPage extends React.Component<ISitePagesProps, ISitePagesState> {
     const newValue = this.state.message;
 
     if (this.state.doAsync) {
-      this.props.testCall(newVal232ue);
+      this.props.testCallAsync();
     } else {
+      this.props.testCall(newValue);
     }
   };
 
@@ -76,8 +77,8 @@ class SitesPage extends React.Component<ISitePagesProps, ISitePagesState> {
     });
   };
 
-  private handleDoAsyncChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const newValue = event.target.checked;
+  private handleDoAsyncChange = () => {
+    const newValue = !this.state.doAsync;
 
     this.setState({
       doAsync: newValue
@@ -93,8 +94,8 @@ function mapStateToProps(state: IStoreState) {
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
-    testCall: bindActionCreators(testCall, dispatch)
-    // TODO ADD ACTION HERE
+    testCall: bindActionCreators(testCall, dispatch),
+    testCallAsync: bindActionCreators(testCallAsync, dispatch)
   };
 }
 

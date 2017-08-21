@@ -1,8 +1,8 @@
 import { applyMiddleware, createStore } from "redux";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunkMiddleware from "redux-thunk";
 import rootReducer from "../reducers/rootReducer";
 import IStoreState from "./IStoreState";
-import thunkMiddleware from "redux-thunk";
 
 export default function configureStore() {
   return createStore<IStoreState>(

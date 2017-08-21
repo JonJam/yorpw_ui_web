@@ -16,7 +16,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
-    "removeComments": true
+    "removeComments": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",

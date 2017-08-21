@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
+import "whatwg-fetch";
+import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
 import ITestCallAction from "./ITestCallAction";
 import ITestCallAsyncSuccessAction from "./ITestCallAsyncSuccessAction";
-import IStoreState from "../../store/IStoreState";
-import "whatwg-fetch";
 
 export function testCall(message: string): ITestCallAction {
   return {
@@ -18,12 +18,9 @@ export function testCallAsync(): (
   dispatch: Dispatch<IStoreState>
 ) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
-    const response = await fetch("https://www.google.co.uk");
-    const json = await response.json();
+    await fetch("https://api.github.com/users");
 
-    console.log(json);
-
-    dispatch(testCallSuccess("GOT STUFF"));
+    dispatch(testCallSuccess("MESSAGE FROM ASYNC"));
   };
 }
 
