@@ -3,7 +3,7 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": ["es6", "dom", "es2015.promise"],
     "sourceMap": true,
     "jsx": "react",
     "moduleResolution": "node",
@@ -16,7 +16,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
-    "removeComments": true
+    "removeComments": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
