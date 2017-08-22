@@ -56,7 +56,7 @@
     "lint-css": "stylelint 'src/**/*.scss'",
     "build-css": "npm run lint-css && node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "generate-mock-api-data": "ts-node --configFile tsconfig.json --rootDir ./buildScripts --outDir ./buildScripts buildScripts/mockApi/generateData.ts",
+    "generate-mock-api-data": "ts-node -P tsconfig.buildScripts.json buildScripts/mockApi/generateData.ts",
     "start-mock-api": "json-server --watch buildScripts/mockApi/index.ts --port 3001",
     "security-check": "nsp check",
     "start-ts": "react-scripts-ts start",

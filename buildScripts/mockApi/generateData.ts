@@ -1,3 +1,23 @@
+import * as jsf from "json-schema-faker";
+// import { red, green } from "chalk";
+// import schema from "./dataSchema";
+// import { writeFile } from "fs";
+
+// const something = jsf(schema);
+
+console.log(jsf);
+
+// const json = JSON.stringify(value);
+
+// writeFile(".db.json", json, (err) => {
+//   if (err) {
+//     return console.log(red(err.message));
+//   } else {
+//     console.log(green("Mock data generated."));
+//   }
+// });
+
+
 // // "generate-mock-data": "babel-node buildScripts/mockApi/generateMockData",
 // // "prestart-mock-api": "npm run generate-mock-data",
 // // "start-mock-api": "json-server --watch buildScripts/mockApi/db.json --port 3001",
@@ -14,23 +34,3 @@
 // //   }
 // //   return data
 // // }
-
-// import { jsfAPI } from "json-schema-faker";
-// import { red, green } from "chalk";
-// import schema from "./dataSchema";
-// import { writeFile } from "fs";
-
-// const value = await jsf.resolve(schema);
-// const something = jsfAPI(schema);
-
-console.log("hi");
-
-// const json = JSON.stringify(value);
-
-// writeFile(".db.json", json, (err) => {
-//   if (err) {
-//     return console.log(red(err.message));
-//   } else {
-//     console.log(green("Mock data generated."));
-//   }
-// });
