@@ -22,3 +22,4 @@ yarn-error.log*
 
 # Built files
 src/**/*.css
+db.json
