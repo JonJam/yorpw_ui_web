@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs", // ts-node does not work with esnext
-    "rootDir": "buildScripts",
-    "outDir": "buildScripts"
+    "module": "commonjs" // ts-node does not work with esnext
   }
 }

@@ -1,0 +1,312 @@
+{
+  "groups": [
+    {
+      "id": "c1fea862-fad3-46f5-b573-7fc03f8f8669",
+      "name": "Unbranded Cotton Chair",
+      "sites": [
+        "a337c008-7b63-476c-9cc9-20e915723754",
+        "a1a26550-3a60-4373-9dea-60e68ea5a7d0",
+        "1b2809fc-3f72-4f37-83d0-ed2d3178aa44",
+        "4469d4fe-c556-4648-baeb-b8fba54b3b54"
+      ]
+    },
+    {
+      "id": "b97f0bd7-8e39-42ba-a03c-222b6df5456f",
+      "name": "Handcrafted Cotton Bike",
+      "sites": [
+        "69cf1631-37f8-4279-a96f-a294637236fd",
+        "66cc0a29-a83c-49a9-abf0-afa83c6dc26c",
+        "a739828e-d94f-4fe0-a0c1-cb6a811e0c28",
+        "ba959960-e199-4fa7-a8d5-0a73daa2b63f",
+        "9ed3daf9-f0fe-4772-9d88-d62e68002932",
+        "fe1cbda5-cc3c-43ab-893a-6b9a9c3967a7",
+        "755dfcf1-a10d-4781-bd6a-e97610a125b9",
+        "78721254-520a-4d85-b81c-53a4afeede25",
+        "2ecba02b-8402-402b-a18b-02f85e2f8c70",
+        "b340a8be-ef0e-4b98-8956-b1040b8eaf72",
+        "0f48f859-e98f-43b6-9928-d361b194831c",
+        "ebea9cfa-47a9-4cc8-baaf-835df40b8d82",
+        "75fbd26e-7d69-4645-8aa1-ed23d19fee6c",
+        "94ad256d-0f4f-4048-bbfb-219b0f8278c4",
+        "aea0c356-99df-431a-986f-de28a759ccad",
+        "35024ba0-b1b0-4619-b521-bef020dffa17",
+        "6847d01a-4c4e-4ff4-8221-45a9ba2f9058"
+      ]
+    },
+    {
+      "id": "cc482426-8705-436b-8f87-34af53defd7e",
+      "name": "Licensed Plastic Table",
+      "sites": [
+        "c54ac672-3e92-447b-8bda-10657b829848",
+        "ba27c554-cff9-4417-adc3-7ca2488a9c30",
+        "b26b1b4c-4d7a-454c-90ba-2f990798295b",
+        "a0cbae67-a1d0-4850-ac3f-a9e8ade44f10",
+        "ed52ee44-121a-4617-9dfb-32be65841067",
+        "891dc7a5-1acf-43e6-939b-9c292edbc593",
+        "9c2e275c-03fe-4fdc-ba92-ffc9f990db55",
+        "7a8ce7d9-baef-4550-a76b-520ea5ac9c62",
+        "fd5549a6-bd0c-420f-8d63-95f66792bc4c",
+        "d93a6682-88b5-4837-9bfe-ed52092f3379",
+        "5c0216b0-e4c3-4dc2-96fe-7bfb9e427660",
+        "0fc562fc-2dfe-4693-878b-ffdd8bab1235",
+        "c9a3ff74-16f6-4b34-9b27-b0f31628ac54",
+        "9532273f-37e2-461e-8bc9-b79409ba6215",
+        "415f9f6c-f1f2-4eac-80c9-d4e65c2a50ae"
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "id": "a337c008-7b63-476c-9cc9-20e915723754",
+      "name": "hollie.name",
+      "url": "https://eloise.com",
+      "userName": "Salvatore60@yahoo.com",
+      "password": "zpp5boGfxt6NWmb"
+    },
+    {
+      "id": "a1a26550-3a60-4373-9dea-60e68ea5a7d0",
+      "name": "jonatan.com",
+      "url": "https://emmalee.info",
+      "userName": "Arielle_Schuster83@gmail.com",
+      "password": "b6jy1tEKqLFsSjh"
+    },
+    {
+      "id": "1b2809fc-3f72-4f37-83d0-ed2d3178aa44",
+      "name": "albert.net",
+      "url": "http://houston.name",
+      "userName": "Elinor.Kuhic48@gmail.com",
+      "password": "GZh8QzUEKDx3UwU"
+    },
+    {
+      "id": "4469d4fe-c556-4648-baeb-b8fba54b3b54",
+      "name": "corrine.biz",
+      "url": "http://maida.org",
+      "userName": "Eloise_Oberbrunner@gmail.com",
+      "password": "senprMo_voYAWtu"
+    },
+    {
+      "id": "69cf1631-37f8-4279-a96f-a294637236fd",
+      "name": "norene.biz",
+      "url": "http://mariela.org",
+      "userName": "Wilbert_Towne@gmail.com",
+      "password": "6jBC_6IXKOzAeih"
+    },
+    {
+      "id": "66cc0a29-a83c-49a9-abf0-afa83c6dc26c",
+      "name": "fernando.com",
+      "url": "https://terrence.biz",
+      "userName": "Devan_Grant@gmail.com",
+      "password": "EEHnaTTDyN8sSXL"
+    },
+    {
+      "id": "a739828e-d94f-4fe0-a0c1-cb6a811e0c28",
+      "name": "zelma.info",
+      "url": "https://frida.info",
+      "userName": "Ryann.Schultz71@hotmail.com",
+      "password": "sjVg3ZpAatXbjSn"
+    },
+    {
+      "id": "ba959960-e199-4fa7-a8d5-0a73daa2b63f",
+      "name": "freida.com",
+      "url": "https://glenda.net",
+      "userName": "Clemens51@hotmail.com",
+      "password": "gfXc9HuD143jMtT"
+    },
+    {
+      "id": "9ed3daf9-f0fe-4772-9d88-d62e68002932",
+      "name": "rosella.com",
+      "url": "https://raven.info",
+      "userName": "Sedrick99@hotmail.com",
+      "password": "AXp0oItQfAtTGrj"
+    },
+    {
+      "id": "fe1cbda5-cc3c-43ab-893a-6b9a9c3967a7",
+      "name": "bradford.info",
+      "url": "https://sabina.net",
+      "userName": "Asia13@yahoo.com",
+      "password": "HvhCLg2Xt2Q_Qz3"
+    },
+    {
+      "id": "755dfcf1-a10d-4781-bd6a-e97610a125b9",
+      "name": "tod.net",
+      "url": "https://phoebe.name",
+      "userName": "Jonathon78@gmail.com",
+      "password": "I5rlA6xLomlQjY3"
+    },
+    {
+      "id": "78721254-520a-4d85-b81c-53a4afeede25",
+      "name": "lauretta.com",
+      "url": "http://raymond.com",
+      "userName": "Ari.Parisian@hotmail.com",
+      "password": "sL2NMFixsngvYLX"
+    },
+    {
+      "id": "2ecba02b-8402-402b-a18b-02f85e2f8c70",
+      "name": "annamae.name",
+      "url": "http://alexys.com",
+      "userName": "Ahmed78@yahoo.com",
+      "password": "Owomm69WhBK07cT"
+    },
+    {
+      "id": "b340a8be-ef0e-4b98-8956-b1040b8eaf72",
+      "name": "merle.biz",
+      "url": "https://danial.name",
+      "userName": "August_Kunde@yahoo.com",
+      "password": "0RaWdRqb93Vhuvs"
+    },
+    {
+      "id": "0f48f859-e98f-43b6-9928-d361b194831c",
+      "name": "chelsie.name",
+      "url": "http://hanna.name",
+      "userName": "Mona63@hotmail.com",
+      "password": "5nNkjzpLw8AQbQ1"
+    },
+    {
+      "id": "ebea9cfa-47a9-4cc8-baaf-835df40b8d82",
+      "name": "lawson.info",
+      "url": "https://lincoln.biz",
+      "userName": "Jessie.Kihn19@yahoo.com",
+      "password": "6aeOc3bMl0D9qmd"
+    },
+    {
+      "id": "75fbd26e-7d69-4645-8aa1-ed23d19fee6c",
+      "name": "randy.name",
+      "url": "https://mittie.org",
+      "userName": "Vella1@gmail.com",
+      "password": "RK18CPAFMfrWPGb"
+    },
+    {
+      "id": "94ad256d-0f4f-4048-bbfb-219b0f8278c4",
+      "name": "genoveva.biz",
+      "url": "https://mona.info",
+      "userName": "Robb.Orn40@yahoo.com",
+      "password": "NBFWE8p7QyTZPHu"
+    },
+    {
+      "id": "aea0c356-99df-431a-986f-de28a759ccad",
+      "name": "brain.org",
+      "url": "http://verdie.org",
+      "userName": "Jonas_Sporer43@yahoo.com",
+      "password": "IyAsXEdZpmdBXep"
+    },
+    {
+      "id": "35024ba0-b1b0-4619-b521-bef020dffa17",
+      "name": "kaitlin.org",
+      "url": "https://theodore.com",
+      "userName": "Reyna.Senger6@gmail.com",
+      "password": "CXNu811ywAbDe9b"
+    },
+    {
+      "id": "6847d01a-4c4e-4ff4-8221-45a9ba2f9058",
+      "name": "ethyl.info",
+      "url": "https://magnolia.net",
+      "userName": "Kristy_Beer84@yahoo.com",
+      "password": "PxT3boVhN_N7XwO"
+    },
+    {
+      "id": "c54ac672-3e92-447b-8bda-10657b829848",
+      "name": "charles.org",
+      "url": "https://verlie.name",
+      "userName": "Krista_Turcotte70@yahoo.com",
+      "password": "hJSY3x5MaysyH8j"
+    },
+    {
+      "id": "ba27c554-cff9-4417-adc3-7ca2488a9c30",
+      "name": "clifford.name",
+      "url": "https://nigel.net",
+      "userName": "Georgianna_Morissette14@hotmail.com",
+      "password": "gqoHvDaSG3x069X"
+    },
+    {
+      "id": "b26b1b4c-4d7a-454c-90ba-2f990798295b",
+      "name": "maria.biz",
+      "url": "http://rod.net",
+      "userName": "May.Auer81@gmail.com",
+      "password": "RbcInUjXN3S8wc4"
+    },
+    {
+      "id": "a0cbae67-a1d0-4850-ac3f-a9e8ade44f10",
+      "name": "toney.org",
+      "url": "https://jaylin.name",
+      "userName": "Ewald18@yahoo.com",
+      "password": "HG4ju_6L7O4Ka5E"
+    },
+    {
+      "id": "ed52ee44-121a-4617-9dfb-32be65841067",
+      "name": "randi.name",
+      "url": "http://lillian.com",
+      "userName": "Maida63@yahoo.com",
+      "password": "mhF0RBeO5_jvQVe"
+    },
+    {
+      "id": "891dc7a5-1acf-43e6-939b-9c292edbc593",
+      "name": "annalise.net",
+      "url": "http://alan.biz",
+      "userName": "Leland.Bogan2@gmail.com",
+      "password": "PczvWnMmqwYncQl"
+    },
+    {
+      "id": "9c2e275c-03fe-4fdc-ba92-ffc9f990db55",
+      "name": "mariane.name",
+      "url": "http://anahi.biz",
+      "userName": "Rollin_Bailey@yahoo.com",
+      "password": "oIidXVj0nixugMx"
+    },
+    {
+      "id": "7a8ce7d9-baef-4550-a76b-520ea5ac9c62",
+      "name": "salma.com",
+      "url": "http://milford.net",
+      "userName": "Lionel.Fadel82@gmail.com",
+      "password": "ZnPIIDsVHLmCOo1"
+    },
+    {
+      "id": "fd5549a6-bd0c-420f-8d63-95f66792bc4c",
+      "name": "antonette.name",
+      "url": "http://paul.com",
+      "userName": "Malvina.Leuschke@gmail.com",
+      "password": "0Jsr2tk8MWS_bTG"
+    },
+    {
+      "id": "d93a6682-88b5-4837-9bfe-ed52092f3379",
+      "name": "joana.biz",
+      "url": "http://easter.org",
+      "userName": "Lou_Berge91@yahoo.com",
+      "password": "3_Kqecy6O63skKk"
+    },
+    {
+      "id": "5c0216b0-e4c3-4dc2-96fe-7bfb9e427660",
+      "name": "rickey.name",
+      "url": "http://reba.com",
+      "userName": "Georgette.Lubowitz68@gmail.com",
+      "password": "2VIxJVxogUWX12f"
+    },
+    {
+      "id": "0fc562fc-2dfe-4693-878b-ffdd8bab1235",
+      "name": "ewald.info",
+      "url": "http://aubrey.net",
+      "userName": "Max.Shanahan29@gmail.com",
+      "password": "xyMdXMZNd0mGXml"
+    },
+    {
+      "id": "c9a3ff74-16f6-4b34-9b27-b0f31628ac54",
+      "name": "manuel.info",
+      "url": "https://lia.org",
+      "userName": "Ruby.Doyle@gmail.com",
+      "password": "ffxC5_LFrMzY3Rg"
+    },
+    {
+      "id": "9532273f-37e2-461e-8bc9-b79409ba6215",
+      "name": "rebeca.info",
+      "url": "https://eva.name",
+      "userName": "Alia_Pfeffer15@hotmail.com",
+      "password": "Bw50L3fvX8KoITZ"
+    },
+    {
+      "id": "415f9f6c-f1f2-4eac-80c9-d4e65c2a50ae",
+      "name": "cordia.net",
+      "url": "http://alena.net",
+      "userName": "Jaqueline.Mosciski86@yahoo.com",
+      "password": "EbMFp7lEo9PW6v2"
+    }
+  ]
+}
