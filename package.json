@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/chalk": "^0.4.31",
     "@types/enzyme": "^2.8.4",
+    "@types/jquery": "^3.2.12",
     "@types/react-redux": "^5.0.1",
     "@types/react-router-dom": "^4.0.7",
     "@types/redux-immutable-state-invariant": "^2.0.0",

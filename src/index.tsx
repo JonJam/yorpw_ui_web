@@ -4,6 +4,10 @@ import App from "../src/components/App";
 import configureStore from "../src/store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
 
+// The following imports have to be in this order for bootstrap to correctly work.
+/* tslint:disable ordered-imports */
+import "./createBootstrapGlobals";
+import "bootstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 const store = configureStore();
