@@ -1,0 +1,10 @@
+@import "./_variables.scss";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: $footerHeight;
+}

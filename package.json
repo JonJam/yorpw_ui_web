@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/chalk": "^0.4.31",
     "@types/enzyme": "^2.8.4",
+    "@types/jquery": "^3.2.12",
     "@types/react-redux": "^5.0.1",
     "@types/react-router-dom": "^4.0.7",
     "@types/redux-immutable-state-invariant": "^2.0.0",
@@ -53,7 +54,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "lint-css": "stylelint 'src/**/*.scss'",
+    "lint-css": "stylelint src/**/*.scss -f verbose --color",
     "build-css": "npm run lint-css && node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "generate-mock-api-data": "ts-node -P tsconfig.buildScripts.json src/buildScripts/mockApi/generateData.ts",
