@@ -3,11 +3,12 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Store } from "redux";
 import IStoreState from "../store/IStoreState";
+import Footer from "./app/Footer/Footer";
+import NavBar from "./app/NavBar/NavBar";
 import Error404Page from "./errors/Error404Page";
 import HomePage from "./home/HomePage";
+import SignUpPage from "./signup/SignUpPage";
 import SitesPage from "./sites/SitesPage";
-import NavBar from "./app/NavBar/NavBar";
-import Footer from "./app/Footer/Footer";
 
 import "./App.css";
 
@@ -27,6 +28,7 @@ class App extends React.Component<IAppProps> {
               <Switch>
                 <Route exact={true} path="/" component={HomePage} />
                 <Route path="/sites" component={SitesPage} />
+                <Route path="/signup" component={SignUpPage} />
                 <Route component={Error404Page} />
               </Switch>
             </div>
