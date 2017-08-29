@@ -1,3 +1,4 @@
 export default {
-  msg: "hi"
+  groups: [],
+  pendingActions: 0
 };

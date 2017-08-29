@@ -9,7 +9,7 @@ const mockStore = configureStore<IStoreState>();
 it("shallow renders without crashing", () => {
   // Arrange
   const initialState: IStoreState = {
-    example: "Hi"
+    groups: []
   };
 
   const store = mockStore(initialState);

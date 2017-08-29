@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import IStoreState from "../store/IStoreState";
-import example from "./exampleReducer";
+import groups from "./groupsReducer";
+import pendingActions from "./pendingActionsReducer";
 
 const rootReducer = combineReducers<IStoreState>({
-  example
+  groups,
+  pendingActions
 });
 
 export default rootReducer;

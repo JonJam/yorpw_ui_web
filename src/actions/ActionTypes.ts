@@ -1,6 +1,10 @@
-import ITestCallAction from "./example/ITestCallAction";
-import ITestCallAsyncSuccessAction from "./example/ITestCallAsyncSuccessAction";
+import IGetGroupsFailAction from "./group/IGetGroupsFailAction";
+import IGetGroupsInProgressAction from "./group/IGetGroupsInProgressAction";
+import IGetGroupsSuccessAction from "./group/IGetGroupsSuccessAction";
 
-type ActionTypes = ITestCallAction | ITestCallAsyncSuccessAction;
+type ActionTypes =
+  | IGetGroupsFailAction
+  | IGetGroupsInProgressAction
+  | IGetGroupsSuccessAction;
 
 export default ActionTypes;
