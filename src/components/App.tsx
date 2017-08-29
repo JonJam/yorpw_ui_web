@@ -2,6 +2,7 @@ import * as React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Store } from "redux";
+import routes from "../routes";
 import IStoreState from "../store/IStoreState";
 import Footer from "./app/Footer/Footer";
 import NavBar from "./app/NavBar/NavBar";
@@ -26,9 +27,9 @@ class App extends React.Component<IAppProps> {
 
             <div className="container">
               <Switch>
-                <Route exact={true} path="/" component={HomePage} />
-                <Route path="/sites" component={SitesPage} />
-                <Route path="/signup" component={SignUpPage} />
+                <Route exact={true} path={routes.home} component={HomePage} />
+                <Route path={routes.sites} component={SitesPage} />
+                <Route path={routes.signUp} component={SignUpPage} />
                 <Route component={Error404Page} />
               </Switch>
             </div>

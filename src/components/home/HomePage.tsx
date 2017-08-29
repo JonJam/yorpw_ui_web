@@ -1,5 +1,6 @@
 import { History } from "history";
 import * as React from "react";
+import routes from "../../routes";
 import strings from "../../strings";
 
 interface IHomePageProps {
@@ -11,10 +12,10 @@ class HomePage extends React.Component<IHomePageProps> {
     return (
       <div className="jumbotron">
         <h1 className="display-3 text-center">
-          {strings.Home.title}
+          {strings.home.title}
         </h1>
         <p className="lead text-center">
-          {strings.Home.tagLine}
+          {strings.home.tagLine}
         </p>
         <hr className="my-4" />
         <div className="text-center">
@@ -23,7 +24,7 @@ class HomePage extends React.Component<IHomePageProps> {
             className="btn btn-primary btn-lg"
             onClick={this.handleClick}
           >
-            {strings.Home.getButton}
+            {strings.home.getButton}
           </button>
         </div>
       </div>
@@ -31,7 +32,7 @@ class HomePage extends React.Component<IHomePageProps> {
   }
 
   private handleClick = () => {
-    this.props.history.push("/signup");
+    this.props.history.push(routes.signUp);
   };
 }
 
