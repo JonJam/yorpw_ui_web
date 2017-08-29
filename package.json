@@ -54,7 +54,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "lint-css": "stylelint 'src/**/*.scss'",
+    "lint-css": "stylelint src/**/*.scss -f verbose --color",
     "build-css": "npm run lint-css && node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "generate-mock-api-data": "ts-node -P tsconfig.buildScripts.json src/buildScripts/mockApi/generateData.ts",
