@@ -4,6 +4,8 @@ import App from "../src/components/App";
 import configureStore from "../src/store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
 
+import "whatwg-fetch";
+
 // The following imports have to be in this order for bootstrap to correctly work.
 /* tslint:disable ordered-imports */
 import "./createBootstrapGlobals";

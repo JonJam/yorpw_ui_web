@@ -1,6 +1,5 @@
-import ActionTypeKeys from "../actions/ActionTypeKeys";
+import ActionTypeKeys, { ActionTypeStates } from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
-import { ActionTypeStates } from "../actions/ActionTypeKeys";
 import initialState from "./initialState";
 
 export default function pendingActionsReducer(

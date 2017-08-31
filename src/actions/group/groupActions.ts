@@ -1,11 +1,11 @@
 import { Dispatch } from "redux";
+import { getGroups as getGroupsFromApi } from "../../api/groupsApi";
+import IGroup from "../../model/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
+import IGetGroupsFailAction from "./IGetGroupsFailAction";
 import IGetGroupsInProgressAction from "./IGetGroupsInProgressAction";
 import IGetGroupsSuccessAction from "./IGetGroupsSuccessAction";
-import IGetGroupsFailAction from "./IGetGroupsFailAction";
-import IGroup from "../../model/IGroup";
-import { getGroups as getGroupsFromApi } from "../../api/groupsApi";
 
 export function getGroups(): (
   dispatch: Dispatch<IStoreState>
@@ -14,7 +14,6 @@ export function getGroups(): (
     // Signal work in progress.
     dispatch(getGroupsInProgress());
 
-    // TODO Test this
     try {
       const groups: IGroup[] = await getGroupsFromApi();
 
