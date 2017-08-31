@@ -1,4 +1,5 @@
 export default {
   groups: [],
-  pendingActions: 0
+  pendingActions: 0,
+  sites: []
 };
