@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getSites as getSitesFromApi } from "../../api/sitesApi";
-import ISite from "../../model/ISite";
+import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
 import IGetSitesFailAction from "./IGetSitesFailAction";

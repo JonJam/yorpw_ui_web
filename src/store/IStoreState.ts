@@ -1,5 +1,5 @@
-import IGroup from "../model/IGroup";
-import ISite from "../model/ISite";
+import IGroup from "../models/IGroup";
+import ISite from "../models/ISite";
 
 export default interface IStoreState {
   groups: IGroup[];

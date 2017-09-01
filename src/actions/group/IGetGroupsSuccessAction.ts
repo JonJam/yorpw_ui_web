@@ -1,5 +1,5 @@
 import keys from "../ActionTypeKeys";
-import IGroup from "../../model/IGroup";
+import IGroup from "../../models/IGroup";
 
 export default interface IGetGroupsSuccessAction {
   type: keys.GET_GROUPS_SUCCESS;

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getGroups as getGroupsFromApi } from "../../api/groupsApi";
-import IGroup from "../../model/IGroup";
+import IGroup from "../../models/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
 import IGetGroupsFailAction from "./IGetGroupsFailAction";

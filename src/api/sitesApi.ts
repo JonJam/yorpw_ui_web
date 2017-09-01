@@ -1,4 +1,4 @@
-import ISite from "../model/ISite";
+import ISite from "../models/ISite";
 import ApiError from "./ApiError";
 import baseUrl from "./baseUrl";
 

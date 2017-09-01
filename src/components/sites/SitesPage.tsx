@@ -3,22 +3,17 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
-import IGroup from "../../model/IGroup";
-import ISite from "../../model/ISite";
+import IGroupViewModel from "../../models/IGroupViewModel";
+import getGroupViewModels from "../../selectors/getGroupViewModels";
 import IStoreState from "../../store/IStoreState";
 
 interface ISitePagesProps {
-  groups: IGroup[];
-  sites: ISite[];
+  groups: IGroupViewModel[];
   getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   getSites: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 class SitesPage extends React.Component<ISitePagesProps> {
-  constructor(props: ISitePagesProps) {
-    super(props);
-  }
-
   public componentDidMount() {
     this.props.getGroups();
     this.props.getSites();
@@ -31,8 +26,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    groups: state.groups,
-    sites: state.sites
+    groups: getGroupViewModels(state.groups, state.sites)
   };
 }
 

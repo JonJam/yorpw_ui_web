@@ -1,4 +1,4 @@
-import IGroup from "../model/IGroup";
+import IGroup from "../models/IGroup";
 import ApiError from "./ApiError";
 import baseUrl from "./baseUrl";
 
