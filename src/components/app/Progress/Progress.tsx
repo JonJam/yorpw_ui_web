@@ -10,18 +10,20 @@ interface ILoadingProps {
 function Progress(props: ILoadingProps) {
   const displayProgress = areActionsInProgress(props.pendingActions);
 
-  const style: React.CSSProperties = {
-    display: displayProgress ? "block" : "none"
-  };
+  let progress: JSX.Element | null = null;
 
-  return (
-    <div className="progress" style={style}>
-      <div
-        className="progress-bar progress-bar-striped progress-bar-animated"
-        role="progressbar"
-      />
-    </div>
-  );
+  if (displayProgress) {
+    progress = (
+      <div className="progress">
+        <div
+          className="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar"
+        />
+      </div>
+    );
+  }
+
+  return progress;
 }
 
 export default Progress;

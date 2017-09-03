@@ -6,7 +6,8 @@ import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupViewModel from "../../models/IGroupViewModel";
 import getGroupViewModels from "../../selectors/getGroupViewModels";
 import IStoreState from "../../store/IStoreState";
-import GroupsList from "./GroupsList";
+import strings from "../../strings";
+import GroupList from "./GroupList";
 
 interface ISitePagesProps {
   groups: IGroupViewModel[];
@@ -21,7 +22,14 @@ class SitesPage extends React.Component<ISitePagesProps> {
   }
 
   public render() {
-    return <GroupsList groups={this.props.groups} />;
+    return (
+      <div>
+        <h1 className="sr-only">
+          {strings.sitesPage.h1}
+        </h1>
+        <GroupList groups={this.props.groups} />
+      </div>
+    );
   }
 }
 
