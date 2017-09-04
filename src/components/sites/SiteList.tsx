@@ -9,20 +9,22 @@ interface ISiteListProps {
 }
 
 function SiteList(props: ISiteListProps) {
-  const sites = props.sites.map(site => <Site key={site.id} site={site} />);
+  let element: JSX.Element = (
+    <EmptyMessage emptyMessage={strings.siteList.emptyMessage} />
+  );
 
   // TODO Maybe move this logic to a common function
-  const isEmpty = sites.length === 0;
+  if (props.sites.length > 0) {
+    const sites = props.sites.map(site => <Site key={site.id} site={site} />);
 
-  return (
-    <div className="row">
-      {sites}
-      <EmptyMessage
-        emptyMessage={strings.siteList.emptyMessage}
-        isEmpty={isEmpty}
-      />
-    </div>
-  );
+    element = (
+      <div className="row">
+        {sites}
+      </div>
+    );
+  }
+
+  return element;
 }
 
 export default SiteList;

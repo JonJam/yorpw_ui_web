@@ -9,22 +9,25 @@ interface IGroupListProps {
 }
 
 function GroupList(props: IGroupListProps) {
-  const groupItems = props.groups.map(group => {
-    return <Group key={group.id} group={group} />;
-  });
+  let element: JSX.Element = (
+    <EmptyMessage emptyMessage={strings.groupList.emptyMessage} />
+  );
 
   // TODO Maybe move this logic to a common function
-  const isEmpty = groupItems.length === 0;
+  if (props.groups.length > 0) {
+    const thisId = "groups";
+    const groupItems = props.groups.map(group => {
+      return <Group key={group.id} group={group} parentId={thisId} />;
+    });
 
-  return (
-    <div>
-      {groupItems}
-      <EmptyMessage
-        emptyMessage={strings.groupList.emptyMessage}
-        isEmpty={isEmpty}
-      />
-    </div>
-  );
+    element = (
+      <div id={thisId} role="tablist">
+        {groupItems}
+      </div>
+    );
+  }
+
+  return element;
 }
 
 export default GroupList;
