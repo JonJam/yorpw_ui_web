@@ -15,13 +15,12 @@ function GroupList(props: IGroupListProps) {
 
   // TODO Maybe move this logic to a common function
   if (props.groups.length > 0) {
-    const thisId = "groups";
     const groupItems = props.groups.map(group => {
-      return <Group key={group.id} group={group} parentId={thisId} />;
+      return <Group key={group.id} group={group} />;
     });
 
     element = (
-      <div id={thisId} role="tablist">
+      <div data-children=".item">
         {groupItems}
       </div>
     );

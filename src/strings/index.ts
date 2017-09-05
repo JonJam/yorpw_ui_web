@@ -1,4 +1,7 @@
 export default {
+  group: {
+    sitesInGroup: "sites in group."
+  },
   groupList: {
     emptyMessage: "Looks like you don't have any groups."
   },

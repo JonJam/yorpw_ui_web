@@ -12,12 +12,12 @@ function Site(props: ISiteProps) {
     <div className="col-md-6 col-lg-4">
       <div className="card mb-3">
         <div className="card-body">
-          <h4 className="card-title text-truncate">
+          <p className="card-title lead text-truncate">
             {props.site.name}
-          </h4>
-          <h6 className="card-subtitle text-muted text-truncate">
+          </p>
+          <p className="card-subtitle text-muted text-truncate">
             {props.site.userName}
-          </h6>
+          </p>
         </div>
       </div>
     </div>

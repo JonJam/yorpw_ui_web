@@ -1,37 +1,42 @@
 import * as React from "react";
 import IGroupViewModel from "../../models/IGroupViewModel";
 import SiteList from "./SiteList";
+import strings from "../../strings";
 
 interface IGroupProps {
-  parentId: string;
   group: IGroupViewModel;
 }
 
 function Group(props: IGroupProps) {
-  // WORKING HERE
   const headingId = props.group.id;
   const collapseId = `collapse${props.group.id}`;
+
   return (
-    <div className="card">
-      <div className="card-header" role="tab" id={headingId}>
-        <h2 className="mb-0">
-          <a
-            data-toggle="collapse"
-            href={`#${collapseId}`}
-            aria-expanded="true"
-            aria-controls={collapseId}
-          >
-            {props.group.name}
-          </a>
-        </h2>
-      </div>
+    <div className="item my-2">
+      <button
+        type="button"
+        className="btn btn-light btn-lg btn-block text-left"
+        data-target={`#${collapseId}`}
+        data-toggle="collapse"
+        aria-expanded="true"
+        aria-controls={collapseId}
+      >
+        {props.group.name}
+        &nbsp;
+        <span className="badge badge-secondary">
+          {props.group.sites.length}
+          <span className="sr-only">
+            {strings.group.sitesInGroup}
+          </span>
+        </span>
+        {/* TODO Add caret here */}
+      </button>
 
       <div
         id={collapseId}
         className="collapse show"
         role="tabpanel"
         aria-labelledby={headingId}
-        data-parent={`#${props.parentId}`}
       >
         <div className="card-body">
           <SiteList sites={props.group.sites} />
