@@ -1,101 +1,51 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { testCall, testCallAsync } from "../../actions/example/exampleActions";
-import ITestCallAction from "../../actions/example/ITestCallAction";
+import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
+import { getSites as getSitesAction } from "../../actions/site/siteActions";
+import IGroupViewModel from "../../models/IGroupViewModel";
+import getGroupViewModels from "../../selectors/getGroupViewModels";
+import isBusy from "../../selectors/isBusy";
 import IStoreState from "../../store/IStoreState";
+import strings from "../../strings";
+import GroupList from "./GroupList";
 
 interface ISitePagesProps {
-  msg: string;
-  testCall: (message: string) => ITestCallAction;
-  testCallAsync: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  groups: IGroupViewModel[];
+  isBusy: boolean;
+  getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  getSites: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
-interface ISitePagesState {
-  doAsync: boolean;
-  message: string;
-}
-
-class SitesPage extends React.Component<ISitePagesProps, ISitePagesState> {
-  constructor(props: ISitePagesProps) {
-    super(props);
-
-    this.state = {
-      doAsync: false,
-      message: props.msg
-    };
+class SitesPage extends React.Component<ISitePagesProps> {
+  public componentDidMount() {
+    this.props.getGroups();
+    this.props.getSites();
   }
 
   public render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h1>Home</h1>
-            <div>
-              <p>Message is:</p>
-              <p>
-                {this.props.msg}
-              </p>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="checkbox"
-                  checked={this.state.doAsync}
-                  onChange={this.handleDoAsyncChange}
-                />
-                <input
-                  type="text"
-                  value={this.state.message}
-                  onChange={this.handleTextChange}
-                />
-                <input type="submit" value="submit" />
-              </form>
-            </div>
-          </div>
-        </div>
+      <div>
+        <h1 className="sr-only">
+          {strings.sitesPage.h1}
+        </h1>
+        <GroupList groups={this.props.groups} isBusy={this.props.isBusy} />
       </div>
     );
   }
-
-  private handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const newValue = this.state.message;
-
-    if (this.state.doAsync) {
-      this.props.testCallAsync();
-    } else {
-      this.props.testCall(newValue);
-    }
-  };
-
-  private handleTextChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const newValue = event.currentTarget.value;
-
-    this.setState({
-      message: newValue
-    });
-  };
-
-  private handleDoAsyncChange = () => {
-    const newValue = !this.state.doAsync;
-
-    this.setState({
-      doAsync: newValue
-    });
-  };
 }
 
 function mapStateToProps(state: IStoreState) {
   return {
-    msg: state.example
+    groups: getGroupViewModels(state.groups, state.sites),
+    isBusy: isBusy(state.pendingActions)
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
-    testCall: bindActionCreators(testCall, dispatch),
-    testCallAsync: bindActionCreators(testCallAsync, dispatch)
+    getGroups: bindActionCreators(getGroupsAction, dispatch),
+    getSites: bindActionCreators(getSitesAction, dispatch)
   };
 }
 

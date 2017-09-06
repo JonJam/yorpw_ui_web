@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
 import IStoreState from "../store/IStoreState";
-import example from "./exampleReducer";
+import groups from "./groupsReducer";
+import pendingActions from "./pendingActionsReducer";
+import sites from "./sitesReducer";
 
 const rootReducer = combineReducers<IStoreState>({
-  example
+  groups,
+  pendingActions,
+  sites
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import { History } from "history";
 import * as React from "react";
-import routes from "../../routes";
+import { SignUpRoute } from "../../routes";
 import strings from "../../strings";
 
 interface IHomePageProps {
@@ -8,6 +8,13 @@ interface IHomePageProps {
 }
 
 class HomePage extends React.Component<IHomePageProps> {
+  constructor(props: IHomePageProps) {
+    super(props);
+
+    // Use bind instead of Arrow functions. As when using Arrow functions Chrome Debugger tools can't find values for properties in function.
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   public render() {
     return (
       <div className="jumbotron">
@@ -31,9 +38,9 @@ class HomePage extends React.Component<IHomePageProps> {
     );
   }
 
-  private handleClick = () => {
-    this.props.history.push(routes.signUp);
-  };
+  private handleClick() {
+    this.props.history.push(SignUpRoute);
+  }
 }
 
 export default HomePage;

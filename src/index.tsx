@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import "whatwg-fetch";
 import App from "../src/components/App";
 import configureStore from "../src/store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
@@ -9,6 +10,8 @@ import registerServiceWorker from "./registerServiceWorker";
 import "./createBootstrapGlobals";
 import "bootstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+import "../node_modules/font-awesome/css/font-awesome.css";
 
 const store = configureStore();
 

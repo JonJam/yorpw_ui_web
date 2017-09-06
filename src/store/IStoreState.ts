@@ -1,3 +1,8 @@
+import IGroup from "../models/IGroup";
+import ISite from "../models/ISite";
+
 export default interface IStoreState {
-  example: string;
+  groups: IGroup[];
+  sites: ISite[];
+  pendingActions: number;
 };
