@@ -24,18 +24,20 @@ function GroupList(props: IGroupListProps) {
     );
   } else if (!props.isBusy) {
     element = (
-      <div className="row">
-        <div className="col-12 mt-3">
-          <EmptyMessage
-            emptyMessageTitle={strings.groupList.emptyMessageTitle}
-            emptyMessageDescription={strings.groupList.emptyMessageDescription}
-          />
-        </div>
-      </div>
+      <EmptyMessage
+        emptyMessageTitle={strings.groupList.emptyMessageTitle}
+        emptyMessageDescription={strings.groupList.emptyMessageDescription}
+      />
     );
   }
 
-  return element;
+  return (
+    <div className="row">
+      <div className="col-12 mt-3">
+        {element}
+      </div>
+    </div>
+  );
 }
 
 export default GroupList;
