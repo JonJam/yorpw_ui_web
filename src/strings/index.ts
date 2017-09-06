@@ -3,7 +3,9 @@ export default {
     sitesInGroup: "sites in group."
   },
   groupList: {
-    emptyMessage: "Looks like you don't have any groups."
+    emptyMessageDescription:
+      "Y don't U try creating a grup & adding som sitz 2 it.",
+    emptyMessageTitle: "Hmm! looks lIk U don't hav NE groups"
   },
   home: {
     getButton: "git yorpw",
@@ -15,7 +17,8 @@ export default {
     signUp: "Sign up"
   },
   siteList: {
-    emptyMessage: "Looks like you don't have any sites in this group."
+    emptyMessageDescription: "Y don't U try adding som sitz 2 DIS grup.",
+    emptyMessageTitle: "Hmm! looks lIk U don't hav NE sitz"
   },
   sitesPage: {
     h1: "Sites"

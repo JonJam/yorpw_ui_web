@@ -1,7 +1,7 @@
 import * as React from "react";
 import IGroupViewModel from "../../models/IGroupViewModel";
-import SiteList from "./SiteList";
 import strings from "../../strings";
+import SiteList from "./SiteList";
 
 interface IGroupProps {
   group: IGroupViewModel;
@@ -15,21 +15,20 @@ function Group(props: IGroupProps) {
     <div className="item my-2">
       <button
         type="button"
-        className="btn btn-light btn-lg btn-block text-left"
+        className="btn btn-light btn-lg btn-block text-left text-truncate"
         data-target={`#${collapseId}`}
         data-toggle="collapse"
         aria-expanded="true"
         aria-controls={collapseId}
       >
-        {/* Working here */}
-        <div className="text-truncate">{props.group.name}</div>
-        &nbsp;
-        <span className="badge badge-secondary ">
+        <span className="badge badge-secondary">
           {props.group.sites.length}
           <span className="sr-only">
             {strings.group.sitesInGroup}
           </span>
         </span>
+        &nbsp;
+        {props.group.name}
       </button>
 
       <div

@@ -1,18 +1,15 @@
 import * as React from "react";
-import areActionsInProgress from "./areActionsInProgress";
 
 import "./Progress.css";
 
 interface ILoadingProps {
-  pendingActions: number;
+  isBusy: boolean;
 }
 
 function Progress(props: ILoadingProps) {
-  const displayProgress = areActionsInProgress(props.pendingActions);
-
   let progress: JSX.Element | null = null;
 
-  if (displayProgress) {
+  if (props.isBusy) {
     progress = (
       <div className="progress">
         <div

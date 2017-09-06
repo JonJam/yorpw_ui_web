@@ -8,7 +8,7 @@ import logo from "./logo.svg";
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-      <div className="container">
+      <div className="container-fluid">
         <Link to={HomeRoute} className="navbar-brand">
           <span>
             <img src={logo} alt="" />

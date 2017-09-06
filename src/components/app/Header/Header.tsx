@@ -1,11 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import isBusy from "../../../selectors/isBusy";
 import IStoreState from "../../../store/IStoreState";
 import NavBar from "../NavBar/NavBar";
 import Progress from "../Progress/Progress";
 
 interface IHeaderProps {
-  pendingActions: number;
+  isBusy: boolean;
 }
 
 class Header extends React.Component<IHeaderProps> {
@@ -13,7 +14,7 @@ class Header extends React.Component<IHeaderProps> {
     return (
       <div>
         <NavBar />
-        <Progress pendingActions={this.props.pendingActions} />
+        <Progress isBusy={this.props.isBusy} />
       </div>
     );
   }
@@ -21,7 +22,7 @@ class Header extends React.Component<IHeaderProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    pendingActions: state.pendingActions
+    isBusy: isBusy(state.pendingActions)
   };
 }
 

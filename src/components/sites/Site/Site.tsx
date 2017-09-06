@@ -9,7 +9,7 @@ interface ISiteProps {
 
 function Site(props: ISiteProps) {
   return (
-    <div className="col-md-6 col-lg-4">
+    <div className="col-md-6 col-lg-4 col-xl-3">
       <div className="card mb-3">
         <div className="card-body">
           <p className="card-title lead text-truncate">

@@ -28,7 +28,7 @@ class App extends React.Component<IAppProps> {
           <div>
             <Header />
 
-            <div className="container">
+            <div className="container-fluid">
               <Switch>
                 <Route exact={true} path={HomeRoute} component={HomePage} />
                 <Route path={SitesRoute} component={SitesPage} />

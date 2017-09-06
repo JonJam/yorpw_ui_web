@@ -10,10 +10,12 @@ interface ISiteListProps {
 
 function SiteList(props: ISiteListProps) {
   let element: JSX.Element = (
-    <EmptyMessage emptyMessage={strings.siteList.emptyMessage} />
+    <EmptyMessage
+      emptyMessageTitle={strings.siteList.emptyMessageTitle}
+      emptyMessageDescription={strings.siteList.emptyMessageDescription}
+    />
   );
 
-  // TODO Maybe move this logic to a common function
   if (props.sites.length > 0) {
     const sites = props.sites.map(site => <Site key={site.id} site={site} />);
 
