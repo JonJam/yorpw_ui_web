@@ -21,15 +21,15 @@ function Group(props: IGroupProps) {
         aria-expanded="true"
         aria-controls={collapseId}
       >
-        {props.group.name}
+        {/* Working here */}
+        <div className="text-truncate">{props.group.name}</div>
         &nbsp;
-        <span className="badge badge-secondary">
+        <span className="badge badge-secondary ">
           {props.group.sites.length}
           <span className="sr-only">
             {strings.group.sitesInGroup}
           </span>
         </span>
-        {/* TODO Add caret here */}
       </button>
 
       <div
