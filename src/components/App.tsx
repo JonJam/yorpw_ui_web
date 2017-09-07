@@ -44,7 +44,9 @@ class App extends React.Component<IAppProps> {
     );
   }
 
-  private signOut() {
+  private signOut(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+
     this.props.signOut(this.props.history);
   }
 }

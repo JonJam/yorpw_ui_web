@@ -7,7 +7,7 @@ import logo from "./logo.svg";
 
 interface INavBarProps {
   isAuthenticated: boolean;
-  handleSignOut: () => void;
+  handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function NavBar(props: INavBarProps) {

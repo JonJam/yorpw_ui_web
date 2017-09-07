@@ -5,7 +5,7 @@ import Progress from "./progress/Progress";
 interface IHeaderProps {
   isBusy: boolean;
   isAuthenticated: boolean;
-  handleSignOut: () => void;
+  handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function Header({ isBusy, ...rest }: IHeaderProps) {
