@@ -1,11 +1,11 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { SignUpRoute } from "../../routes";
+import { signUpPath } from "../../routes/paths";
 import strings from "../../strings";
 
 interface IHomePageProps extends RouteComponentProps<any> {}
 
-class HomePage extends React.Component<IHomePageProps> {
+export default class HomePage extends React.Component<IHomePageProps> {
   constructor(props: IHomePageProps) {
     super(props);
 
@@ -37,8 +37,6 @@ class HomePage extends React.Component<IHomePageProps> {
   }
 
   private handleClick() {
-    this.props.history.push(SignUpRoute);
+    this.props.history.push(signUpPath);
   }
 }
-
-export default HomePage;

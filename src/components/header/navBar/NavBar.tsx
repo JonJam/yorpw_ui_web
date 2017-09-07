@@ -1,15 +1,15 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { HomeRoute, SignUpRoute } from "../../../routes";
+import { homePath, signUpPath } from "../../../routes/paths";
 import strings from "../../../strings";
 
 import logo from "./logo.svg";
 
-function NavBar() {
+export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link to={HomeRoute} className="navbar-brand">
+        <Link to={homePath} className="navbar-brand">
           <span>
             <img src={logo} alt="" />
             {strings.navBar.appName}
@@ -30,7 +30,7 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-md-auto">
             <li className="nav-item">
-              <Link to={SignUpRoute} className="nav-link">
+              <Link to={signUpPath} className="nav-link">
                 {strings.navBar.signUp}
               </Link>
             </li>
@@ -40,5 +40,3 @@ function NavBar() {
     </nav>
   );
 }
-
-export default NavBar;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import Footer from "./app/Footer/Footer";
-import Header from "./app/Header/Header";
+import Footer from "./footer/Footer";
+import Header from "./header/Header";
 import Routes from "../routes/Routes";
 import { connect } from "react-redux";
 import isBusy from "../selectors/isBusy";
@@ -11,17 +11,17 @@ import "./App.css";
 
 interface IAppProps extends RouteComponentProps<any> {
   isBusy: boolean;
+  isAuthenticated: boolean;
 }
 
 class App extends React.Component<IAppProps> {
   public render() {
     return (
       <div>
-        <Header />
+        <Header isBusy={this.props.isBusy} />
 
         <div className="container-fluid">
-          {/* TODO Replace isBusy with actual value */}
-          <Routes isAuthenticated={this.props.isBusy} />
+          <Routes isAuthenticated={this.props.isAuthenticated} />
         </div>
 
         <Footer />
@@ -32,6 +32,7 @@ class App extends React.Component<IAppProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
+    isAuthenticated: state.isAuthenticated,
     isBusy: isBusy(state.pendingActions)
   };
 }

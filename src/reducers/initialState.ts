@@ -1,5 +1,6 @@
 export default {
   groups: [],
   pendingActions: 0,
-  sites: []
+  sites: [],
+  isAuthenticated: false
 };

@@ -22,5 +22,8 @@ export default {
   },
   sitesPage: {
     h1: "Sites"
+  },
+  signUpPage: {
+    signUp: "Sign up"
   }
 };
