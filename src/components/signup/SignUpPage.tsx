@@ -1,12 +1,12 @@
+import { History } from "history";
 import * as React from "react";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { signIn as signInAction } from "../../actions/authentication/authenticationActions";
 import ISignInAction from "../../actions/authentication/ISignInAction";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
-import { RouteComponentProps } from "react-router-dom";
-import { History } from "history";
 
 interface ISignUpPageProps extends RouteComponentProps<any> {
   signIn: (history: History) => ISignInAction;

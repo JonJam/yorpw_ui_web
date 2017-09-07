@@ -14,6 +14,10 @@ export default {
   },
   navBar: {
     appName: "yorpw",
+    signOut: "Sign out",
+    signUp: "Sign up"
+  },
+  signUpPage: {
     signUp: "Sign up"
   },
   siteList: {
@@ -22,8 +26,5 @@ export default {
   },
   sitesPage: {
     h1: "Sites"
-  },
-  signUpPage: {
-    signUp: "Sign up"
   }
 };

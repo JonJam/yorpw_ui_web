@@ -5,7 +5,26 @@ import strings from "../../../strings";
 
 import logo from "./logo.svg";
 
-export default function NavBar() {
+interface INavBarProps {
+  isAuthenticated: boolean;
+  handleSignOut: () => void;
+}
+
+export default function NavBar(props: INavBarProps) {
+  let authenticationLink = (
+    <Link to={signUpPath} className="nav-link">
+      {strings.navBar.signUp}
+    </Link>
+  );
+
+  if (props.isAuthenticated) {
+    authenticationLink = (
+      <a href="#" onClick={props.handleSignOut} className="nav-link">
+        {strings.navBar.signOut}
+      </a>
+    );
+  }
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
@@ -30,9 +49,7 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-md-auto">
             <li className="nav-item">
-              <Link to={signUpPath} className="nav-link">
-                {strings.navBar.signUp}
-              </Link>
+              {authenticationLink}
             </li>
           </ul>
         </div>

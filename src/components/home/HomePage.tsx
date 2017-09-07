@@ -3,10 +3,10 @@ import { RouteComponentProps } from "react-router-dom";
 import { signUpPath } from "../../routes/paths";
 import strings from "../../strings";
 
-interface IHomePageProps extends RouteComponentProps<any> {}
-
-export default class HomePage extends React.Component<IHomePageProps> {
-  constructor(props: IHomePageProps) {
+export default class HomePage extends React.Component<
+  RouteComponentProps<any>
+> {
+  constructor(props: RouteComponentProps<any>) {
     super(props);
 
     // Use bind instead of Arrow functions. As when using Arrow functions Chrome Debugger tools can't find values for properties in function.

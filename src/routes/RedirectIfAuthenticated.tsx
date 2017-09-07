@@ -6,32 +6,32 @@ import {
   RouteProps
 } from "react-router-dom";
 
-interface IAuthenticateRouteProps extends RouteProps {
+interface IRedirectIfAuthenticatedProps extends RouteProps {
   isAuthenticated: boolean;
-  authenticatePath: string;
+  redirectPath: string;
   component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
-export default function AuthenticateRoute({
+export default function RedirectIfAuthenticated({
   component,
-  authenticatePath,
+  redirectPath,
   isAuthenticated,
   ...rest
-}: IAuthenticateRouteProps) {
+}: IRedirectIfAuthenticatedProps) {
   const Component = component;
 
   const render = (renderProps: RouteComponentProps<any>) => {
-    let element = (
-      <Redirect
-        to={{
-          pathname: authenticatePath,
-          state: { from: renderProps.location }
-        }}
-      />
-    );
+    let element = <Component {...renderProps} />;
 
     if (isAuthenticated) {
-      element = <Component {...renderProps} />;
+      element = (
+        <Redirect
+          to={{
+            pathname: redirectPath,
+            state: { from: renderProps.location }
+          }}
+        />
+      );
     }
 
     return element;

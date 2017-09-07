@@ -1,15 +1,15 @@
 import { combineReducers } from "redux";
 import IStoreState from "../store/IStoreState";
+import isAuthenticated from "./authenticationReducer";
 import groups from "./groupsReducer";
 import pendingActions from "./pendingActionsReducer";
 import sites from "./sitesReducer";
-import isAuthenticated from "./authenticationReducer";
 
 const rootReducer = combineReducers<IStoreState>({
   groups,
+  isAuthenticated,
   pendingActions,
-  sites,
-  isAuthenticated
+  sites
 });
 
 export default rootReducer;

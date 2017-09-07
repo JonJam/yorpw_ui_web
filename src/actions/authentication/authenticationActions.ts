@@ -1,7 +1,7 @@
+import { homePath, sitesPath } from "../../routes/paths";
 import keys from "../ActionTypeKeys";
-import ISignOutAction from "./ISignOutAction";
 import ISignInAction from "./ISignInAction";
-import { sitesPath } from "../../routes/paths";
+import ISignOutAction from "./ISignOutAction";
 
 import { History } from "history";
 
@@ -13,7 +13,9 @@ export function signIn(history: History): ISignInAction {
   };
 }
 
-export function signOut(): ISignOutAction {
+export function signOut(history: History): ISignOutAction {
+  history.push(homePath);
+
   return {
     type: keys.SIGN_OUT
   };

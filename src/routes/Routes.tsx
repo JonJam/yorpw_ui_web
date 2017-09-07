@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import { homePath, signUpPath, sitesPath } from "./paths";
 import Error404Page from "../components/errors/Error404Page";
 import HomePage from "../components/home/HomePage";
-import SignUpPage from "../components/signup/SignUpPage";
+import SignUpPage from "../components/signUp/SignUpPage";
 import SitesPage from "../components/sites/SitesPage";
 import AuthenticateRoute from "./AuthenticateRoute";
+import { homePath, signUpPath, sitesPath } from "./paths";
+import RedirectIfAuthenticated from "./RedirectIfAuthenticated";
 
 interface IRoutesProps {
   isAuthenticated: boolean;
@@ -14,14 +15,28 @@ interface IRoutesProps {
 export default function Routes(props: IRoutesProps) {
   return (
     <Switch>
-      <Route exact={true} path={homePath} component={HomePage} />
+      <RedirectIfAuthenticated
+        exact={true}
+        path={homePath}
+        component={HomePage}
+        redirectPath={sitesPath}
+        isAuthenticated={props.isAuthenticated}
+      />
+
       <AuthenticateRoute
         authenticatePath={signUpPath}
         path={sitesPath}
         component={SitesPage}
         isAuthenticated={props.isAuthenticated}
       />
-      <Route path={signUpPath} component={SignUpPage} />
+
+      <RedirectIfAuthenticated
+        path={signUpPath}
+        component={SignUpPage}
+        redirectPath={sitesPath}
+        isAuthenticated={props.isAuthenticated}
+      />
+
       <Route component={Error404Page} />
     </Switch>
   );

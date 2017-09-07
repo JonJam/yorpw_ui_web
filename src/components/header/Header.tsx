@@ -4,13 +4,15 @@ import Progress from "./progress/Progress";
 
 interface IHeaderProps {
   isBusy: boolean;
+  isAuthenticated: boolean;
+  handleSignOut: () => void;
 }
 
-export default function Header(props: IHeaderProps) {
+export default function Header({ isBusy, ...rest }: IHeaderProps) {
   return (
     <div>
-      <NavBar />
-      <Progress isBusy={props.isBusy} />
+      <NavBar {...rest} />
+      <Progress isBusy={isBusy} />
     </div>
   );
 }
