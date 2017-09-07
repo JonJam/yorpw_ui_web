@@ -1,48 +1,42 @@
 import * as React from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Store } from "redux";
-import { HomeRoute, SignUpRoute, SitesRoute } from "../routes";
-import IStoreState from "../store/IStoreState";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import Footer from "./app/Footer/Footer";
 import Header from "./app/Header/Header";
-import Error404Page from "./errors/Error404Page";
-import HomePage from "./home/HomePage";
-import SignUpPage from "./signup/SignUpPage";
-import SitesPage from "./sites/SitesPage";
+import Routes from "../routes/Routes";
+import { connect } from "react-redux";
+import isBusy from "../selectors/isBusy";
+import IStoreState from "../store/IStoreState";
 
 import "./App.css";
 
-interface IAppProps {
-  store: Store<IStoreState>;
+interface IAppProps extends RouteComponentProps<any> {
+  isBusy: boolean;
 }
 
 class App extends React.Component<IAppProps> {
   public render() {
-    // Ideally would move Provider/BrowserRouter into index.tsx and move out Switch to Routes.tsx file.
-    // However doing the previous breaks routing locally such that the URL changes but the page doesn't render,
-    // and you have to refresh the browser to view it.
     return (
-      <Provider store={this.props.store}>
-        <BrowserRouter>
-          <div>
-            <Header />
+      <div>
+        <Header />
 
-            <div className="container-fluid">
-              <Switch>
-                <Route exact={true} path={HomeRoute} component={HomePage} />
-                <Route path={SitesRoute} component={SitesPage} />
-                <Route path={SignUpRoute} component={SignUpPage} />
-                <Route component={Error404Page} />
-              </Switch>
-            </div>
+        <div className="container-fluid">
+          {/* TODO Replace isBusy with actual value */}
+          <Routes isAuthenticated={this.props.isBusy} />
+        </div>
 
-            <Footer />
-          </div>
-        </BrowserRouter>
-      </Provider>
+        <Footer />
+      </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state: IStoreState) {
+  return {
+    isBusy: isBusy(state.pendingActions)
+  };
+}
+
+// Casting to prevent error where used in index.ts that isBusy is mandatory, since it is being provided by Redux.
+export default withRouter(
+  connect<{}, {}, IAppProps>(mapStateToProps)(App)
+) as React.ComponentClass<{}>;

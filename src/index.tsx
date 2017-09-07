@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import "whatwg-fetch";
 import App from "../src/components/App";
 import configureStore from "../src/store/configureStore";
@@ -13,10 +15,15 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 import "../node_modules/font-awesome/css/font-awesome.css";
 
-const store = configureStore();
+const configuredStore = configureStore();
 
-ReactDOM.render(
-  <App store={store} />,
-  document.getElementById("root") as HTMLElement
+const app = (
+  <Provider store={configuredStore}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
+
+ReactDOM.render(app, document.getElementById("root") as HTMLElement);
 registerServiceWorker();

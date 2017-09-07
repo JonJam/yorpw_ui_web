@@ -1,11 +1,9 @@
-import { History } from "history";
 import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { SignUpRoute } from "../../routes";
 import strings from "../../strings";
 
-interface IHomePageProps {
-  history: History;
-}
+interface IHomePageProps extends RouteComponentProps<any> {}
 
 class HomePage extends React.Component<IHomePageProps> {
   constructor(props: IHomePageProps) {
