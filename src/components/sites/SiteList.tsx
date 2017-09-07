@@ -2,7 +2,7 @@ import * as React from "react";
 import ISite from "../../models/ISite";
 import strings from "../../strings";
 import EmptyMessage from "../common/EmptyMessage";
-import Site from "./Site/Site";
+import Site from "./site/Site";
 
 interface ISiteListProps {
   sites: ISite[];

@@ -5,4 +5,5 @@ export default interface IStoreState {
   groups: IGroup[];
   sites: ISite[];
   pendingActions: number;
+  isAuthenticated: boolean;
 };

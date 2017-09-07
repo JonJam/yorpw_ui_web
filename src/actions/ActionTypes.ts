@@ -4,6 +4,8 @@ import IGetGroupsSuccessAction from "./group/IGetGroupsSuccessAction";
 import IGetSitesFailAction from "./site/IGetSitesFailAction";
 import IGetSitesInProgressAction from "./site/IGetSitesInProgressAction";
 import IGetSitesSuccessAction from "./site/IGetSitesSuccessAction";
+import ISignInAction from "./authentication/ISignInAction";
+import ISignOutAction from "./authentication/ISignOutAction";
 
 type ActionTypes =
   | IGetGroupsFailAction
@@ -11,6 +13,8 @@ type ActionTypes =
   | IGetGroupsSuccessAction
   | IGetSitesFailAction
   | IGetSitesInProgressAction
-  | IGetSitesSuccessAction;
+  | IGetSitesSuccessAction
+  | ISignInAction
+  | ISignOutAction;
 
 export default ActionTypes;
