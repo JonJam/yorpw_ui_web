@@ -6,6 +6,7 @@ import Site from "./site/Site";
 
 interface ISiteListProps {
   sites: ISite[];
+  handleSiteClick: (siteId: string) => void;
 }
 
 function SiteList(props: ISiteListProps) {
@@ -17,7 +18,9 @@ function SiteList(props: ISiteListProps) {
   );
 
   if (props.sites.length > 0) {
-    const sites = props.sites.map(site => <Site key={site.id} site={site} />);
+    const sites = props.sites.map(site =>
+      <Site key={site.id} site={site} handleSiteClick={props.handleSiteClick} />
+    );
 
     element = (
       <div className="row">

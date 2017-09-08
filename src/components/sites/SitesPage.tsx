@@ -18,6 +18,12 @@ interface ISitePagesProps {
 }
 
 class SitesPage extends React.Component<ISitePagesProps> {
+  constructor(props: ISitePagesProps) {
+    super(props);
+
+    this.handleSiteClick = this.handleSiteClick.bind(this);
+  }
+
   public componentDidMount() {
     this.props.getGroups();
     this.props.getSites();
@@ -29,9 +35,17 @@ class SitesPage extends React.Component<ISitePagesProps> {
         <h1 className="sr-only">
           {strings.sitesPage.h1}
         </h1>
-        <GroupList groups={this.props.groups} isBusy={this.props.isBusy} />
+        <GroupList
+          groups={this.props.groups}
+          isBusy={this.props.isBusy}
+          handleSiteClick={this.handleSiteClick}
+        />
       </div>
     );
+  }
+
+  private handleSiteClick(siteId: string) {
+    console.log(siteId);
   }
 }
 

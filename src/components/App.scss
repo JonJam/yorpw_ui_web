@@ -1,4 +1,8 @@
-@import "./_variables.scss";
+// Global imports
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/font-awesome/css/font-awesome.css";
+
+@import "./_variables";
 
 html {
   position: relative;
