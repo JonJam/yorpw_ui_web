@@ -20,6 +20,7 @@ function GroupList(props: IGroupListProps) {
           key={group.id}
           group={group}
           handleSiteClick={props.handleSiteClick}
+          isBusy={props.isBusy}
         />
       );
     });

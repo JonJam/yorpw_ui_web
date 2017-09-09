@@ -1,16 +1,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupViewModel from "../../models/IGroupViewModel";
+import { sitesPath } from "../../routes/paths";
 import getGroupViewModels from "../../selectors/getGroupViewModels";
 import isBusy from "../../selectors/isBusy";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import GroupList from "./GroupList";
 
-interface ISitePagesProps {
+interface ISitePagesProps extends RouteComponentProps<any> {
   groups: IGroupViewModel[];
   isBusy: boolean;
   getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
@@ -25,6 +27,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
   }
 
   public componentDidMount() {
+    // TODO improve this so not calling everytime page loads ?
     this.props.getGroups();
     this.props.getSites();
   }
@@ -33,7 +36,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
     return (
       <div>
         <h1 className="sr-only">
-          {strings.sitesPage.h1}
+          {strings.sitesPage.title}
         </h1>
         <GroupList
           groups={this.props.groups}
@@ -45,7 +48,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
   }
 
   private handleSiteClick(siteId: string) {
-    console.log(siteId);
+    this.props.history.push(`${sitesPath}/${siteId}`);
   }
 }
 

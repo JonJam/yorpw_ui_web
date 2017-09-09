@@ -8,9 +8,9 @@ interface IEmptyMessageProps {
 function EmptyMessage(props: IEmptyMessageProps) {
   return (
     <div className="alert alert-light" role="alert">
-      <h2 className="alert-heading">
+      <p className="h2 alert-heading">
         {props.emptyMessageTitle}
-      </h2>
+      </p>
       <p>
         {props.emptyMessageDescription}
       </p>

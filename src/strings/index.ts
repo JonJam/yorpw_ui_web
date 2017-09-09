@@ -20,11 +20,26 @@ export default {
   signUpPage: {
     signUp: "Sign up"
   },
+  siteForm: {
+    cancelButton: "Cancel",
+    emailAddressLabel: "Email address",
+    emailAddressPlaceholder: "Enter an email address",
+    nameLabel: "Name",
+    namePlaceholder: "Enter name",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter a password",
+    saveButton: "Save",
+    urlLabel: "Url",
+    urlPlaceholder: "Enter a url"
+  },
   siteList: {
     emptyMessageDescription: "Y don't U try adding som sitz 2 DIS grup.",
     emptyMessageTitle: "Hmm! looks lIk U don't hav NE sitz"
   },
+  sitePage: {
+    title: "Edit site"
+  },
   sitesPage: {
-    h1: "Sites"
+    title: "Sites"
   }
 };

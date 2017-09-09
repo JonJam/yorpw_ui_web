@@ -6,6 +6,7 @@ import SiteList from "./SiteList";
 interface IGroupProps {
   group: IGroupViewModel;
   handleSiteClick: (siteId: string) => void;
+  isBusy: boolean;
 }
 
 function Group(props: IGroupProps) {
@@ -42,6 +43,7 @@ function Group(props: IGroupProps) {
           <SiteList
             sites={props.group.sites}
             handleSiteClick={props.handleSiteClick}
+            isBusy={props.isBusy}
           />
         </div>
       </div>

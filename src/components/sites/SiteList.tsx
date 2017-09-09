@@ -6,16 +6,12 @@ import Site from "./site/Site";
 
 interface ISiteListProps {
   sites: ISite[];
+  isBusy: boolean;
   handleSiteClick: (siteId: string) => void;
 }
 
-function SiteList(props: ISiteListProps) {
-  let element: JSX.Element = (
-    <EmptyMessage
-      emptyMessageTitle={strings.siteList.emptyMessageTitle}
-      emptyMessageDescription={strings.siteList.emptyMessageDescription}
-    />
-  );
+export default function SiteList(props: ISiteListProps) {
+  let element: JSX.Element | null = null;
 
   if (props.sites.length > 0) {
     const sites = props.sites.map(site =>
@@ -27,9 +23,14 @@ function SiteList(props: ISiteListProps) {
         {sites}
       </div>
     );
+  } else if (!props.isBusy) {
+    element = (
+      <EmptyMessage
+        emptyMessageTitle={strings.siteList.emptyMessageTitle}
+        emptyMessageDescription={strings.siteList.emptyMessageDescription}
+      />
+    );
   }
 
   return element;
 }
-
-export default SiteList;

@@ -1,0 +1,8 @@
+@import "../../../node_modules/bootstrap/scss/_functions";
+@import "../../../node_modules/bootstrap/scss/_variables";
+
+.sitePage {
+  .card-header {
+    background-color: theme-color("light");
+  }
+}

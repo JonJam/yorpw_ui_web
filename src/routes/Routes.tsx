@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Error404Page from "../components/errors/Error404Page";
 import HomePage from "../components/home/HomePage";
 import SignUpPage from "../components/signUp/SignUpPage";
+import SitePage from "../components/site/SitePage";
 import SitesPage from "../components/sites/SitesPage";
 import AuthenticateRoute from "./AuthenticateRoute";
 import { homePath, signUpPath, sitesPath } from "./paths";
@@ -20,6 +21,13 @@ export default function Routes(props: IRoutesProps) {
         path={homePath}
         component={HomePage}
         redirectPath={sitesPath}
+        isAuthenticated={props.isAuthenticated}
+      />
+
+      <AuthenticateRoute
+        authenticatePath={signUpPath}
+        path={`${sitesPath}/:siteId`}
+        component={SitePage}
         isAuthenticated={props.isAuthenticated}
       />
 
