@@ -41,5 +41,9 @@ export default {
   },
   sitesPage: {
     title: "Sites"
+  },
+  passwordInput: {
+    showPasswordLabel: "Show password",
+    hidePasswordLabel: "Hide password"
   }
 };

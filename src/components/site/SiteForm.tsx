@@ -2,9 +2,12 @@ import * as React from "react";
 import ISite from "../../models/ISite";
 import strings from "../../strings";
 import Input from "./Input";
+import PasswordInput from "./PasswordInput";
 
 interface ISiteFormProps {
   site: ISite;
+  showClearPassword: boolean;
+  handleTogglePasswordClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleCancelClick: () => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -46,15 +49,15 @@ export default function SiteForm(props: ISiteFormProps) {
           value={props.site.userName}
           handleInputChange={props.handleInputChange}
         />
-        {/* TODO Refactor this to be custom input like LastPass */}
-        <Input
+        <PasswordInput
           className="col-sm-6"
           id="password"
           label={strings.siteForm.passwordLabel}
-          type="password"
           placeholder={strings.siteForm.passwordPlaceholder}
           value={props.site.password}
+          showClear={props.showClearPassword}
           handleInputChange={props.handleInputChange}
+          handleToggleClick={props.handleTogglePasswordClick}
         />
       </div>
       <div className="form-row">
