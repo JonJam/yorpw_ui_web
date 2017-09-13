@@ -8,7 +8,6 @@ import SitesPage from "../components/sites/SitesPage";
 import AuthenticateRoute from "./AuthenticateRoute";
 import { homePath, signUpPath, sitesPath } from "./paths";
 import RedirectIfAuthenticated from "./RedirectIfAuthenticated";
-import * as MediaQuery from "react-responsive";
 
 interface IRoutesProps {
   isAuthenticated: boolean;
@@ -25,15 +24,12 @@ export default function Routes(props: IRoutesProps) {
         isAuthenticated={props.isAuthenticated}
       />
 
-      {/* TODO test this */}
-      <MediaQuery maxDeviceWidth={768}>
-        <AuthenticateRoute
-          authenticatePath={signUpPath}
-          path={`${sitesPath}/:siteId`}
-          component={SitePage}
-          isAuthenticated={props.isAuthenticated}
-        />
-      </MediaQuery>
+      <AuthenticateRoute
+        authenticatePath={signUpPath}
+        path={`${sitesPath}/:siteId`}
+        component={SitePage}
+        isAuthenticated={props.isAuthenticated}
+      />
 
       <AuthenticateRoute
         authenticatePath={signUpPath}
