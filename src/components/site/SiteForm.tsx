@@ -10,10 +10,11 @@ interface ISiteFormProps {
   readonly site: ISite;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
-  readonly saveInProgress: boolean;
+  readonly actionInProgress: boolean;
   handleTogglePasswordClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleCancelClick: () => void;
+  handleDeleteClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -74,7 +75,7 @@ export default function SiteForm(props: ISiteFormProps) {
         />
       </div>
       <div className="form-row">
-        <div className="col-12">
+        <div className="col-11">
           <button
             type="button"
             className="btn btn-light"
@@ -83,12 +84,22 @@ export default function SiteForm(props: ISiteFormProps) {
             {strings.siteForm.cancelButton}
           </button>
           <button
-            disabled={props.saveInProgress}
+            disabled={props.actionInProgress}
             type="submit"
             className="btn btn-primary ml-1"
             onClick={props.handleSaveClick}
           >
             {strings.siteForm.saveButton}
+          </button>
+        </div>
+        <div className="col-1">
+          <button
+            disabled={props.actionInProgress}
+            type="button"
+            className="btn btn-danger float-right"
+            onClick={props.handleDeleteClick}
+          >
+            {strings.siteForm.deleteButton}
           </button>
         </div>
       </div>

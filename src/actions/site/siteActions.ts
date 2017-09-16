@@ -1,7 +1,8 @@
 import { Dispatch } from "redux";
 import {
   getSites as getSitesFromApi,
-  updateSite as updateSiteFromApi
+  updateSite as updateSiteFromApi,
+  deleteSite as deleteSiteFromApi
 } from "../../api/sitesApi";
 import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
@@ -12,6 +13,9 @@ import IGetSitesSuccessAction from "./IGetSitesSuccessAction";
 import IUpdateSiteFailAction from "./IUpdateSiteFailAction";
 import IUpdateSiteInProgressAction from "./IUpdateSiteInProgressAction";
 import IUpdateSiteSuccessAction from "./IUpdateSiteSuccessAction";
+import IDeleteSiteFailAction from "./IDeleteSiteFailAction";
+import IDeleteSiteInProgressAction from "./IDeleteSiteInProgressAction";
+import IDeleteSiteSuccessAction from "./IDeleteSiteSuccessAction";
 
 export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
@@ -41,6 +45,23 @@ export function updateSite(
       dispatch(updateSiteSuccess(updatedSite));
     } catch (err) {
       dispatch(updateSiteFail(err));
+    }
+  };
+}
+
+export function deleteSite(
+  siteId: string
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(deleteSiteInProgress());
+
+    try {
+      await deleteSiteFromApi(siteId);
+
+      dispatch(deleteSiteSuccess(siteId));
+    } catch (err) {
+      dispatch(deleteSiteFail(err));
     }
   };
 }
@@ -90,5 +111,29 @@ function updateSiteFail(error: Error): IUpdateSiteFailAction {
       error
     },
     type: keys.UPDATE_SITE_FAIL
+  };
+}
+
+function deleteSiteInProgress(): IDeleteSiteInProgressAction {
+  return {
+    type: keys.DELETE_SITE_INPROGRESS
+  };
+}
+
+function deleteSiteSuccess(siteId: string): IDeleteSiteSuccessAction {
+  return {
+    payload: {
+      siteId
+    },
+    type: keys.DELETE_SITE_SUCCESS
+  };
+}
+
+function deleteSiteFail(error: Error): IDeleteSiteFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.DELETE_SITE_FAIL
   };
 }

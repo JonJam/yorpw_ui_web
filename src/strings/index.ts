@@ -42,6 +42,7 @@ export default {
   },
   siteForm: {
     cancelButton: "Cancel",
+    deleteButton: "Delete",
     emailAddressLabel: "Email address",
     emailAddressPlaceholder: "Enter an email address",
     nameLabel: "Name",
@@ -58,7 +59,8 @@ export default {
   },
   sitePage: {
     title: "Edit site",
-    updateSiteSuccessMessage: "Changes to site saved."
+    deleteSiteSuccessMessage: "Site deleted.",
+    updateSiteSuccessMessage: "Site updated."
   },
   sitesPage: {
     title: "Sites"
