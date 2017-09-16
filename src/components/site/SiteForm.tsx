@@ -3,7 +3,7 @@ import ISite from "../../models/ISite";
 import IValidationErrors from "../../models/IValidationErrors";
 import strings from "../../strings";
 import { nameOf } from "../../utilities";
-import Input from "./Input";
+import Input from "../common/Input";
 import PasswordInput from "./passwordInput/PasswordInput";
 
 interface ISiteFormProps {

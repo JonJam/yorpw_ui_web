@@ -1,6 +1,6 @@
 import * as React from "react";
 import strings from "../../../strings";
-import ValidationErrorMessage from "../ValidationErrorMessage";
+import ValidationErrorMessage from "../../common/ValidationErrorMessage";
 
 import "./PasswordInput.css";
 
