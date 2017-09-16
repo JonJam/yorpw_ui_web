@@ -1,5 +1,5 @@
 export default interface IGroup {
-  id: string;
-  name: string;
-  sites: string[];
+  readonly id: string;
+  readonly name: string;
+  readonly sites: ReadonlyArray<string>;
 };

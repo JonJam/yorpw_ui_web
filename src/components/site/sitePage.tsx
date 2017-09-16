@@ -1,21 +1,26 @@
+import { validate } from "class-validator";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import ISite from "../../models/ISite";
+import IValidationErrors from "../../models/IValidationErrors";
+import Site from "../../models/Site";
 import getCourseById from "../../selectors/getCourseById";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
+import { mapToValidationErrors } from "../../utilities";
 import SiteFrom from "./SiteForm";
 
 import "./SitePage.css";
 
 interface ISitePageProps extends RouteComponentProps<any> {
-  site: ISite;
+  readonly site: ISite;
 }
 
 interface ISitePageState {
-  formSite: ISite;
-  showClearPassword: boolean;
+  readonly formSite: ISite;
+  readonly showClearPassword: boolean;
+  readonly validationErrors: IValidationErrors;
 }
 
 // TODO Use this for add new sites or purely update ?
@@ -26,7 +31,8 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
 
     this.state = {
       formSite: { ...this.props.site },
-      showClearPassword: false
+      showClearPassword: false,
+      validationErrors: {}
     };
 
     this.handleTogglePasswordClick = this.handleTogglePasswordClick.bind(this);
@@ -50,6 +56,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
             <div className="card-body">
               <SiteFrom
                 site={this.state.formSite}
+                validationErrors={this.state.validationErrors}
                 showClearPassword={this.state.showClearPassword}
                 handleCancelClick={this.handleCancelClick}
                 handleSaveClick={this.handleSaveClick}
@@ -77,11 +84,21 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     });
   }
 
-  private handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
+  private async handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    // TODO implement this.
-    console.log("Saved clicked");
+    // TODO Loading ?
+    const site = new Site(this.state.formSite);
+
+    const validationResult = await validate(site);
+
+    if (validationResult.length > 0) {
+      this.setState({
+        validationErrors: mapToValidationErrors(validationResult)
+      });
+    } else {
+      // TODO implement save
+    }
   }
 
   private handleCancelClick() {

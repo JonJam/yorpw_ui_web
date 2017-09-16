@@ -13,8 +13,8 @@ import strings from "../../strings";
 import GroupList from "./GroupList";
 
 interface ISitePagesProps extends RouteComponentProps<any> {
-  groups: IGroupViewModel[];
-  isBusy: boolean;
+  readonly groups: ReadonlyArray<IGroupViewModel>;
+  readonly isBusy: boolean;
   getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   getSites: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }

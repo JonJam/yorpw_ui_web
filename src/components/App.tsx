@@ -14,8 +14,8 @@ import Header from "./header/Header";
 import "./App.css";
 
 interface IAppProps extends RouteComponentProps<any> {
-  isBusy: boolean;
-  isAuthenticated: boolean;
+  readonly isBusy: boolean;
+  readonly isAuthenticated: boolean;
   signOut: (history: History) => ISignOutAction;
 }
 

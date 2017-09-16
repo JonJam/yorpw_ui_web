@@ -5,8 +5,8 @@ import EmptyMessage from "../common/EmptyMessage";
 import Group from "./Group";
 
 interface IGroupListProps {
-  groups: IGroupViewModel[];
-  isBusy: boolean;
+  readonly groups: ReadonlyArray<IGroupViewModel>;
+  readonly isBusy: boolean;
   handleSiteClick: (siteId: string) => void;
 }
 

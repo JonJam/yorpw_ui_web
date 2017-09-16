@@ -4,9 +4,9 @@ import strings from "../../strings";
 import SiteList from "./SiteList";
 
 interface IGroupProps {
-  group: IGroupViewModel;
+  readonly group: IGroupViewModel;
   handleSiteClick: (siteId: string) => void;
-  isBusy: boolean;
+  readonly isBusy: boolean;
 }
 
 function Group(props: IGroupProps) {

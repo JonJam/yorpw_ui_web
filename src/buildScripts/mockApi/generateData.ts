@@ -8,15 +8,20 @@ import siteSchema from "./siteSchema";
 
 const compiledGroupSchema = jsf(groupSchema);
 
-const groups = compiledGroupSchema.groups;
-let sites: ISite[] = [];
+const generatedGroups: ReadonlyArray<IGroup> = compiledGroupSchema.groups;
 
-groups.forEach((group: IGroup) => {
+let sites: ISite[] = [];
+let groups: IGroup[] = [];
+
+generatedGroups.forEach((group: IGroup) => {
   const compiledSiteSchema = jsf(siteSchema);
 
   sites = [...sites, ...compiledSiteSchema.sites];
 
-  group.sites = compiledSiteSchema.sites.map((site: ISite) => site.id);
+  groups.push({
+    ...group,
+    sites: compiledSiteSchema.sites.map((site: ISite) => site.id)
+  });
 });
 
 const json = JSON.stringify({

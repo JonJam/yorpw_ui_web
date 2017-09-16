@@ -17,8 +17,28 @@ export default {
     signOut: "Sign out",
     signUp: "Sign up"
   },
+  passwordInput: {
+    hidePasswordLabel: "Hide password",
+    showPasswordLabel: "Show password"
+  },
   signUpPage: {
     signUp: "Sign up"
+  },
+  site: {
+    nameIsNotEmptyMessage: "Name is required.",
+    nameMaxLengthMessage:
+      "Name must be shorter than or equal to $constraint1 characters.",
+    passwordIsNotEmptyMessage: "Password is required.",
+    passwordMaxLengthMessage:
+      "Password must be shorter than or equal to $constraint1 characters.",
+    urlIsNotEmptyMessage: "Url is required.",
+    urlIsUrlMessage: "Url must be a URL.",
+    urlMaxLengthMessage:
+      "Url must be shorter than or equal to $constraint1 characters.",
+    userNameIsEmailMessage: "Email address must be an email address.",
+    userNameIsNotEmptyMessage: "Email address is required.",
+    userNameMaxLengthMessage:
+      "Email address must be shorter than or equal to $constraint1 characters."
   },
   siteForm: {
     cancelButton: "Cancel",
@@ -41,9 +61,5 @@ export default {
   },
   sitesPage: {
     title: "Sites"
-  },
-  passwordInput: {
-    showPasswordLabel: "Show password",
-    hidePasswordLabel: "Hide password"
   }
 };

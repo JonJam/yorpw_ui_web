@@ -10,7 +10,7 @@ import { homePath, signUpPath, sitesPath } from "./paths";
 import RedirectIfAuthenticated from "./RedirectIfAuthenticated";
 
 interface IRoutesProps {
-  isAuthenticated: boolean;
+  readonly isAuthenticated: boolean;
 }
 
 export default function Routes(props: IRoutesProps) {

@@ -4,10 +4,12 @@ import ISite from "../models/ISite";
 
 // TODO Refactor this to use reselect see http://redux.js.org/docs/recipes/ComputingDerivedData.html
 function getGroupViewModels(
-  groupsFromState: IGroup[],
-  sitesFromState: ISite[]
-): IGroupViewModel[] {
-  const val = groupsFromState.map(groupFromState => {
+  groupsFromState: ReadonlyArray<IGroup>,
+  sitesFromState: ReadonlyArray<ISite>
+) {
+  const val: ReadonlyArray<
+    IGroupViewModel
+  > = groupsFromState.map(groupFromState => {
     const { id, name } = groupFromState;
     const sites: ISite[] = [];
 

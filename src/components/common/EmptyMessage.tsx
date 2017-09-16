@@ -1,8 +1,8 @@
 import * as React from "react";
 
 interface IEmptyMessageProps {
-  emptyMessageTitle: string;
-  emptyMessageDescription: string;
+  readonly emptyMessageTitle: string;
+  readonly emptyMessageDescription: string;
 }
 
 function EmptyMessage(props: IEmptyMessageProps) {

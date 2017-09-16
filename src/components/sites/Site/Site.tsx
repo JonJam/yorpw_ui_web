@@ -4,7 +4,7 @@ import ISite from "../../../models/ISite";
 import "./Site.css";
 
 interface ISiteProps {
-  site: ISite;
+  readonly site: ISite;
   handleSiteClick: (siteId: string) => void;
 }
 

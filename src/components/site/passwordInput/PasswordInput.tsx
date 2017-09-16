@@ -1,19 +1,27 @@
 import * as React from "react";
-import strings from "../../strings";
+import strings from "../../../strings";
+import ValidationErrorMessage from "../ValidationErrorMessage";
+
+import "./PasswordInput.css";
 
 interface IPasswordInputProps {
-  className: string;
-  id: string;
-  label: string;
-  placeholder: string;
-  value: any;
-  showClear: boolean;
+  readonly className: string;
+  readonly id: string;
+  readonly label: string;
+  readonly placeholder: string;
+  readonly value: any;
+  readonly showClear: boolean;
+  readonly validationErrors: ReadonlyArray<string> | undefined;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleToggleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function PasswordInput(props: IPasswordInputProps) {
-  const className = `form-group ${props.className}`;
+  const formGroupClass = `password-input form-group ${props.className}`;
+  const inputClass = `form-control ${props.validationErrors !== undefined &&
+  props.validationErrors.length > 0
+    ? "is-invalid"
+    : ""}`;
 
   let type = "password";
   let icon = <span className="fa fa-eye" aria-hidden="true" />;
@@ -26,7 +34,7 @@ export default function PasswordInput(props: IPasswordInputProps) {
   }
 
   return (
-    <div className={className}>
+    <div className={formGroupClass}>
       <label htmlFor={props.id}>
         {props.label}
       </label>
@@ -34,7 +42,7 @@ export default function PasswordInput(props: IPasswordInputProps) {
       <div className="input-group">
         <input
           type={type}
-          className="form-control"
+          className={inputClass}
           id={props.id}
           placeholder={props.placeholder}
           value={props.value}
@@ -51,6 +59,8 @@ export default function PasswordInput(props: IPasswordInputProps) {
           </button>
         </span>
       </div>
+
+      <ValidationErrorMessage messages={props.validationErrors} />
     </div>
   );
 }

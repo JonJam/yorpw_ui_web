@@ -6,7 +6,7 @@ import strings from "../../../strings";
 import logo from "./logo.svg";
 
 interface INavBarProps {
-  isAuthenticated: boolean;
+  readonly isAuthenticated: boolean;
   handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 

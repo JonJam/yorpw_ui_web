@@ -5,8 +5,8 @@ import EmptyMessage from "../common/EmptyMessage";
 import Site from "./site/Site";
 
 interface ISiteListProps {
-  sites: ISite[];
-  isBusy: boolean;
+  readonly sites: ReadonlyArray<ISite>;
+  readonly isBusy: boolean;
   handleSiteClick: (siteId: string) => void;
 }
 
