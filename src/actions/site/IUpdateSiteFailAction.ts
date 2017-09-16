@@ -1,7 +1,7 @@
 import keys from "../ActionTypeKeys";
 
-export default interface IGetSitesFailAction {
-  readonly type: keys.GET_SITES_FAIL;
+export default interface IUpdateSiteFailAction {
+  readonly type: keys.UPDATE_SITE_FAIL;
   readonly payload: {
     readonly error: Error;
   };

@@ -1,7 +1,9 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
 import IGetSitesSuccessAction from "../actions/site/IGetSitesSuccessAction";
+import IUpdateSiteSuccessAction from "../actions/site/IUpdateSiteSuccessAction";
 import initialState from "./initialState";
+import ISite from "../models/ISite";
 
 export default function sitesReducer(
   state = initialState.sites,
@@ -10,6 +12,8 @@ export default function sitesReducer(
   switch (action.type) {
     case ActionTypeKeys.GET_SITES_SUCCESS:
       return onGetSitesSuccess(action);
+    case ActionTypeKeys.UPDATE_SITE_SUCCESS:
+      return onUpdateSiteSuccess(action, state);
     default:
       return state;
   }
@@ -17,4 +21,14 @@ export default function sitesReducer(
 
 function onGetSitesSuccess(action: IGetSitesSuccessAction) {
   return action.payload.sites;
+}
+
+function onUpdateSiteSuccess(
+  action: IUpdateSiteSuccessAction,
+  currentState: ISite[]
+) {
+  return [
+    ...currentState.filter(site => site.id !== action.payload.site.id),
+    { ...action.payload.site }
+  ];
 }

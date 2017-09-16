@@ -1,11 +1,17 @@
 import { Dispatch } from "redux";
-import { getSites as getSitesFromApi } from "../../api/sitesApi";
+import {
+  getSites as getSitesFromApi,
+  updateSite as updateSiteFromApi
+} from "../../api/sitesApi";
 import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
 import IGetSitesFailAction from "./IGetSitesFailAction";
 import IGetSitesInProgressAction from "./IGetSitesInProgressAction";
 import IGetSitesSuccessAction from "./IGetSitesSuccessAction";
+import IUpdateSiteFailAction from "./IUpdateSiteFailAction";
+import IUpdateSiteInProgressAction from "./IUpdateSiteInProgressAction";
+import IUpdateSiteSuccessAction from "./IUpdateSiteSuccessAction";
 
 export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
@@ -18,6 +24,23 @@ export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
       dispatch(getSitesSuccess(sites));
     } catch (err) {
       dispatch(getSitesFail(err));
+    }
+  };
+}
+
+export function updateSite(
+  site: ISite
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(updateSiteInProgress());
+
+    try {
+      const updatedSite: ISite = await updateSiteFromApi(site);
+
+      dispatch(updateSiteSuccess(updatedSite));
+    } catch (err) {
+      dispatch(updateSiteFail(err));
     }
   };
 }
@@ -43,5 +66,29 @@ function getSitesFail(error: Error): IGetSitesFailAction {
       error
     },
     type: keys.GET_SITES_FAIL
+  };
+}
+
+function updateSiteInProgress(): IUpdateSiteInProgressAction {
+  return {
+    type: keys.UPDATE_SITE_INPROGRESS
+  };
+}
+
+function updateSiteSuccess(site: ISite): IUpdateSiteSuccessAction {
+  return {
+    payload: {
+      site
+    },
+    type: keys.UPDATE_SITE_SUCCESS
+  };
+}
+
+function updateSiteFail(error: Error): IUpdateSiteFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.UPDATE_SITE_FAIL
   };
 }

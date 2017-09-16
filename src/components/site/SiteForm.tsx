@@ -10,6 +10,7 @@ interface ISiteFormProps {
   readonly site: ISite;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
+  readonly saveInProgress: boolean;
   handleTogglePasswordClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleCancelClick: () => void;
@@ -82,6 +83,7 @@ export default function SiteForm(props: ISiteFormProps) {
             {strings.siteForm.cancelButton}
           </button>
           <button
+            disabled={props.saveInProgress}
             type="submit"
             className="btn btn-primary ml-1"
             onClick={props.handleSaveClick}

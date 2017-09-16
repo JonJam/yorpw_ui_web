@@ -57,7 +57,8 @@ export default {
     emptyMessageTitle: "Hmm! looks lIk U don't hav NE sitz"
   },
   sitePage: {
-    title: "Edit site"
+    title: "Edit site",
+    updateSiteSuccessMessage: "Changes to site saved."
   },
   sitesPage: {
     title: "Sites"

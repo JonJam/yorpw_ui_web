@@ -1,6 +1,7 @@
 import { validate } from "class-validator";
 import * as React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
 import ISite from "../../models/ISite";
 import IValidationErrors from "../../models/IValidationErrors";
@@ -10,17 +11,23 @@ import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import { mapToValidationErrors } from "../../utilities";
 import SiteFrom from "./SiteForm";
+import { updateSite as updateSiteAction } from "../../actions/site/siteActions";
+import * as toastr from "toastr";
 
 import "./SitePage.css";
 
 interface ISitePageProps extends RouteComponentProps<any> {
   readonly site: ISite;
+  updateSite: (
+    site: ISite
+  ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface ISitePageState {
   readonly formSite: ISite;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
+  readonly saveInProgress: boolean;
 }
 
 // TODO Use this for add new sites or purely update ?
@@ -32,7 +39,8 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     this.state = {
       formSite: { ...this.props.site },
       showClearPassword: false,
-      validationErrors: {}
+      validationErrors: {},
+      saveInProgress: false
     };
 
     this.handleTogglePasswordClick = this.handleTogglePasswordClick.bind(this);
@@ -58,6 +66,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
                 site={this.state.formSite}
                 validationErrors={this.state.validationErrors}
                 showClearPassword={this.state.showClearPassword}
+                saveInProgress={this.state.saveInProgress}
                 handleCancelClick={this.handleCancelClick}
                 handleSaveClick={this.handleSaveClick}
                 handleInputChange={this.handleInputChange}
@@ -87,7 +96,10 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
   private async handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    // TODO Loading ?
+    this.setState({
+      saveInProgress: true
+    });
+
     const site = new Site(this.state.formSite);
 
     const validationResult = await validate(site);
@@ -97,8 +109,16 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
         validationErrors: mapToValidationErrors(validationResult)
       });
     } else {
-      // TODO implement save
+      await this.props.updateSite(site);
+
+      toastr.success(strings.sitePage.updateSiteSuccessMessage);
+
+      this.props.history.goBack();
     }
+
+    this.setState({
+      saveInProgress: false
+    });
   }
 
   private handleCancelClick() {
@@ -127,4 +147,10 @@ function mapStateToProps(
   };
 }
 
-export default connect(mapStateToProps)(SitePage);
+function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
+  return {
+    updateSite: bindActionCreators(updateSiteAction, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SitePage);
