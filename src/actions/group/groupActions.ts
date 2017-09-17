@@ -6,12 +6,16 @@ import {
 import IGroup from "../../models/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
-import IGetGroupsFailAction from "./IGetGroupsFailAction";
-import IGetGroupsInProgressAction from "./IGetGroupsInProgressAction";
-import IGetGroupsSuccessAction from "./IGetGroupsSuccessAction";
-import IUpdateGroupFailAction from "./IUpdateGroupFailAction";
-import IUpdateGroupInProgressAction from "./IUpdateGroupInProgressAction";
-import IUpdateGroupSuccessAction from "./IUpdateGroupSuccessAction";
+import {
+  IGetGroupsFailAction,
+  IGetGroupsInProgressAction,
+  IGetGroupsSuccessAction
+} from "./get";
+import {
+  IUpdateGroupFailAction,
+  IUpdateGroupInProgressAction,
+  IUpdateGroupSuccessAction
+} from "./update";
 
 export function getGroups(): (
   dispatch: Dispatch<IStoreState>

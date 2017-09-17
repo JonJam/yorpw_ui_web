@@ -23,7 +23,7 @@ import SiteFrom from "./SiteForm";
 import "./SitePage.css";
 
 interface ISitePageProps extends RouteComponentProps<any> {
-  readonly site: SiteViewModel;
+  readonly viewModel: SiteViewModel;
   readonly groups: ReadonlyArray<IGroup>;
   readonly groupOptions: ReadonlyArray<ISelectOption>;
   updateSite: (
@@ -56,7 +56,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
       actionInProgress: false,
       showClearPassword: false,
       validationErrors: {},
-      viewModel: this.props.site
+      viewModel: this.props.viewModel
     };
 
     this.handleTogglePasswordClick = this.handleTogglePasswordClick.bind(this);
@@ -189,10 +189,10 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     let oldGroup: IGroup | undefined;
     let newGroup: IGroup | undefined;
 
-    if (this.props.site.groupId !== viewModel.groupId) {
+    if (this.props.viewModel.groupId !== viewModel.groupId) {
       // Group changed.
       oldGroup = this.props.groups.find(
-        g => g.id === this.props.site.groupId
+        g => g.id === this.props.viewModel.groupId
       ) as IGroup;
       newGroup = this.props.groups.find(
         g => g.id === viewModel.groupId
@@ -239,7 +239,7 @@ function mapStateToProps(
   return {
     groupOptions: getGroupOptions(state.groups),
     groups: state.groups,
-    site: siteViewModel
+    viewModel: siteViewModel
   };
 }
 

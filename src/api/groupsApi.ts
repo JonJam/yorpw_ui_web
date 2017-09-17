@@ -38,7 +38,7 @@ export async function updateGroup(group: IGroup): Promise<IGroup> {
 }
 
 // Using this to remove any other properties that happen to be on object so only
-// send ISite properties to server.
+// send IGroup properties to server.
 function stripProperties({ id, name, sites }: IGroup): IGroup {
   return {
     id,

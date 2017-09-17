@@ -10,18 +10,26 @@ import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
 import { updateGroup } from "../group/groupActions";
-import IAddSiteFailAction from "./IAddSiteFailAction";
-import IAddSiteInProgressAction from "./IAddSiteInProgressAction";
-import IAddSiteSuccessAction from "./IAddSiteSuccessAction";
-import IDeleteSiteFailAction from "./IDeleteSiteFailAction";
-import IDeleteSiteInProgressAction from "./IDeleteSiteInProgressAction";
-import IDeleteSiteSuccessAction from "./IDeleteSiteSuccessAction";
-import IGetSitesFailAction from "./IGetSitesFailAction";
-import IGetSitesInProgressAction from "./IGetSitesInProgressAction";
-import IGetSitesSuccessAction from "./IGetSitesSuccessAction";
-import IUpdateSiteFailAction from "./IUpdateSiteFailAction";
-import IUpdateSiteInProgressAction from "./IUpdateSiteInProgressAction";
-import IUpdateSiteSuccessAction from "./IUpdateSiteSuccessAction";
+import {
+  IAddSiteFailAction,
+  IAddSiteInProgressAction,
+  IAddSiteSuccessAction
+} from "./add";
+import {
+  IDeleteSiteFailAction,
+  IDeleteSiteInProgressAction,
+  IDeleteSiteSuccessAction
+} from "./delete";
+import {
+  IGetSitesFailAction,
+  IGetSitesInProgressAction,
+  IGetSitesSuccessAction
+} from "./get";
+import {
+  IUpdateSiteFailAction,
+  IUpdateSiteInProgressAction,
+  IUpdateSiteSuccessAction
+} from "./update";
 
 export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {

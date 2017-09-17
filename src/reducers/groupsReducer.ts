@@ -1,7 +1,7 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
-import IGetGroupsSuccessAction from "../actions/group/IGetGroupsSuccessAction";
-import IUpdateGroupSuccessAction from "../actions/group/IUpdateGroupSuccessAction";
+import { IGetGroupsSuccessAction } from "../actions/group/get";
+import { IUpdateGroupSuccessAction } from "../actions/group/update";
 import IGroup from "../models/IGroup";
 import initialState from "./initialState";
 
