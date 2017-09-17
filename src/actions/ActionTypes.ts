@@ -1,6 +1,9 @@
 import IGetGroupsFailAction from "./group/IGetGroupsFailAction";
 import IGetGroupsInProgressAction from "./group/IGetGroupsInProgressAction";
 import IGetGroupsSuccessAction from "./group/IGetGroupsSuccessAction";
+import IUpdateGroupFailAction from "./group/IUpdateGroupFailAction";
+import IUpdateGroupInProgressAction from "./group/IUpdateGroupInProgressAction";
+import IUpdateGroupSuccessAction from "./group/IUpdateGroupSuccessAction";
 import IGetSitesFailAction from "./site/IGetSitesFailAction";
 import IGetSitesInProgressAction from "./site/IGetSitesInProgressAction";
 import IGetSitesSuccessAction from "./site/IGetSitesSuccessAction";
@@ -20,6 +23,9 @@ type ActionTypes =
   | IGetGroupsFailAction
   | IGetGroupsInProgressAction
   | IGetGroupsSuccessAction
+  | IUpdateGroupFailAction
+  | IUpdateGroupInProgressAction
+  | IUpdateGroupSuccessAction
   | IGetSitesFailAction
   | IGetSitesInProgressAction
   | IGetSitesSuccessAction

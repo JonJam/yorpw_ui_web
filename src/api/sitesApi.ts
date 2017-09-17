@@ -22,7 +22,7 @@ export async function updateSite(site: ISite): Promise<ISite> {
   headers.append("Content-Type", "application/json");
 
   const requestInit: RequestInit = {
-    body: JSON.stringify(site),
+    body: JSON.stringify(stripProperties(site)),
     headers,
     method: "PATCH"
   };
@@ -59,7 +59,7 @@ export async function addSite(site: ISite): Promise<ISite> {
   headers.append("Content-Type", "application/json");
 
   const requestInit: RequestInit = {
-    body: JSON.stringify(site),
+    body: JSON.stringify(stripProperties(site)),
     headers,
     method: "POST"
   };
@@ -72,4 +72,16 @@ export async function addSite(site: ISite): Promise<ISite> {
   } else {
     throw new ApiError(response.status, response.statusText);
   }
+}
+
+// Using this to remove any other properties that happen to be on object so only
+// send ISite properties to server.
+function stripProperties({ id, name, url, password, userName }: ISite): ISite {
+  return {
+    id,
+    name,
+    password,
+    url,
+    userName
+  };
 }

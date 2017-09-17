@@ -9,33 +9,43 @@ import {
   deleteSite as deleteSiteAction,
   updateSite as updateSiteAction
 } from "../../actions/site/siteActions";
+import IGroup from "../../models/IGroup";
 import ISite from "../../models/ISite";
 import IValidationErrors from "../../models/IValidationErrors";
-import Site from "../../models/Site";
-import getCourseById from "../../selectors/getCourseById";
+import SiteViewModel from "../../models/SiteViewModel";
+import { getGroupForSite, getGroupOptions, getSiteById } from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import { mapToValidationErrors } from "../../utilities";
+import ISelectOption from "../common/select/ISelectOption";
 import SiteFrom from "./SiteForm";
 
 import "./SitePage.css";
 
 interface ISitePageProps extends RouteComponentProps<any> {
-  readonly site: ISite;
+  readonly site: SiteViewModel;
+  readonly groups: ReadonlyArray<IGroup>;
+  readonly groupOptions: ReadonlyArray<ISelectOption>;
   updateSite: (
-    site: ISite
+    site: ISite,
+    oldGroup?: IGroup,
+    newGroup?: IGroup
   ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   deleteSite: (
-    siteId: string
+    siteId: string,
+    group: IGroup
   ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
-  addSite: (site: ISite) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  addSite: (
+    site: ISite,
+    group: IGroup
+  ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface ISitePageState {
   readonly actionInProgress: boolean;
-  readonly formSite: ISite;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
+  readonly viewModel: SiteViewModel;
 }
 
 class SitePage extends React.Component<ISitePageProps, ISitePageState> {
@@ -44,20 +54,20 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
 
     this.state = {
       actionInProgress: false,
-      formSite: { ...this.props.site },
       showClearPassword: false,
-      validationErrors: {}
+      validationErrors: {},
+      viewModel: this.props.site
     };
 
     this.handleTogglePasswordClick = this.handleTogglePasswordClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   public render() {
-    const isNewSite = this.state.formSite.id === "";
+    const isNewSite = this.state.viewModel.id === "";
     const title = isNewSite
       ? strings.sitePage.addTitle
       : strings.sitePage.editTitle;
@@ -74,14 +84,15 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
             </div>
             <div className="card-body">
               <SiteFrom
-                site={this.state.formSite}
+                site={this.state.viewModel}
+                groupOptions={this.props.groupOptions}
                 isNewSite={isNewSite}
                 validationErrors={this.state.validationErrors}
                 showClearPassword={this.state.showClearPassword}
                 actionInProgress={this.state.actionInProgress}
                 handleCancelClick={this.handleCancelClick}
                 handleSaveClick={this.handleSaveClick}
-                handleInputChange={this.handleInputChange}
+                handleValueChange={this.handleValueChange}
                 handleTogglePasswordClick={this.handleTogglePasswordClick}
                 handleDeleteClick={this.handleDeleteClick}
               />
@@ -92,17 +103,19 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     );
   }
 
-  private handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+  private handleValueChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
     const propertyName = e.target.id;
     const updatedValue = e.target.value;
 
     const updatedSite = {
-      ...this.state.formSite,
+      ...this.state.viewModel,
       [propertyName]: updatedValue
     };
 
     this.setState({
-      formSite: updatedSite
+      viewModel: new SiteViewModel(updatedSite)
     });
   }
 
@@ -113,19 +126,19 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
       actionInProgress: true
     });
 
-    const site = new Site(this.state.formSite);
+    const viewModel = this.state.viewModel;
 
-    const validationResult = await validate(site);
+    const validationResult = await validate(viewModel);
 
     if (validationResult.length > 0) {
       this.setState({
         validationErrors: mapToValidationErrors(validationResult)
       });
     } else {
-      if (site.id !== "") {
-        await this.updateSite(site);
+      if (viewModel.id !== "") {
+        await this.updateSite(viewModel);
       } else {
-        await this.addSite(site);
+        await this.addSite(viewModel);
       }
 
       this.props.history.goBack();
@@ -143,7 +156,13 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
       actionInProgress: true
     });
 
-    await this.props.deleteSite(this.state.formSite.id);
+    const viewModel = this.state.viewModel;
+
+    const groupToUpdate = this.props.groups.find(
+      g => g.id === viewModel.groupId
+    ) as IGroup;
+
+    await this.props.deleteSite(this.state.viewModel.id, groupToUpdate);
 
     toastr.success(strings.sitePage.deleteSiteSuccessMessage);
 
@@ -166,14 +185,31 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     });
   }
 
-  private async updateSite(site: ISite) {
-    await this.props.updateSite(site);
+  private async updateSite(viewModel: SiteViewModel) {
+    let oldGroup: IGroup | undefined;
+    let newGroup: IGroup | undefined;
+
+    if (this.props.site.groupId !== viewModel.groupId) {
+      // Group changed.
+      oldGroup = this.props.groups.find(
+        g => g.id === this.props.site.groupId
+      ) as IGroup;
+      newGroup = this.props.groups.find(
+        g => g.id === viewModel.groupId
+      ) as IGroup;
+    }
+
+    await this.props.updateSite(viewModel, oldGroup, newGroup);
 
     toastr.success(strings.sitePage.updateSiteSuccessMessage);
   }
 
-  private async addSite(site: ISite) {
-    await this.props.addSite(site);
+  private async addSite(viewModel: SiteViewModel) {
+    const groupToUpdate = this.props.groups.find(
+      g => g.id === viewModel.groupId
+    ) as IGroup;
+
+    await this.props.addSite(viewModel, groupToUpdate);
 
     toastr.success(strings.sitePage.addSiteSuccessMessage);
   }
@@ -184,20 +220,26 @@ function mapStateToProps(
   ownProps: RouteComponentProps<any>
 ) {
   const siteId: string = ownProps.match.params.siteId;
-  let site: ISite | undefined = {
-    id: "",
-    name: "",
-    password: "",
-    url: "",
-    userName: ""
-  };
+  let siteViewModel = new SiteViewModel();
 
   if (siteId !== undefined) {
-    site = getCourseById(state.sites, siteId);
+    const site = getSiteById(state.sites, siteId);
+    const group = getGroupForSite(state.groups, siteId);
+
+    if (site !== undefined && group !== undefined) {
+      // We may get undefined as a result of:
+      //  - Performing a delete so site would return null.
+      //  - Perform an update to move between groups.
+      //  - The specified IDs are incorrect.
+      // So use default as displaying error message may result in false positives.
+      siteViewModel = new SiteViewModel({ ...site, groupId: group.id });
+    }
   }
 
   return {
-    site
+    groupOptions: getGroupOptions(state.groups),
+    groups: state.groups,
+    site: siteViewModel
   };
 }
 

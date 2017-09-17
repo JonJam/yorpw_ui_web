@@ -1,13 +1,16 @@
 import * as React from "react";
-import ISite from "../../models/ISite";
 import IValidationErrors from "../../models/IValidationErrors";
+import SiteViewModel from "../../models/SiteViewModel";
 import strings from "../../strings";
 import { nameOf } from "../../utilities";
 import Input from "../common/Input";
+import ISelectOption from "../common/select/ISelectOption";
+import Select from "../common/select/Select";
 import PasswordInput from "./passwordInput/PasswordInput";
 
 interface ISiteFormProps {
-  readonly site: ISite;
+  readonly site: SiteViewModel;
+  readonly groupOptions: ReadonlyArray<ISelectOption>;
   readonly isNewSite: boolean;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
@@ -16,42 +19,56 @@ interface ISiteFormProps {
   handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleCancelClick: () => void;
   handleDeleteClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleValueChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
 }
 
 export default function SiteForm(props: ISiteFormProps) {
-  const name = nameOf<ISite>("name");
-  const url = nameOf<ISite>("url");
-  const userName = nameOf<ISite>("userName");
-  const password = nameOf<ISite>("password");
+  const name = nameOf<SiteViewModel>("name");
+  const url = nameOf<SiteViewModel>("url");
+  const userName = nameOf<SiteViewModel>("userName");
+  const password = nameOf<SiteViewModel>("password");
+  const groupId = nameOf<SiteViewModel>("groupId");
 
   return (
     // Disabling browser default feedback tooltips using novalidate
     <form noValidate={true}>
       <div className="form-row">
-        <Input
+        <Select
           className="col-12"
+          id={groupId}
+          value={props.site.groupId}
+          label={strings.siteForm.groupIdLabel}
+          options={props.groupOptions}
+          handleChange={props.handleValueChange}
+          validationErrors={props.validationErrors[groupId]}
+        />
+      </div>
+
+      <div className="form-row">
+        <Input
+          className="col-6"
           id={name}
           label={strings.siteForm.nameLabel}
           type="text"
           placeholder={strings.siteForm.namePlaceholder}
           value={props.site.name}
-          handleInputChange={props.handleInputChange}
+          handleChange={props.handleValueChange}
           validationErrors={props.validationErrors[name]}
         />
-      </div>
-      <div className="form-row">
         <Input
-          className="col-12"
+          className="col-6"
           id={url}
           label={strings.siteForm.urlLabel}
           type="url"
           placeholder={strings.siteForm.urlPlaceholder}
           value={props.site.url}
-          handleInputChange={props.handleInputChange}
+          handleChange={props.handleValueChange}
           validationErrors={props.validationErrors[url]}
         />
       </div>
+
       <div className="form-row">
         <Input
           className="col-sm-6"
@@ -60,7 +77,7 @@ export default function SiteForm(props: ISiteFormProps) {
           type="email"
           placeholder={strings.siteForm.emailAddressPlaceholder}
           value={props.site.userName}
-          handleInputChange={props.handleInputChange}
+          handleChange={props.handleValueChange}
           validationErrors={props.validationErrors[userName]}
         />
         <PasswordInput
@@ -70,7 +87,7 @@ export default function SiteForm(props: ISiteFormProps) {
           placeholder={strings.siteForm.passwordPlaceholder}
           value={props.site.password}
           showClear={props.showClearPassword}
-          handleInputChange={props.handleInputChange}
+          handleInputChange={props.handleValueChange}
           handleToggleClick={props.handleTogglePasswordClick}
           validationErrors={props.validationErrors[password]}
         />

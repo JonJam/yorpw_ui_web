@@ -5,9 +5,11 @@ import {
   getSites as getSitesFromApi,
   updateSite as updateSiteFromApi
 } from "../../api/sitesApi";
+import IGroup from "../../models/IGroup";
 import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
+import { updateGroup } from "../group/groupActions";
 import IAddSiteFailAction from "./IAddSiteFailAction";
 import IAddSiteInProgressAction from "./IAddSiteInProgressAction";
 import IAddSiteSuccessAction from "./IAddSiteSuccessAction";
@@ -37,7 +39,9 @@ export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
 }
 
 export function updateSite(
-  site: ISite
+  site: ISite,
+  oldGroup?: IGroup,
+  newGroup?: IGroup
 ): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
     // Signal work in progress.
@@ -45,6 +49,27 @@ export function updateSite(
 
     try {
       const updatedSite: ISite = await updateSiteFromApi(site);
+
+      // Adding to new group first so that that SitePage doesn't display
+      // an error that it cannot find Group for Site, which is temporary.
+      // After added to new group then remove from old group.
+      if (newGroup !== undefined) {
+        const newGroupToUpdate = {
+          ...newGroup,
+          sites: [...newGroup.sites, site.id]
+        };
+
+        await dispatch(updateGroup(newGroupToUpdate));
+      }
+
+      if (oldGroup !== undefined) {
+        const oldGroupToUpdate = {
+          ...oldGroup,
+          sites: oldGroup.sites.filter(s => s !== site.id)
+        };
+
+        await dispatch(updateGroup(oldGroupToUpdate));
+      }
 
       dispatch(updateSiteSuccess(updatedSite));
     } catch (err) {
@@ -54,7 +79,8 @@ export function updateSite(
 }
 
 export function deleteSite(
-  siteId: string
+  siteId: string,
+  group: IGroup
 ): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
     // Signal work in progress.
@@ -62,6 +88,13 @@ export function deleteSite(
 
     try {
       await deleteSiteFromApi(siteId);
+
+      const groupToUpdate = {
+        ...group,
+        sites: group.sites.filter(s => s !== siteId)
+      };
+
+      await dispatch(updateGroup(groupToUpdate));
 
       dispatch(deleteSiteSuccess(siteId));
     } catch (err) {
@@ -71,14 +104,22 @@ export function deleteSite(
 }
 
 export function addSite(
-  site: ISite
+  site: ISite,
+  group: IGroup
 ): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
     // Signal work in progress.
     dispatch(addSiteInProgress());
 
     try {
-      const addedSite: ISite = await addSiteFromApi(site);
+      const addedSite = await addSiteFromApi(site);
+
+      const groupToUpdate = {
+        ...group,
+        sites: [...group.sites, addedSite.id]
+      };
+
+      await dispatch(updateGroup(groupToUpdate));
 
       dispatch(addSiteSuccess(addedSite));
     } catch (err) {

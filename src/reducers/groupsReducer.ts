@@ -1,15 +1,19 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
 import IGetGroupsSuccessAction from "../actions/group/IGetGroupsSuccessAction";
+import IUpdateGroupSuccessAction from "../actions/group/IUpdateGroupSuccessAction";
+import IGroup from "../models/IGroup";
 import initialState from "./initialState";
 
 export default function groupsReducer(
-  state = initialState.groups,
+  state: ReadonlyArray<IGroup> = initialState.groups,
   action: ActionTypes
 ) {
   switch (action.type) {
     case ActionTypeKeys.GET_GROUPS_SUCCESS:
       return onGetGroupsSuccess(action);
+    case ActionTypeKeys.UPDATE_GROUP_SUCCESS:
+      return onUpdateGroupSuccess(action, state);
     default:
       return state;
   }
@@ -17,4 +21,14 @@ export default function groupsReducer(
 
 function onGetGroupsSuccess(action: IGetGroupsSuccessAction) {
   return action.payload.groups;
+}
+
+function onUpdateGroupSuccess(
+  action: IUpdateGroupSuccessAction,
+  currentState: ReadonlyArray<IGroup>
+) {
+  return [
+    ...currentState.filter(group => group.id !== action.payload.group.id),
+    { ...action.payload.group }
+  ];
 }

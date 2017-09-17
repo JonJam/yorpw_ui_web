@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { signOut as signOutAction } from "../actions/authentication/authenticationActions";
 import ISignOutAction from "../actions/authentication/ISignOutAction";
 import Routes from "../routes/Routes";
-import isBusy from "../selectors/isBusy";
+import { isBusy } from "../selectors";
 import IStoreState from "../store/IStoreState";
 import Header from "./header/Header";
 
