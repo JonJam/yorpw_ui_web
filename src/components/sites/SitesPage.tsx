@@ -6,12 +6,11 @@ import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupViewModel from "../../models/IGroupViewModel";
 import { sitePath } from "../../routes/paths";
-import getGroupViewModels from "../../selectors/getGroupViewModels";
-import isBusy from "../../selectors/isBusy";
+import { getGroupViewModels, isBusy } from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
-import GroupList from "./GroupList";
 import Footer from "./footer/Footer";
+import GroupList from "./GroupList";
 
 interface ISitePagesProps extends RouteComponentProps<any> {
   readonly groups: ReadonlyArray<IGroupViewModel>;

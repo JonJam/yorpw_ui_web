@@ -1,11 +1,21 @@
 import { Dispatch } from "redux";
-import { getGroups as getGroupsFromApi } from "../../api/groupsApi";
+import {
+  getGroups as getGroupsFromApi,
+  updateGroup as updateGroupFromApi
+} from "../../api/groupsApi";
 import IGroup from "../../models/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
-import IGetGroupsFailAction from "./IGetGroupsFailAction";
-import IGetGroupsInProgressAction from "./IGetGroupsInProgressAction";
-import IGetGroupsSuccessAction from "./IGetGroupsSuccessAction";
+import {
+  IGetGroupsFailAction,
+  IGetGroupsInProgressAction,
+  IGetGroupsSuccessAction
+} from "./get";
+import {
+  IUpdateGroupFailAction,
+  IUpdateGroupInProgressAction,
+  IUpdateGroupSuccessAction
+} from "./update";
 
 export function getGroups(): (
   dispatch: Dispatch<IStoreState>
@@ -20,6 +30,23 @@ export function getGroups(): (
       dispatch(getGroupsSuccess(groups));
     } catch (err) {
       dispatch(getGroupsFail(err));
+    }
+  };
+}
+
+export function updateGroup(
+  group: IGroup
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(updateGroupInProgress());
+
+    try {
+      const updatedGroup: IGroup = await updateGroupFromApi(group);
+
+      dispatch(updateGroupSuccess(updatedGroup));
+    } catch (err) {
+      dispatch(updateGroupFail(err));
     }
   };
 }
@@ -45,5 +72,29 @@ function getGroupsFail(error: Error): IGetGroupsFailAction {
       error
     },
     type: keys.GET_GROUPS_FAIL
+  };
+}
+
+function updateGroupInProgress(): IUpdateGroupInProgressAction {
+  return {
+    type: keys.UPDATE_GROUP_INPROGRESS
+  };
+}
+
+function updateGroupSuccess(group: IGroup): IUpdateGroupSuccessAction {
+  return {
+    payload: {
+      group
+    },
+    type: keys.UPDATE_GROUP_SUCCESS
+  };
+}
+
+function updateGroupFail(error: Error): IUpdateGroupFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.UPDATE_GROUP_FAIL
   };
 }

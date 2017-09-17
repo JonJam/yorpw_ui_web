@@ -1,9 +1,9 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
-import IAddSiteSuccessAction from "../actions/site/IAddSiteSuccessAction";
-import IDeleteSiteSuccessAction from "../actions/site/IDeleteSiteSuccessAction";
-import IGetSitesSuccessAction from "../actions/site/IGetSitesSuccessAction";
-import IUpdateSiteSuccessAction from "../actions/site/IUpdateSiteSuccessAction";
+import { IAddSiteSuccessAction } from "../actions/site/add";
+import { IDeleteSiteSuccessAction } from "../actions/site/delete";
+import { IGetSitesSuccessAction } from "../actions/site/get";
+import { IUpdateSiteSuccessAction } from "../actions/site/update";
 import ISite from "../models/ISite";
 import initialState from "./initialState";
 

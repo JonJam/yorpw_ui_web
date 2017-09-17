@@ -27,7 +27,34 @@ export default {
   signUpPage: {
     signUp: "Sign up"
   },
-  site: {
+  siteForm: {
+    cancelButton: "Cancel",
+    deleteButton: "Delete",
+    emailAddressLabel: "Email address",
+    emailAddressPlaceholder: "Enter an email address",
+    groupIdLabel: "Group",
+    nameLabel: "Name",
+    namePlaceholder: "Enter name",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter a password",
+    saveButton: "Save",
+    urlLabel: "Url",
+    urlPlaceholder: "Enter a url"
+  },
+  siteList: {
+    emptyMessageDescription:
+      "Why don't you try adding some sites to this group.",
+    emptyMessageTitle: "Hmm! Looks like you dont have any sites."
+  },
+  sitePage: {
+    addSiteSuccessMessage: "Site added.",
+    addTitle: "Add site",
+    deleteSiteSuccessMessage: "Site deleted.",
+    editTitle: "Edit site",
+    updateSiteSuccessMessage: "Site updated."
+  },
+  siteViewModel: {
+    groupIdIsNotEmptyMessage: "Group is required",
     nameIsNotEmptyMessage: "Name is required.",
     nameMaxLengthMessage:
       "Name must be shorter than or equal to $constraint1 characters.",
@@ -42,30 +69,6 @@ export default {
     userNameIsNotEmptyMessage: "Email address is required.",
     userNameMaxLengthMessage:
       "Email address must be shorter than or equal to $constraint1 characters."
-  },
-  siteForm: {
-    cancelButton: "Cancel",
-    deleteButton: "Delete",
-    emailAddressLabel: "Email address",
-    emailAddressPlaceholder: "Enter an email address",
-    nameLabel: "Name",
-    namePlaceholder: "Enter name",
-    passwordLabel: "Password",
-    passwordPlaceholder: "Enter a password",
-    saveButton: "Save",
-    urlLabel: "Url",
-    urlPlaceholder: "Enter a url"
-  },
-  siteList: {
-    emptyMessageDescription: "Y don't U try adding som sitz 2 DIS grup.",
-    emptyMessageTitle: "Hmm! looks lIk U don't hav NE sitz"
-  },
-  sitePage: {
-    addSiteSuccessMessage: "Site added.",
-    addTitle: "Add site",
-    deleteSiteSuccessMessage: "Site deleted.",
-    editTitle: "Edit site",
-    updateSiteSuccessMessage: "Site updated."
   },
   sitesPage: {
     title: "Sites"
