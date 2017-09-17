@@ -1,13 +1,14 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
+import IAddSiteSuccessAction from "../actions/site/IAddSiteSuccessAction";
+import IDeleteSiteSuccessAction from "../actions/site/IDeleteSiteSuccessAction";
 import IGetSitesSuccessAction from "../actions/site/IGetSitesSuccessAction";
 import IUpdateSiteSuccessAction from "../actions/site/IUpdateSiteSuccessAction";
-import IDeleteSiteSuccessAction from "../actions/site/IDeleteSiteSuccessAction";
-import initialState from "./initialState";
 import ISite from "../models/ISite";
+import initialState from "./initialState";
 
 export default function sitesReducer(
-  state = initialState.sites,
+  state: ReadonlyArray<ISite> = initialState.sites,
   action: ActionTypes
 ) {
   switch (action.type) {
@@ -17,6 +18,8 @@ export default function sitesReducer(
       return onUpdateSiteSuccess(action, state);
     case ActionTypeKeys.DELETE_SITE_SUCCESS:
       return onDeleteSiteSuccess(action, state);
+    case ActionTypeKeys.ADD_SITE_SUCCESS:
+      return onAddSiteSuccess(action, state);
     default:
       return state;
   }
@@ -28,7 +31,7 @@ function onGetSitesSuccess(action: IGetSitesSuccessAction) {
 
 function onUpdateSiteSuccess(
   action: IUpdateSiteSuccessAction,
-  currentState: ISite[]
+  currentState: ReadonlyArray<ISite>
 ) {
   return [
     ...currentState.filter(site => site.id !== action.payload.site.id),
@@ -38,7 +41,14 @@ function onUpdateSiteSuccess(
 
 function onDeleteSiteSuccess(
   action: IDeleteSiteSuccessAction,
-  currentState: ISite[]
+  currentState: ReadonlyArray<ISite>
 ) {
   return [...currentState.filter(site => site.id !== action.payload.siteId)];
+}
+
+function onAddSiteSuccess(
+  action: IAddSiteSuccessAction,
+  currentState: ReadonlyArray<ISite>
+) {
+  return [...currentState, { ...action.payload.site }];
 }

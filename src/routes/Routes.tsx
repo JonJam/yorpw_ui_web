@@ -6,7 +6,7 @@ import SignUpPage from "../components/signUp/SignUpPage";
 import SitePage from "../components/site/SitePage";
 import SitesPage from "../components/sites/SitesPage";
 import AuthenticateRoute from "./AuthenticateRoute";
-import { homePath, signUpPath, sitesPath } from "./paths";
+import { homePath, signUpPath, sitePath, sitesPath } from "./paths";
 import RedirectIfAuthenticated from "./RedirectIfAuthenticated";
 
 interface IRoutesProps {
@@ -26,7 +26,7 @@ export default function Routes(props: IRoutesProps) {
 
       <AuthenticateRoute
         authenticatePath={signUpPath}
-        path={`${sitesPath}/:siteId`}
+        path={`${sitePath}/:siteId?`}
         component={SitePage}
         isAuthenticated={props.isAuthenticated}
       />

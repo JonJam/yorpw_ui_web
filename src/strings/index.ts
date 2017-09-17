@@ -1,4 +1,7 @@
 export default {
+  footer: {
+    addSiteButton: "Add site"
+  },
   group: {
     sitesInGroup: "sites in group."
   },
@@ -58,8 +61,10 @@ export default {
     emptyMessageTitle: "Hmm! looks lIk U don't hav NE sitz"
   },
   sitePage: {
-    title: "Edit site",
+    addSiteSuccessMessage: "Site added.",
+    addTitle: "Add site",
     deleteSiteSuccessMessage: "Site deleted.",
+    editTitle: "Edit site",
     updateSiteSuccessMessage: "Site updated."
   },
   sitesPage: {

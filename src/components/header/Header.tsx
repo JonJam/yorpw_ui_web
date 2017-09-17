@@ -10,7 +10,7 @@ interface IHeaderProps {
 
 export default function Header({ isBusy, ...rest }: IHeaderProps) {
   return (
-    <div>
+    <div className="sticky-top">
       <NavBar {...rest} />
       <Progress isBusy={isBusy} />
     </div>

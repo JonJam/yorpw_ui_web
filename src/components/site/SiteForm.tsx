@@ -8,6 +8,7 @@ import PasswordInput from "./passwordInput/PasswordInput";
 
 interface ISiteFormProps {
   readonly site: ISite;
+  readonly isNewSite: boolean;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
   readonly actionInProgress: boolean;
@@ -92,16 +93,18 @@ export default function SiteForm(props: ISiteFormProps) {
             {strings.siteForm.saveButton}
           </button>
         </div>
-        <div className="col-1">
-          <button
-            disabled={props.actionInProgress}
-            type="button"
-            className="btn btn-danger float-right"
-            onClick={props.handleDeleteClick}
-          >
-            {strings.siteForm.deleteButton}
-          </button>
-        </div>
+        {props.isNewSite
+          ? null
+          : <div className="col-1">
+              <button
+                disabled={props.actionInProgress}
+                type="button"
+                className="btn btn-danger float-right"
+                onClick={props.handleDeleteClick}
+              >
+                {strings.siteForm.deleteButton}
+              </button>
+            </div>}
       </div>
     </form>
   );

@@ -1,8 +1,14 @@
 import { validate } from "class-validator";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
+import { bindActionCreators, Dispatch } from "redux";
+import * as toastr from "toastr";
+import {
+  addSite as addSiteAction,
+  deleteSite as deleteSiteAction,
+  updateSite as updateSiteAction
+} from "../../actions/site/siteActions";
 import ISite from "../../models/ISite";
 import IValidationErrors from "../../models/IValidationErrors";
 import Site from "../../models/Site";
@@ -11,11 +17,6 @@ import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import { mapToValidationErrors } from "../../utilities";
 import SiteFrom from "./SiteForm";
-import {
-  deleteSite as deleteSiteAction,
-  updateSite as updateSiteAction
-} from "../../actions/site/siteActions";
-import * as toastr from "toastr";
 
 import "./SitePage.css";
 
@@ -27,26 +28,25 @@ interface ISitePageProps extends RouteComponentProps<any> {
   deleteSite: (
     siteId: string
   ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  addSite: (site: ISite) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface ISitePageState {
+  readonly actionInProgress: boolean;
   readonly formSite: ISite;
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
-  readonly actionInProgress: boolean;
 }
 
-// TODO Use this for add new sites or purely update ?
-// TODO redirect if site is null ?
 class SitePage extends React.Component<ISitePageProps, ISitePageState> {
   constructor(props: ISitePageProps) {
     super(props);
 
     this.state = {
+      actionInProgress: false,
       formSite: { ...this.props.site },
       showClearPassword: false,
-      validationErrors: {},
-      actionInProgress: false
+      validationErrors: {}
     };
 
     this.handleTogglePasswordClick = this.handleTogglePasswordClick.bind(this);
@@ -57,20 +57,25 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
   }
 
   public render() {
+    const isNewSite = this.state.formSite.id === "";
+    const title = isNewSite
+      ? strings.sitePage.addTitle
+      : strings.sitePage.editTitle;
+
     return (
       <div className="row mt-3 sitePage">
         <div className="col-12">
           <div className="card">
-            {/* TODO Update title based on whether updating or creating */}
             <div className="card-header">
-              {strings.sitePage.title}
+              {title}
               <h1 className="sr-only">
-                {strings.sitePage.title}
+                {title}
               </h1>
             </div>
             <div className="card-body">
               <SiteFrom
                 site={this.state.formSite}
+                isNewSite={isNewSite}
                 validationErrors={this.state.validationErrors}
                 showClearPassword={this.state.showClearPassword}
                 actionInProgress={this.state.actionInProgress}
@@ -117,9 +122,11 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
         validationErrors: mapToValidationErrors(validationResult)
       });
     } else {
-      await this.props.updateSite(site);
-
-      toastr.success(strings.sitePage.updateSiteSuccessMessage);
+      if (site.id !== "") {
+        await this.updateSite(site);
+      } else {
+        await this.addSite(site);
+      }
 
       this.props.history.goBack();
     }
@@ -158,6 +165,18 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
       };
     });
   }
+
+  private async updateSite(site: ISite) {
+    await this.props.updateSite(site);
+
+    toastr.success(strings.sitePage.updateSiteSuccessMessage);
+  }
+
+  private async addSite(site: ISite) {
+    await this.props.addSite(site);
+
+    toastr.success(strings.sitePage.addSiteSuccessMessage);
+  }
 }
 
 function mapStateToProps(
@@ -165,8 +184,17 @@ function mapStateToProps(
   ownProps: RouteComponentProps<any>
 ) {
   const siteId: string = ownProps.match.params.siteId;
+  let site: ISite | undefined = {
+    id: "",
+    name: "",
+    password: "",
+    url: "",
+    userName: ""
+  };
 
-  const site = getCourseById(state.sites, siteId);
+  if (siteId !== undefined) {
+    site = getCourseById(state.sites, siteId);
+  }
 
   return {
     site
@@ -175,8 +203,9 @@ function mapStateToProps(
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
-    updateSite: bindActionCreators(updateSiteAction, dispatch),
-    deleteSite: bindActionCreators(deleteSiteAction, dispatch)
+    addSite: bindActionCreators(addSiteAction, dispatch),
+    deleteSite: bindActionCreators(deleteSiteAction, dispatch),
+    updateSite: bindActionCreators(updateSiteAction, dispatch)
   };
 }
 

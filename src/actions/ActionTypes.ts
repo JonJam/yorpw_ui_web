@@ -10,6 +10,9 @@ import IUpdateSiteSuccessAction from "./site/IUpdateSiteSuccessAction";
 import IDeleteSiteFailAction from "./site/IDeleteSiteFailAction";
 import IDeleteSiteInProgressAction from "./site/IDeleteSiteInProgressAction";
 import IDeleteSiteSuccessAction from "./site/IDeleteSiteSuccessAction";
+import IAddSiteFailAction from "./site/IAddSiteFailAction";
+import IAddSiteInProgressAction from "./site/IAddSiteInProgressAction";
+import IAddSiteSuccessAction from "./site/IAddSiteSuccessAction";
 import ISignInAction from "./authentication/ISignInAction";
 import ISignOutAction from "./authentication/ISignOutAction";
 
@@ -27,6 +30,9 @@ type ActionTypes =
   | IUpdateSiteInProgressAction
   | IDeleteSiteFailAction
   | IDeleteSiteInProgressAction
-  | IDeleteSiteSuccessAction;
+  | IDeleteSiteSuccessAction
+  | IAddSiteFailAction
+  | IAddSiteInProgressAction
+  | IAddSiteSuccessAction;
 
 export default ActionTypes;

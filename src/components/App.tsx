@@ -8,7 +8,6 @@ import ISignOutAction from "../actions/authentication/ISignOutAction";
 import Routes from "../routes/Routes";
 import isBusy from "../selectors/isBusy";
 import IStoreState from "../store/IStoreState";
-import Footer from "./footer/Footer";
 import Header from "./header/Header";
 
 import "./App.css";
@@ -38,8 +37,6 @@ class App extends React.Component<IAppProps> {
         <div className="container-fluid">
           <Routes isAuthenticated={this.props.isAuthenticated} />
         </div>
-
-        <Footer />
       </div>
     );
   }

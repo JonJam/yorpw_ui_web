@@ -2,14 +2,3 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../../node_modules/font-awesome/css/font-awesome.css";
 @import "../../node_modules/toastr/build/toastr.css";
-
-@import "./_variables";
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: $footerHeight;
-}

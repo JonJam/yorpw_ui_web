@@ -5,12 +5,13 @@ import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupViewModel from "../../models/IGroupViewModel";
-import { sitesPath } from "../../routes/paths";
+import { sitePath } from "../../routes/paths";
 import getGroupViewModels from "../../selectors/getGroupViewModels";
 import isBusy from "../../selectors/isBusy";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import GroupList from "./GroupList";
+import Footer from "./footer/Footer";
 
 interface ISitePagesProps extends RouteComponentProps<any> {
   readonly groups: ReadonlyArray<IGroupViewModel>;
@@ -43,12 +44,13 @@ class SitesPage extends React.Component<ISitePagesProps> {
           isBusy={this.props.isBusy}
           handleSiteClick={this.handleSiteClick}
         />
+        <Footer />
       </div>
     );
   }
 
   private handleSiteClick(siteId: string) {
-    this.props.history.push(`${sitesPath}/${siteId}`);
+    this.props.history.push(`${sitePath}/${siteId}`);
   }
 }
 

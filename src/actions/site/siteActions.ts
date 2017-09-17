@@ -1,21 +1,25 @@
 import { Dispatch } from "redux";
 import {
+  addSite as addSiteFromApi,
+  deleteSite as deleteSiteFromApi,
   getSites as getSitesFromApi,
-  updateSite as updateSiteFromApi,
-  deleteSite as deleteSiteFromApi
+  updateSite as updateSiteFromApi
 } from "../../api/sitesApi";
 import ISite from "../../models/ISite";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
+import IAddSiteFailAction from "./IAddSiteFailAction";
+import IAddSiteInProgressAction from "./IAddSiteInProgressAction";
+import IAddSiteSuccessAction from "./IAddSiteSuccessAction";
+import IDeleteSiteFailAction from "./IDeleteSiteFailAction";
+import IDeleteSiteInProgressAction from "./IDeleteSiteInProgressAction";
+import IDeleteSiteSuccessAction from "./IDeleteSiteSuccessAction";
 import IGetSitesFailAction from "./IGetSitesFailAction";
 import IGetSitesInProgressAction from "./IGetSitesInProgressAction";
 import IGetSitesSuccessAction from "./IGetSitesSuccessAction";
 import IUpdateSiteFailAction from "./IUpdateSiteFailAction";
 import IUpdateSiteInProgressAction from "./IUpdateSiteInProgressAction";
 import IUpdateSiteSuccessAction from "./IUpdateSiteSuccessAction";
-import IDeleteSiteFailAction from "./IDeleteSiteFailAction";
-import IDeleteSiteInProgressAction from "./IDeleteSiteInProgressAction";
-import IDeleteSiteSuccessAction from "./IDeleteSiteSuccessAction";
 
 export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
@@ -62,6 +66,23 @@ export function deleteSite(
       dispatch(deleteSiteSuccess(siteId));
     } catch (err) {
       dispatch(deleteSiteFail(err));
+    }
+  };
+}
+
+export function addSite(
+  site: ISite
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(addSiteInProgress());
+
+    try {
+      const addedSite: ISite = await addSiteFromApi(site);
+
+      dispatch(addSiteSuccess(addedSite));
+    } catch (err) {
+      dispatch(addSiteFail(err));
     }
   };
 }
@@ -135,5 +156,29 @@ function deleteSiteFail(error: Error): IDeleteSiteFailAction {
       error
     },
     type: keys.DELETE_SITE_FAIL
+  };
+}
+
+function addSiteInProgress(): IAddSiteInProgressAction {
+  return {
+    type: keys.ADD_SITE_INPROGRESS
+  };
+}
+
+function addSiteSuccess(site: ISite): IAddSiteSuccessAction {
+  return {
+    payload: {
+      site
+    },
+    type: keys.ADD_SITE_SUCCESS
+  };
+}
+
+function addSiteFail(error: Error): IAddSiteFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.ADD_SITE_FAIL
   };
 }

@@ -22,9 +22,9 @@ export async function updateSite(site: ISite): Promise<ISite> {
   headers.append("Content-Type", "application/json");
 
   const requestInit: RequestInit = {
-    method: "PATCH",
+    body: JSON.stringify(site),
     headers,
-    body: JSON.stringify(site)
+    method: "PATCH"
   };
 
   // Throws TypeError for network error. See for details: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
@@ -48,6 +48,28 @@ export async function deleteSite(siteId: string): Promise<void> {
   const response = await fetch(requestUrl, requestInit);
 
   if (!response.ok) {
+    throw new ApiError(response.status, response.statusText);
+  }
+}
+
+export async function addSite(site: ISite): Promise<ISite> {
+  const requestUrl = `${baseUrl}sites/`;
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+
+  const requestInit: RequestInit = {
+    body: JSON.stringify(site),
+    headers,
+    method: "POST"
+  };
+
+  // Throws TypeError for network error. See for details: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+  const response = await fetch(requestUrl, requestInit);
+
+  if (response.ok) {
+    return await response.json();
+  } else {
     throw new ApiError(response.status, response.statusText);
   }
 }
