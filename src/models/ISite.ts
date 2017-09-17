@@ -1,7 +1,7 @@
 export default interface ISite {
-  id: string;
-  name: string;
-  url: string;
-  userName: string;
-  password: string;
+  readonly id: string;
+  readonly name: string;
+  readonly url: string;
+  readonly userName: string;
+  readonly password: string;
 };

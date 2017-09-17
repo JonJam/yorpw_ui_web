@@ -5,8 +5,9 @@ import EmptyMessage from "../common/EmptyMessage";
 import Group from "./Group";
 
 interface IGroupListProps {
-  groups: IGroupViewModel[];
-  isBusy: boolean;
+  readonly groups: ReadonlyArray<IGroupViewModel>;
+  readonly isBusy: boolean;
+  handleSiteClick: (siteId: string) => void;
 }
 
 function GroupList(props: IGroupListProps) {
@@ -14,7 +15,14 @@ function GroupList(props: IGroupListProps) {
 
   if (props.groups.length > 0) {
     const groupItems = props.groups.map(group => {
-      return <Group key={group.id} group={group} />;
+      return (
+        <Group
+          key={group.id}
+          group={group}
+          handleSiteClick={props.handleSiteClick}
+          isBusy={props.isBusy}
+        />
+      );
     });
 
     element = (

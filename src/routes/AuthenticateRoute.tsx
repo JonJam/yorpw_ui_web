@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 
 interface IAuthenticateRouteProps extends RouteProps {
-  isAuthenticated: boolean;
-  authenticatePath: string;
-  component: React.ComponentClass<any> | React.StatelessComponent<any>;
+  readonly isAuthenticated: boolean;
+  readonly authenticatePath: string;
+  readonly component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
 export default function AuthenticateRoute({

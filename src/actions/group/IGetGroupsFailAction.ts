@@ -1,8 +1,8 @@
 import keys from "../ActionTypeKeys";
 
 export default interface IGetGroupsFailAction {
-  type: keys.GET_GROUPS_FAIL;
-  payload: {
-    error: Error;
+  readonly type: keys.GET_GROUPS_FAIL;
+  readonly payload: {
+    readonly error: Error;
   };
 };

@@ -17,7 +17,8 @@
     "noUnusedParameters": true,
     "noEmitOnError": true,
     "removeComments": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

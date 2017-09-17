@@ -15,19 +15,23 @@ const siteSchema = {
           },
           name: {
             type: "string",
-            faker: "internet.domainName"
+            faker: "internet.domainName",
+            maxLength: 100
           },
           url: {
             type: "string",
-            faker: "internet.url"
+            faker: "internet.url",
+            maxLength: 1000
           },
           userName: {
             type: "string",
-            faker: "internet.email"
+            faker: "internet.email",
+            maxLength: 100
           },
           password: {
             type: "string",
-            faker: "internet.password"
+            faker: "internet.password",
+            maxLength: 100
           }
         },
         required: ["id", "name", "url", "userName", "password"]

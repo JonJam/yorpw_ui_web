@@ -8,6 +8,7 @@
     "@types/react": "^16.0.1",
     "@types/react-dom": "^15.5.2",
     "bootstrap": "4.0.0-beta",
+    "class-validator": "^0.7.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "npm-run-all": "^4.0.2",
@@ -18,7 +19,8 @@
     "react-router-dom": "^4.1.2",
     "react-scripts-ts": "2.5.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
@@ -28,6 +30,7 @@
     "@types/react-router-dom": "^4.0.7",
     "@types/redux-immutable-state-invariant": "^2.0.0",
     "@types/redux-mock-store": "^0.0.10",
+    "@types/toastr": "^2.1.35",
     "@types/whatwg-fetch": "^0.0.33",
     "chalk": "^2.1.0",
     "enzyme": "^2.9.1",

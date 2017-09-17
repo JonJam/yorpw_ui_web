@@ -3,7 +3,7 @@ import * as React from "react";
 import "./Progress.css";
 
 interface ILoadingProps {
-  isBusy: boolean;
+  readonly isBusy: boolean;
 }
 
 function Progress(props: ILoadingProps) {

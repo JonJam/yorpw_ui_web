@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 
 interface IRedirectIfAuthenticatedProps extends RouteProps {
-  isAuthenticated: boolean;
-  redirectPath: string;
-  component: React.ComponentClass<any> | React.StatelessComponent<any>;
+  readonly isAuthenticated: boolean;
+  readonly redirectPath: string;
+  readonly component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
 export default function RedirectIfAuthenticated({

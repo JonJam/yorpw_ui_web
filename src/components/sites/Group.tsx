@@ -4,7 +4,9 @@ import strings from "../../strings";
 import SiteList from "./SiteList";
 
 interface IGroupProps {
-  group: IGroupViewModel;
+  readonly group: IGroupViewModel;
+  handleSiteClick: (siteId: string) => void;
+  readonly isBusy: boolean;
 }
 
 function Group(props: IGroupProps) {
@@ -38,7 +40,11 @@ function Group(props: IGroupProps) {
         aria-labelledby={headingId}
       >
         <div className="card-body">
-          <SiteList sites={props.group.sites} />
+          <SiteList
+            sites={props.group.sites}
+            handleSiteClick={props.handleSiteClick}
+            isBusy={props.isBusy}
+          />
         </div>
       </div>
     </div>
