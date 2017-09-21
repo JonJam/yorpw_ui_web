@@ -1,6 +1,8 @@
 export default {
   footer: {
-    addSiteButton: "Add site"
+    add: "Expand to add",
+    addGroup: "Add group",
+    addSite: "Add site"
   },
   group: {
     sitesInGroup: "sites in group."
@@ -9,6 +11,15 @@ export default {
     emptyMessageDescription:
       "Y don't U try creating a grup & adding som sitz 2 it.",
     emptyMessageTitle: "Hmm! looks lIk U don't hav NE groups"
+  },
+  groupPage: {
+    addTitle: "Add group",
+    editTitle: "Edit group"
+  },
+  groupViewModel: {
+    nameIsNotEmptyMessage: "Name is required.",
+    nameMaxLengthMessage:
+      "Name must be shorter than or equal to $constraint1 characters."
   },
   home: {
     getButton: "git yorpw",

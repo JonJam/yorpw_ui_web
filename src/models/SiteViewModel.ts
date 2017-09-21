@@ -6,7 +6,6 @@ interface ISiteViewModel extends ISite {
   groupId: string;
 }
 
-// TODO Think of a better name for this.
 export default class SiteViewModel implements ISiteViewModel {
   public readonly id: string;
 

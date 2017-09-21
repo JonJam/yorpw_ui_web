@@ -15,7 +15,8 @@ const groupSchema = {
           },
           name: {
             type: "string",
-            faker: "commerce.productName"
+            faker: "commerce.productName",
+            maxLength: 100
           }
         },
         required: ["id", "name"]

@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import * as Popper from "popper.js";
+import Popper from "popper.js";
 
 const win = window as any;
 
