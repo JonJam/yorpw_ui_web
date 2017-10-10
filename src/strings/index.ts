@@ -7,6 +7,13 @@ export default {
   group: {
     sitesInGroup: "sites in group."
   },
+  groupForm: {
+    cancelButton: "Cancel",
+    deleteButton: "Delete",
+    nameLabel: "Name",
+    namePlaceholder: "Enter name",
+    saveButton: "Save"
+  },
   groupList: {
     emptyMessageDescription:
       "Y don't U try creating a grup & adding som sitz 2 it.",

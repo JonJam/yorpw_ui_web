@@ -28,9 +28,9 @@ export default function GroupForm(props: IGroupFormProps) {
         <Input
           className="col-12"
           id={name}
-          label={strings.siteForm.nameLabel}
+          label={strings.groupForm.nameLabel}
           type="text"
-          placeholder={strings.siteForm.namePlaceholder}
+          placeholder={strings.groupForm.namePlaceholder}
           value={props.group.name}
           handleChange={props.handleValueChange}
           validationErrors={props.validationErrors[name]}
@@ -43,7 +43,7 @@ export default function GroupForm(props: IGroupFormProps) {
             className="btn btn-light"
             onClick={props.handleCancelClick}
           >
-            {strings.siteForm.cancelButton}
+            {strings.groupForm.cancelButton}
           </button>
           <button
             disabled={props.actionInProgress}
@@ -51,7 +51,7 @@ export default function GroupForm(props: IGroupFormProps) {
             className="btn btn-primary ml-1"
             onClick={props.handleSaveClick}
           >
-            {strings.siteForm.saveButton}
+            {strings.groupForm.saveButton}
           </button>
         </div>
         {props.isNewGroup
@@ -63,7 +63,7 @@ export default function GroupForm(props: IGroupFormProps) {
                 className="btn btn-danger float-right"
                 onClick={props.handleDeleteClick}
               >
-                {strings.siteForm.deleteButton}
+                {strings.groupForm.deleteButton}
               </button>
             </div>}
       </div>
