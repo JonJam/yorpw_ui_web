@@ -1,11 +1,17 @@
 import { Dispatch } from "redux";
 import {
+  addGroup as addGroupFromApi,
   getGroups as getGroupsFromApi,
   updateGroup as updateGroupFromApi
 } from "../../api/groupsApi";
 import IGroup from "../../models/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
+import {
+  IAddGroupFailAction,
+  IAddGroupInProgressAction,
+  IAddGroupSuccessAction
+} from "./add";
 import {
   IGetGroupsFailAction,
   IGetGroupsInProgressAction,
@@ -30,6 +36,23 @@ export function getGroups(): (
       dispatch(getGroupsSuccess(groups));
     } catch (err) {
       dispatch(getGroupsFail(err));
+    }
+  };
+}
+
+export function addGroup(
+  group: IGroup
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(addGroupInProgress());
+
+    try {
+      const addedGroup = await addGroupFromApi(group);
+
+      dispatch(addGroupSuccess(addedGroup));
+    } catch (err) {
+      dispatch(addGroupFail(err));
     }
   };
 }
@@ -72,6 +95,30 @@ function getGroupsFail(error: Error): IGetGroupsFailAction {
       error
     },
     type: keys.GET_GROUPS_FAIL
+  };
+}
+
+function addGroupInProgress(): IAddGroupInProgressAction {
+  return {
+    type: keys.ADD_GROUP_INPROGRESS
+  };
+}
+
+function addGroupSuccess(group: IGroup): IAddGroupSuccessAction {
+  return {
+    payload: {
+      group
+    },
+    type: keys.ADD_GROUP_SUCCESS
+  };
+}
+
+function addGroupFail(error: Error): IAddGroupFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.ADD_GROUP_FAIL
   };
 }
 

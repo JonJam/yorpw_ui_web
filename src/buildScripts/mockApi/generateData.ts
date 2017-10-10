@@ -20,7 +20,7 @@ generatedGroups.forEach((group: IGroup) => {
 
   groups.push({
     ...group,
-    sites: compiledSiteSchema.sites.map((site: ISite) => site.id)
+    siteIds: compiledSiteSchema.sites.map((site: ISite) => site.id)
   });
 });
 

@@ -64,7 +64,7 @@ export function updateSite(
       if (newGroup !== undefined) {
         const newGroupToUpdate = {
           ...newGroup,
-          sites: [...newGroup.sites, site.id]
+          sites: [...newGroup.siteIds, site.id]
         };
 
         await dispatch(updateGroup(newGroupToUpdate));
@@ -73,7 +73,7 @@ export function updateSite(
       if (oldGroup !== undefined) {
         const oldGroupToUpdate = {
           ...oldGroup,
-          sites: oldGroup.sites.filter(s => s !== site.id)
+          sites: oldGroup.siteIds.filter(s => s !== site.id)
         };
 
         await dispatch(updateGroup(oldGroupToUpdate));
@@ -99,7 +99,7 @@ export function deleteSite(
 
       const groupToUpdate = {
         ...group,
-        sites: group.sites.filter(s => s !== siteId)
+        sites: group.siteIds.filter(s => s !== siteId)
       };
 
       await dispatch(updateGroup(groupToUpdate));
@@ -124,7 +124,7 @@ export function addSite(
 
       const groupToUpdate = {
         ...group,
-        sites: [...group.sites, addedSite.id]
+        sites: [...group.siteIds, addedSite.id]
       };
 
       await dispatch(updateGroup(groupToUpdate));

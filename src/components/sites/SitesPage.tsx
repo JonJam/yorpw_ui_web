@@ -4,16 +4,16 @@ import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
-import IGroupViewModel from "../../models/IGroupViewModel";
+import IGroupWithSites from "../../models/IGroupWithSites";
 import { sitePath } from "../../routes/paths";
-import { getGroupViewModels, isBusy } from "../../selectors";
+import { getGroupsWithSites, isBusy } from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import Footer from "./footer/Footer";
 import GroupList from "./GroupList";
 
 interface ISitePagesProps extends RouteComponentProps<any> {
-  readonly groups: ReadonlyArray<IGroupViewModel>;
+  readonly groups: ReadonlyArray<IGroupWithSites>;
   readonly isBusy: boolean;
   getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   getSites: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
@@ -55,7 +55,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    groups: getGroupViewModels(state.groups, state.sites),
+    groups: getGroupsWithSites(state.groups, state.sites),
     isBusy: isBusy(state.pendingActions)
   };
 }

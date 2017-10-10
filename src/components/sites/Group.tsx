@@ -1,10 +1,10 @@
 import * as React from "react";
-import IGroupViewModel from "../../models/IGroupViewModel";
+import IGroupWithSites from "../../models/IGroupWithSites";
 import strings from "../../strings";
 import SiteList from "./SiteList";
 
 interface IGroupProps {
-  readonly group: IGroupViewModel;
+  readonly group: IGroupWithSites;
   handleSiteClick: (siteId: string) => void;
   readonly isBusy: boolean;
 }

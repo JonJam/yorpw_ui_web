@@ -1,6 +1,6 @@
 import ISelectOption from "../components/common/select/ISelectOption";
 import IGroup from "../models/IGroup";
-import IGroupViewModel from "../models/IGroupViewModel";
+import IGroupWithSites from "../models/IGroupWithSites";
 import ISite from "../models/ISite";
 
 // TODO Refactor these to use reselect see http://redux.js.org/docs/recipes/ComputingDerivedData.html
@@ -13,17 +13,17 @@ export function isBusy(pendingActions: number) {
   return pendingActions > 0;
 }
 
-export function getGroupViewModels(
+export function getGroupsWithSites(
   groupsFromState: ReadonlyArray<IGroup>,
   sitesFromState: ReadonlyArray<ISite>
-): ReadonlyArray<IGroupViewModel> {
+): ReadonlyArray<IGroupWithSites> {
   const sortedGroups = [...groupsFromState].sort(groupCompare);
 
   return sortedGroups.map(group => {
     const { id, name } = group;
     const sites: ISite[] = [];
 
-    group.sites.forEach(siteId => {
+    group.siteIds.forEach(siteId => {
       const site = sitesFromState.find(s => s.id === siteId);
 
       if (site !== undefined) {
@@ -33,13 +33,14 @@ export function getGroupViewModels(
 
     sites.sort(siteCompare);
 
-    const groupViewModel: IGroupViewModel = {
+    const groupWithSites: IGroupWithSites = {
       id,
       name,
+      siteIds: group.siteIds,
       sites
     };
 
-    return groupViewModel;
+    return groupWithSites;
   });
 }
 
@@ -62,7 +63,11 @@ export function getGroupForSite(
   groupsFromState: ReadonlyArray<IGroup>,
   siteId: string
 ) {
-  return groupsFromState.find(g => g.sites.indexOf(siteId) !== -1);
+  return groupsFromState.find(g => g.siteIds.indexOf(siteId) !== -1);
+}
+
+export function getGroupById(groups: ReadonlyArray<IGroup>, groupId: string) {
+  return groups.find(g => g.id === groupId);
 }
 
 function groupCompare(group1: IGroup, group2: IGroup) {
