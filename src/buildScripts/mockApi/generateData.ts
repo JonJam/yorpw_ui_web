@@ -26,7 +26,7 @@ generatedGroups.forEach((group: IGroup) => {
 
 const json = JSON.stringify({
   groups,
-  siteIds: sites
+  sites
 });
 
 fs.writeFile("./src/buildScripts/mockApi/db.json", json, err => {

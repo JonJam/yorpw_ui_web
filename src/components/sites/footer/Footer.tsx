@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { sitePath, groupPath } from "../../../routes/paths";
+import { groupPath, sitePath } from "../../../routes/paths";
 import strings from "../../../strings";
 
 import "./Footer.css";

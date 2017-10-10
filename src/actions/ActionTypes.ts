@@ -1,4 +1,9 @@
 import {
+  IAddGroupFailAction,
+  IAddGroupInProgressAction,
+  IAddGroupSuccessAction
+} from "./group/add";
+import {
   IGetGroupsFailAction,
   IGetGroupsInProgressAction,
   IGetGroupsSuccessAction
@@ -51,6 +56,9 @@ type ActionTypes =
   | IDeleteSiteSuccessAction
   | IAddSiteFailAction
   | IAddSiteInProgressAction
-  | IAddSiteSuccessAction;
+  | IAddSiteSuccessAction
+  | IAddGroupFailAction
+  | IAddGroupInProgressAction
+  | IAddGroupSuccessAction;
 
 export default ActionTypes;

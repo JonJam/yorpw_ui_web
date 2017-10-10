@@ -1,6 +1,6 @@
 import * as React from "react";
-import IValidationErrors from "../../models/IValidationErrors";
 import GroupViewModel from "../../models/GroupViewModel";
+import IValidationErrors from "../../models/IValidationErrors";
 import strings from "../../strings";
 import { nameOf } from "../../utilities";
 import Input from "../common/Input";

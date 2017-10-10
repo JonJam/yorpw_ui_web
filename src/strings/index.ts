@@ -13,6 +13,7 @@ export default {
     emptyMessageTitle: "Hmm! looks lIk U don't hav NE groups"
   },
   groupPage: {
+    addGroupSuccessMessage: "Group added.",
     addTitle: "Add group",
     editTitle: "Edit group"
   },

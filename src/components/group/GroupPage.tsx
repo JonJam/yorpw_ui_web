@@ -1,26 +1,27 @@
+import { validate } from "class-validator";
 import * as React from "react";
+import { connect, Dispatch } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import * as toastr from "toastr";
+import { addGroup as addGroupAction } from "../../actions/group/groupActions";
+import GroupViewModel from "../../models/GroupViewModel";
 import IGroup from "../../models/IGroup";
 import IValidationErrors from "../../models/IValidationErrors";
-import GroupViewModel from "../../models/GroupViewModel";
+import { getGroupById } from "../../selectors";
+import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
-import { RouteComponentProps } from "react-router-dom";
-import { validate } from "class-validator";
 import { mapToValidationErrors } from "../../utilities";
 import GroupFrom from "./GroupForm";
-import IStoreState from "../../store/IStoreState";
-import { connect, Dispatch } from "react-redux";
-import { getGroupById } from "../../selectors";
-// import {bindActionCreators } from "redux";
 
 interface IGroupPageProps extends RouteComponentProps<any> {
   readonly viewModel: GroupViewModel;
   readonly groups: ReadonlyArray<IGroup>;
+  addGroup: (
+    group: IGroup
+  ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   // TODO Add updateGroup
   // TODO Add deleteGroup
-  // TODO Add add group
-  // addGroup: (
-  //   group: IGroup
-  // ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface IGroupPageState {
@@ -135,14 +136,14 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     this.props.history.goBack();
   }
 
-  private async updateGroup(viewModel: GroupViewModel) {
+  private async updateGroup(_viewModel: GroupViewModel) {
     // TODO implement update.
-    console.log(`Update ${viewModel}`);
   }
 
   private async addGroup(viewModel: GroupViewModel) {
-    // TODO implement add group
-    console.log(`Add ${viewModel}`);
+    await this.props.addGroup(viewModel);
+
+    toastr.success(strings.groupPage.addGroupSuccessMessage);
   }
 }
 
@@ -171,10 +172,8 @@ function mapStateToProps(
 }
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
-  console.log(dispatch);
   return {
-    // TODO bind action
-    // addGroup: bindActionCreators(addGroupAction, dispatch),
+    addGroup: bindActionCreators(addGroupAction, dispatch)
   };
 }
 
