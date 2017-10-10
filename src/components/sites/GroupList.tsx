@@ -2,7 +2,7 @@ import * as React from "react";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import strings from "../../strings";
 import EmptyMessage from "../common/EmptyMessage";
-import Group from "./Group";
+import Group from "./Group/Group";
 
 interface IGroupListProps {
   readonly groups: ReadonlyArray<IGroupWithSites>;
