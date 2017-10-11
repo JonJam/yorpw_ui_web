@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import {
   addGroup as addGroupFromApi,
+  deleteGroup as deleteGroupFromApi,
   getGroups as getGroupsFromApi,
   updateGroup as updateGroupFromApi
 } from "../../api/groupsApi";
@@ -13,6 +14,11 @@ import {
   IAddGroupSuccessAction
 } from "./add";
 import {
+  IDeleteGroupFailAction,
+  IDeleteGroupInProgressAction,
+  IDeleteGroupSuccessAction
+} from "./delete";
+import {
   IGetGroupsFailAction,
   IGetGroupsInProgressAction,
   IGetGroupsSuccessAction
@@ -22,6 +28,7 @@ import {
   IUpdateGroupInProgressAction,
   IUpdateGroupSuccessAction
 } from "./update";
+import { deleteSite } from "../site/siteActions";
 
 export function getGroups(): (
   dispatch: Dispatch<IStoreState>
@@ -70,6 +77,30 @@ export function updateGroup(
       dispatch(updateGroupSuccess(updatedGroup));
     } catch (err) {
       dispatch(updateGroupFail(err));
+    }
+  };
+}
+
+export function deleteGroup(
+  group: IGroup
+): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(deleteGroupInProgress());
+
+    try {
+      // Delete all sites within group.
+      const deleteSitePromises = group.siteIds.map(siteId => {
+        return dispatch(deleteSite(siteId));
+      });
+
+      await Promise.all(deleteSitePromises);
+
+      await deleteGroupFromApi(group.id);
+
+      dispatch(deleteGroupSuccess(group.id));
+    } catch (err) {
+      dispatch(deleteGroupFail(err));
     }
   };
 }
@@ -143,5 +174,29 @@ function updateGroupFail(error: Error): IUpdateGroupFailAction {
       error
     },
     type: keys.UPDATE_GROUP_FAIL
+  };
+}
+
+function deleteGroupInProgress(): IDeleteGroupInProgressAction {
+  return {
+    type: keys.DELETE_GROUP_INPROGRESS
+  };
+}
+
+function deleteGroupSuccess(groupId: string): IDeleteGroupSuccessAction {
+  return {
+    payload: {
+      groupId
+    },
+    type: keys.DELETE_GROUP_SUCCESS
+  };
+}
+
+function deleteGroupFail(error: Error): IDeleteGroupFailAction {
+  return {
+    payload: {
+      error
+    },
+    type: keys.DELETE_GROUP_FAIL
   };
 }

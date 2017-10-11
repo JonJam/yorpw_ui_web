@@ -59,6 +59,21 @@ export async function updateGroup(group: IGroup): Promise<IGroup> {
   }
 }
 
+export async function deleteGroup(groupId: string): Promise<void> {
+  const requestUrl = `${baseUrl}groups/${groupId}`;
+
+  const requestInit: RequestInit = {
+    method: "DELETE"
+  };
+
+  // Throws TypeError for network error. See for details: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+  const response = await fetch(requestUrl, requestInit);
+
+  if (!response.ok) {
+    throw new ApiError(response.status, response.statusText);
+  }
+}
+
 // Using this to remove any other properties that happen to be on object so only
 // send IGroup properties to server.
 function stripProperties({ id, name, siteIds }: IGroup): IGroup {

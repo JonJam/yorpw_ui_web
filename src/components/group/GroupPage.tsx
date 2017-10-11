@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import * as toastr from "toastr";
 import {
   addGroup as addGroupAction,
+  deleteGroup as deleteGroupAction,
   updateGroup as updateGroupAction
 } from "../../actions/group/groupActions";
 import GroupViewModel from "../../models/GroupViewModel";
@@ -26,7 +27,9 @@ interface IGroupPageProps extends RouteComponentProps<any> {
   updateGroup: (
     group: IGroup
   ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
-  // TODO Add deleteGroup
+  deleteGroup: (
+    group: IGroup
+  ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
 }
 
 interface IGroupPageState {
@@ -130,7 +133,19 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
   }
 
   private async handleDeleteClick() {
-    // TODO Implement delete
+    this.setState({
+      actionInProgress: true
+    });
+
+    await this.props.deleteGroup(this.state.viewModel);
+
+    toastr.success(strings.groupPage.deleteGroupSuccessMessage);
+
+    this.props.history.goBack();
+
+    this.setState({
+      actionInProgress: false
+    });
   }
 
   private handleCancelClick() {
@@ -177,6 +192,7 @@ function mapStateToProps(
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
     addGroup: bindActionCreators(addGroupAction, dispatch),
+    deleteGroup: bindActionCreators(deleteGroupAction, dispatch),
     updateGroup: bindActionCreators(updateGroupAction, dispatch)
   };
 }
