@@ -5,6 +5,7 @@ export default {
     addSite: "Add site"
   },
   group: {
+    editButton: "Edit group",
     sitesInGroup: "sites in group."
   },
   groupForm: {

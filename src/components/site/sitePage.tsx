@@ -119,9 +119,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     });
   }
 
-  private async handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleSaveClick() {
     this.setState({
       actionInProgress: true
     });
@@ -149,9 +147,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
     });
   }
 
-  private async handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleDeleteClick() {
     this.setState({
       actionInProgress: true
     });

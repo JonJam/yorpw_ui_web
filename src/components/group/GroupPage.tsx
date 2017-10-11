@@ -101,9 +101,7 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     });
   }
 
-  private async handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleSaveClick() {
     this.setState({
       actionInProgress: true
     });
@@ -131,9 +129,7 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     });
   }
 
-  private async handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleDeleteClick() {
     // TODO Implement delete
   }
 

@@ -8,12 +8,17 @@ import "./Group.css";
 interface IGroupProps {
   readonly group: IGroupWithSites;
   handleSiteClick: (siteId: string) => void;
+  handleGroupEditClick: (groupId: string) => void;
   readonly isBusy: boolean;
 }
 
 function Group(props: IGroupProps) {
   const headingId = props.group.id;
   const collapseId = `collapse${props.group.id}`;
+
+  const handleClick = () => {
+    props.handleGroupEditClick(props.group.id);
+  };
 
   return (
     <div className="item my-2">
@@ -40,14 +45,12 @@ function Group(props: IGroupProps) {
             <button
               type="button"
               className="btn btn-primary btn-sm float-right"
+              onClick={handleClick}
             >
-              {/* TODO Update icon
-              TODO Update string
-              TODO add click functionality to navigate to update group*/}
               <span
-                className="fa fa-plus"
+                className="fa fa-pencil"
                 aria-hidden="true"
-                aria-label={strings.footer.add}
+                aria-label={strings.group.editButton}
               />
             </button>
           </div>

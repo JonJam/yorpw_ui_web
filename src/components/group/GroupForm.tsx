@@ -10,9 +10,9 @@ interface IGroupFormProps {
   readonly isNewGroup: boolean;
   readonly validationErrors: IValidationErrors;
   readonly actionInProgress: boolean;
-  handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSaveClick: () => void;
   handleCancelClick: () => void;
-  handleDeleteClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleDeleteClick: () => void;
   handleValueChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
