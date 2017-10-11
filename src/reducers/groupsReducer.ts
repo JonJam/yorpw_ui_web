@@ -1,6 +1,7 @@
 import ActionTypeKeys from "../actions/ActionTypeKeys";
 import ActionTypes from "../actions/ActionTypes";
 import { IAddGroupSuccessAction } from "../actions/group/add";
+import { IDeleteGroupSuccessAction } from "../actions/group/delete";
 import { IGetGroupsSuccessAction } from "../actions/group/get";
 import { IUpdateGroupSuccessAction } from "../actions/group/update";
 import IGroup from "../models/IGroup";
@@ -17,6 +18,8 @@ export default function groupsReducer(
       return onUpdateGroupSuccess(action, state);
     case ActionTypeKeys.ADD_GROUP_SUCCESS:
       return onAddGroupSuccess(action, state);
+    case ActionTypeKeys.DELETE_GROUP_SUCCESS:
+      return onDeleteGroupSuccess(action, state);
     default:
       return state;
   }
@@ -41,4 +44,11 @@ function onAddGroupSuccess(
   currentState: ReadonlyArray<IGroup>
 ) {
   return [...currentState, { ...action.payload.group }];
+}
+
+function onDeleteGroupSuccess(
+  action: IDeleteGroupSuccessAction,
+  currentState: ReadonlyArray<IGroup>
+) {
+  return [...currentState.filter(group => group.id !== action.payload.groupId)];
 }

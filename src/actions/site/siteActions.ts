@@ -88,7 +88,7 @@ export function updateSite(
 
 export function deleteSite(
   siteId: string,
-  group: IGroup
+  group?: IGroup
 ): (dispatch: Dispatch<IStoreState>) => Promise<void> {
   return async (dispatch: Dispatch<IStoreState>) => {
     // Signal work in progress.
@@ -97,12 +97,16 @@ export function deleteSite(
     try {
       await deleteSiteFromApi(siteId);
 
-      const groupToUpdate = {
-        ...group,
-        sites: group.siteIds.filter(s => s !== siteId)
-      };
+      // Group will be undefined when deleting a site whilst deleting a group, so we
+      // don't need to update the group.
+      if (group !== undefined) {
+        const groupToUpdate = {
+          ...group,
+          sites: group.siteIds.filter(s => s !== siteId)
+        };
 
-      await dispatch(updateGroup(groupToUpdate));
+        await dispatch(updateGroup(groupToUpdate));
+      }
 
       dispatch(deleteSiteSuccess(siteId));
     } catch (err) {

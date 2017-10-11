@@ -4,6 +4,11 @@ import {
   IAddGroupSuccessAction
 } from "./group/add";
 import {
+  IDeleteGroupFailAction,
+  IDeleteGroupInProgressAction,
+  IDeleteGroupSuccessAction
+} from "./group/delete";
+import {
   IGetGroupsFailAction,
   IGetGroupsInProgressAction,
   IGetGroupsSuccessAction
@@ -59,6 +64,9 @@ type ActionTypes =
   | IAddSiteSuccessAction
   | IAddGroupFailAction
   | IAddGroupInProgressAction
-  | IAddGroupSuccessAction;
+  | IAddGroupSuccessAction
+  | IDeleteGroupFailAction
+  | IDeleteGroupInProgressAction
+  | IDeleteGroupSuccessAction;
 
 export default ActionTypes;

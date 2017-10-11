@@ -23,6 +23,7 @@ export default {
   groupPage: {
     addGroupSuccessMessage: "Group added.",
     addTitle: "Add group",
+    deleteGroupSuccessMessage: "Group (and contained sites) deleted.",
     editTitle: "Edit group",
     updateGroupSuccessMessage: "Group updated."
   },
