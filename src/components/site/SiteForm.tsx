@@ -15,10 +15,10 @@ interface ISiteFormProps {
   readonly showClearPassword: boolean;
   readonly validationErrors: IValidationErrors;
   readonly actionInProgress: boolean;
-  handleTogglePasswordClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleSaveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleTogglePasswordClick: () => void;
+  handleSaveClick: () => void;
   handleCancelClick: () => void;
-  handleDeleteClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleDeleteClick: () => void;
   handleValueChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;

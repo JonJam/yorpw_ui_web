@@ -5,6 +5,7 @@ export default {
     addSite: "Add site"
   },
   group: {
+    editButton: "Edit group",
     sitesInGroup: "sites in group."
   },
   groupForm: {
@@ -22,7 +23,8 @@ export default {
   groupPage: {
     addGroupSuccessMessage: "Group added.",
     addTitle: "Add group",
-    editTitle: "Edit group"
+    editTitle: "Edit group",
+    updateGroupSuccessMessage: "Group updated."
   },
   groupViewModel: {
     nameIsNotEmptyMessage: "Name is required.",

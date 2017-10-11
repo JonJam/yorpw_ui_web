@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupWithSites from "../../models/IGroupWithSites";
-import { sitePath } from "../../routes/paths";
+import { groupPath, sitePath } from "../../routes/paths";
 import { getGroupsWithSites, isBusy } from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
@@ -23,6 +23,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
   constructor(props: ISitePagesProps) {
     super(props);
 
+    this.handleGroupEditClick = this.handleGroupEditClick.bind(this);
     this.handleSiteClick = this.handleSiteClick.bind(this);
   }
 
@@ -41,11 +42,16 @@ class SitesPage extends React.Component<ISitePagesProps> {
         <GroupList
           groups={this.props.groups}
           isBusy={this.props.isBusy}
+          handleGroupEditClick={this.handleGroupEditClick}
           handleSiteClick={this.handleSiteClick}
         />
         <Footer />
       </div>
     );
+  }
+
+  private handleGroupEditClick(groupId: string) {
+    this.props.history.push(`${groupPath}/${groupId}`);
   }
 
   private handleSiteClick(siteId: string) {

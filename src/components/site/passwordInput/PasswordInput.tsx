@@ -13,7 +13,7 @@ interface IPasswordInputProps {
   readonly showClear: boolean;
   readonly validationErrors: ReadonlyArray<string> | undefined;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleToggleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleToggleClick: () => void;
 }
 
 export default function PasswordInput(props: IPasswordInputProps) {

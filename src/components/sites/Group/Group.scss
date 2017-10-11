@@ -1,0 +1,15 @@
+@import "../../../../node_modules/bootstrap/scss/_functions";
+@import "../../../../node_modules/bootstrap/scss/_variables";
+
+.item {
+  .row {
+    padding-top: $input-btn-padding-y-lg;
+    padding-bottom: $input-btn-padding-y-lg;
+    font-size: $font-size-lg;
+
+    a {
+      // From btn-light
+      color: #111;
+    }
+  }
+}

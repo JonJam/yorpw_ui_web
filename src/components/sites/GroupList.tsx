@@ -2,11 +2,12 @@ import * as React from "react";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import strings from "../../strings";
 import EmptyMessage from "../common/EmptyMessage";
-import Group from "./Group";
+import Group from "./group/Group";
 
 interface IGroupListProps {
   readonly groups: ReadonlyArray<IGroupWithSites>;
   readonly isBusy: boolean;
+  handleGroupEditClick: (groupId: string) => void;
   handleSiteClick: (siteId: string) => void;
 }
 
@@ -19,6 +20,7 @@ function GroupList(props: IGroupListProps) {
         <Group
           key={group.id}
           group={group}
+          handleGroupEditClick={props.handleGroupEditClick}
           handleSiteClick={props.handleSiteClick}
           isBusy={props.isBusy}
         />

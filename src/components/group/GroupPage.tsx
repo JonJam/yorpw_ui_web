@@ -4,7 +4,10 @@ import { connect, Dispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as toastr from "toastr";
-import { addGroup as addGroupAction } from "../../actions/group/groupActions";
+import {
+  addGroup as addGroupAction,
+  updateGroup as updateGroupAction
+} from "../../actions/group/groupActions";
 import GroupViewModel from "../../models/GroupViewModel";
 import IGroup from "../../models/IGroup";
 import IValidationErrors from "../../models/IValidationErrors";
@@ -20,7 +23,9 @@ interface IGroupPageProps extends RouteComponentProps<any> {
   addGroup: (
     group: IGroup
   ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
-  // TODO Add updateGroup
+  updateGroup: (
+    group: IGroup
+  ) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
   // TODO Add deleteGroup
 }
 
@@ -96,9 +101,7 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     });
   }
 
-  private async handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleSaveClick() {
     this.setState({
       actionInProgress: true
     });
@@ -126,9 +129,7 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     });
   }
 
-  private async handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
+  private async handleDeleteClick() {
     // TODO Implement delete
   }
 
@@ -136,8 +137,10 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
     this.props.history.goBack();
   }
 
-  private async updateGroup(_viewModel: GroupViewModel) {
-    // TODO implement update.
+  private async updateGroup(viewModel: GroupViewModel) {
+    await this.props.updateGroup(viewModel);
+
+    toastr.success(strings.groupPage.updateGroupSuccessMessage);
   }
 
   private async addGroup(viewModel: GroupViewModel) {
@@ -173,7 +176,8 @@ function mapStateToProps(
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
-    addGroup: bindActionCreators(addGroupAction, dispatch)
+    addGroup: bindActionCreators(addGroupAction, dispatch),
+    updateGroup: bindActionCreators(updateGroupAction, dispatch)
   };
 }
 
