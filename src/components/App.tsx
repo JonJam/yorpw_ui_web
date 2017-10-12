@@ -31,6 +31,7 @@ class App extends React.Component<IAppProps> {
         <Header
           isBusy={this.props.isBusy}
           isAuthenticated={this.props.isAuthenticated}
+          currentLocation={this.props.location.pathname}
           handleSignOut={this.signOut}
         />
 

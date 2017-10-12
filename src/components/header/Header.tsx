@@ -5,6 +5,7 @@ import Progress from "./progress/Progress";
 interface IHeaderProps {
   readonly isBusy: boolean;
   readonly isAuthenticated: boolean;
+  readonly currentLocation: string;
   handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 

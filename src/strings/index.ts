@@ -40,7 +40,9 @@ export default {
   navBar: {
     appName: "yorpw",
     signOut: "Sign out",
-    signUp: "Sign up"
+    signUp: "Sign up",
+    searchLabel: "Search sites",
+    searchPlaceholder: "Search"
   },
   passwordInput: {
     hidePasswordLabel: "Hide password",
