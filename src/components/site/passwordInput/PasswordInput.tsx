@@ -1,4 +1,5 @@
 import * as React from "react";
+import zxcvbn from "zxcvbn";
 import strings from "../../../strings";
 import ValidationErrorMessage from "../../common/ValidationErrorMessage";
 
@@ -33,11 +34,17 @@ export default function PasswordInput(props: IPasswordInputProps) {
     label = strings.passwordInput.hidePasswordLabel;
   }
 
+  // bg-danger 0-25
+  // bg-warning 25-75
+  // bg-success 75 - 100
+
+  // // zxcvbn().score is a number in range 0 (too guessable) - 4 (very unguessable).
+  // this.passwordScore = zxcvbn(site.password).score * 25;
+  console.log(zxcvbn);
+
   return (
     <div className={formGroupClass}>
-      <label htmlFor={props.id}>
-        {props.label}
-      </label>
+      <label htmlFor={props.id}>{props.label}</label>
 
       <div className="input-group">
         <input
@@ -58,6 +65,16 @@ export default function PasswordInput(props: IPasswordInputProps) {
             {icon}
           </button>
         </span>
+      </div>
+      <div className="progress">
+        {/* style="width: 25%; height: 4px;" */}
+        <div
+          className="progress-bar bg-success"
+          role="progressbar"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        />
       </div>
 
       <ValidationErrorMessage messages={props.validationErrors} />
