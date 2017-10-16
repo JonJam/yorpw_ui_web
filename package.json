@@ -20,7 +20,8 @@
     "react-scripts-ts": "2.7.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
