@@ -8,6 +8,7 @@ import {
 import IGroup from "../../models/IGroup";
 import IStoreState from "../../store/IStoreState";
 import keys from "../ActionTypeKeys";
+import { deleteSite } from "../site/siteActions";
 import {
   IAddGroupFailAction,
   IAddGroupInProgressAction,
@@ -28,7 +29,6 @@ import {
   IUpdateGroupInProgressAction,
   IUpdateGroupSuccessAction
 } from "./update";
-import { deleteSite } from "../site/siteActions";
 
 export function getGroups(): (
   dispatch: Dispatch<IStoreState>

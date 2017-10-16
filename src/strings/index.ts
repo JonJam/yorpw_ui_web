@@ -39,15 +39,17 @@ export default {
   },
   navBar: {
     appName: "yorpw",
+    searchLabel: "Search sites",
+    searchPlaceholder: "Search",
     signOut: "Sign out",
-    signUp: "Sign up"
+    signUp: "Sign in / up"
   },
   passwordInput: {
     hidePasswordLabel: "Hide password",
     showPasswordLabel: "Show password"
   },
   signUpPage: {
-    signUp: "Sign up"
+    signUp: "Sign in / up"
   },
   siteForm: {
     cancelButton: "Cancel",

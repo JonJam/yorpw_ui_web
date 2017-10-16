@@ -1,13 +1,18 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { homePath, signUpPath } from "../../../routes/paths";
+import { homePath, signUpPath, sitesPath } from "../../../routes/paths";
 import strings from "../../../strings";
 
 import logo from "./logo.svg";
 
+import "./NavBar.css";
+
 interface INavBarProps {
+  readonly searchTerm: string;
   readonly isAuthenticated: boolean;
+  readonly currentLocation: string;
   handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  handleSearchTermChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function NavBar(props: INavBarProps) {
@@ -25,15 +30,24 @@ export default function NavBar(props: INavBarProps) {
     );
   }
 
+  let searchDisplay = "d-none";
+
+  if (props.currentLocation === sitesPath) {
+    searchDisplay = "d-none d-md-flex";
+  }
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to={homePath} className="navbar-brand">
-          <span>
-            <img src={logo} alt="" />
-            {strings.navBar.appName}
-          </span>
+          <img
+            src={logo}
+            className="brand-logo d-inline-block align-top"
+            alt=""
+          />
+          {strings.navBar.appName}
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -47,7 +61,25 @@ export default function NavBar(props: INavBarProps) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-md-auto">
+          <form className={`form-inline ${searchDisplay}`}>
+            <label className="sr-only" htmlFor="search">
+              {strings.navBar.searchLabel}
+            </label>
+            <div className="input-group mb-2 mb-sm-0">
+              <div className="input-group-addon">
+                <span className="fa fa-search" aria-hidden="true" />
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                id="search"
+                placeholder={strings.navBar.searchPlaceholder}
+                value={props.searchTerm}
+                onChange={props.handleSearchTermChange}
+              />
+            </div>
+          </form>
+          <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               {authenticationLink}
             </li>

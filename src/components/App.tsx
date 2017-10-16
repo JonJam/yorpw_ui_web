@@ -5,6 +5,8 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { signOut as signOutAction } from "../actions/authentication/authenticationActions";
 import ISignOutAction from "../actions/authentication/ISignOutAction";
+import IUpdateSearchTermAction from "../actions/searchTerm/IUpdateSearchTermAction";
+import { updateSearchTerm as updateSearchTermAction } from "../actions/searchTerm/searchTermActions";
 import Routes from "../routes/Routes";
 import { isBusy } from "../selectors";
 import IStoreState from "../store/IStoreState";
@@ -15,7 +17,9 @@ import "./App.css";
 interface IAppProps extends RouteComponentProps<any> {
   readonly isBusy: boolean;
   readonly isAuthenticated: boolean;
+  readonly searchTerm: string;
   signOut: (history: History) => ISignOutAction;
+  updateSearchTerm: (searchTerm: string) => IUpdateSearchTermAction;
 }
 
 class App extends React.Component<IAppProps> {
@@ -23,6 +27,7 @@ class App extends React.Component<IAppProps> {
     super(props);
 
     this.signOut = this.signOut.bind(this);
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
   }
 
   public render() {
@@ -31,7 +36,10 @@ class App extends React.Component<IAppProps> {
         <Header
           isBusy={this.props.isBusy}
           isAuthenticated={this.props.isAuthenticated}
+          currentLocation={this.props.location.pathname}
           handleSignOut={this.signOut}
+          searchTerm={this.props.searchTerm}
+          handleSearchTermChange={this.handleSearchTermChange}
         />
 
         <div className="container-fluid">
@@ -46,18 +54,26 @@ class App extends React.Component<IAppProps> {
 
     this.props.signOut(this.props.history);
   }
+
+  private handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const searchTerm = e.target.value;
+
+    this.props.updateSearchTerm(searchTerm);
+  }
 }
 
 function mapStateToProps(state: IStoreState) {
   return {
     isAuthenticated: state.isAuthenticated,
-    isBusy: isBusy(state.pendingActions)
+    isBusy: isBusy(state.pendingActions),
+    searchTerm: state.searchTerm
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
-    signOut: bindActionCreators(signOutAction, dispatch)
+    signOut: bindActionCreators(signOutAction, dispatch),
+    updateSearchTerm: bindActionCreators(updateSearchTermAction, dispatch)
   };
 }
 

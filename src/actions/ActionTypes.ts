@@ -40,6 +40,7 @@ import {
 } from "./site/add";
 import ISignInAction from "./authentication/ISignInAction";
 import ISignOutAction from "./authentication/ISignOutAction";
+import IUpdateSearchTermAction from "./searchTerm/IUpdateSearchTermAction";
 
 type ActionTypes =
   | IGetGroupsFailAction
@@ -67,6 +68,7 @@ type ActionTypes =
   | IAddGroupSuccessAction
   | IDeleteGroupFailAction
   | IDeleteGroupInProgressAction
-  | IDeleteGroupSuccessAction;
+  | IDeleteGroupSuccessAction
+  | IUpdateSearchTermAction;
 
 export default ActionTypes;
