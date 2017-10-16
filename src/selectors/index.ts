@@ -13,6 +13,27 @@ export function isBusy(pendingActions: number) {
   return pendingActions > 0;
 }
 
+export function filterGroupsAndSites(
+  groups: ReadonlyArray<IGroupWithSites>,
+  searchTerm: string
+): ReadonlyArray<IGroupWithSites> {
+  if (searchTerm.trim() !== "") {
+    // Search term populated;
+    return groups
+      .filter(group => {
+        return group.sites.some(site => site.name.includes(searchTerm));
+      })
+      .map(group => {
+        return {
+          ...group,
+          sites: group.sites.filter(site => site.name.includes(searchTerm))
+        };
+      });
+  } else {
+    return groups;
+  }
+}
+
 export function getGroupsWithSites(
   groupsFromState: ReadonlyArray<IGroup>,
   sitesFromState: ReadonlyArray<ISite>

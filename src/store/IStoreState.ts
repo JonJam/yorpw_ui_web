@@ -6,4 +6,5 @@ export default interface IStoreState {
   readonly sites: ReadonlyArray<ISite>;
   readonly pendingActions: number;
   readonly isAuthenticated: boolean;
+  readonly searchTerm: string;
 };

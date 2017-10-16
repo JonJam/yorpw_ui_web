@@ -8,9 +8,11 @@ import logo from "./logo.svg";
 import "./NavBar.css";
 
 interface INavBarProps {
+  readonly searchTerm: string;
   readonly isAuthenticated: boolean;
   readonly currentLocation: string;
   handleSignOut: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  handleSearchTermChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function NavBar(props: INavBarProps) {
@@ -59,8 +61,7 @@ export default function NavBar(props: INavBarProps) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* TODO Hide based on whether on sites page */}
-          <form className="form-inline d-none d-md-flex">
+          <form className={`form-inline ${searchDisplay}`}>
             <label className="sr-only" htmlFor="search">
               {strings.navBar.searchLabel}
             </label>
@@ -68,17 +69,20 @@ export default function NavBar(props: INavBarProps) {
               <div className="input-group-addon">
                 <span className="fa fa-search" aria-hidden="true" />
               </div>
-              {/* TODO Wireup */}
               <input
                 type="text"
                 className="form-control"
                 id="search"
                 placeholder={strings.navBar.searchPlaceholder}
+                value={props.searchTerm}
+                onChange={props.handleSearchTermChange}
               />
             </div>
           </form>
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">{authenticationLink}</li>
+            <li className="nav-item">
+              {authenticationLink}
+            </li>
           </ul>
         </div>
       </div>

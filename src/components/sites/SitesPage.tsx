@@ -6,7 +6,11 @@ import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import { groupPath, sitePath } from "../../routes/paths";
-import { getGroupsWithSites, isBusy } from "../../selectors";
+import {
+  filterGroupsAndSites,
+  getGroupsWithSites,
+  isBusy
+} from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import Footer from "./footer/Footer";
@@ -61,7 +65,10 @@ class SitesPage extends React.Component<ISitePagesProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    groups: getGroupsWithSites(state.groups, state.sites),
+    groups: filterGroupsAndSites(
+      getGroupsWithSites(state.groups, state.sites),
+      state.searchTerm
+    ),
     isBusy: isBusy(state.pendingActions)
   };
 }
