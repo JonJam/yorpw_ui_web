@@ -34,13 +34,21 @@ export default function PasswordInput(props: IPasswordInputProps) {
     label = strings.passwordInput.hidePasswordLabel;
   }
 
-  // bg-danger 0-25
-  // bg-warning 25-75
-  // bg-success 75 - 100
+  // zxcvbn().score is a number in range 0 (too guessable) - 4 (very unguessable).
+  let passwordScore = zxcvbn(props.value).score * 25;
+  // Adding some percentage for 0 in order that progress bar displays some red.
+  passwordScore = passwordScore === 0 ? 1 : passwordScore;
 
-  // // zxcvbn().score is a number in range 0 (too guessable) - 4 (very unguessable).
-  // this.passwordScore = zxcvbn(site.password).score * 25;
-  console.log(zxcvbn);
+  let strengthIndicatorColor = "bg-danger";
+  const strengthIndicatorStyle = {
+    width: `${passwordScore}%`
+  };
+
+  if (passwordScore >= 75) {
+    strengthIndicatorColor = "bg-success";
+  } else if (passwordScore > 25) {
+    strengthIndicatorColor = "bg-warning";
+  }
 
   return (
     <div className={formGroupClass}>
@@ -67,11 +75,11 @@ export default function PasswordInput(props: IPasswordInputProps) {
         </span>
       </div>
       <div className="progress">
-        {/* style="width: 25%; height: 4px;" */}
         <div
-          className="progress-bar bg-success"
+          className={`progress-bar ${strengthIndicatorColor}`}
+          style={strengthIndicatorStyle}
           role="progressbar"
-          aria-valuenow="25"
+          aria-valuenow={passwordScore}
           aria-valuemin="0"
           aria-valuemax="100"
         />
