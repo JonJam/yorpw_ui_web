@@ -1,4 +1,5 @@
 import * as React from "react";
+import zxcvbn from "zxcvbn";
 import strings from "../../../strings";
 import ValidationErrorMessage from "../../common/ValidationErrorMessage";
 
@@ -33,11 +34,25 @@ export default function PasswordInput(props: IPasswordInputProps) {
     label = strings.passwordInput.hidePasswordLabel;
   }
 
+  // zxcvbn().score is a number in range 0 (too guessable) - 4 (very unguessable).
+  let passwordScore = zxcvbn(props.value).score * 25;
+  // Adding some percentage for 0 in order that progress bar displays some red.
+  passwordScore = passwordScore === 0 ? 1 : passwordScore;
+
+  let strengthIndicatorColor = "bg-danger";
+  const strengthIndicatorStyle = {
+    width: `${passwordScore}%`
+  };
+
+  if (passwordScore >= 75) {
+    strengthIndicatorColor = "bg-success";
+  } else if (passwordScore > 25) {
+    strengthIndicatorColor = "bg-warning";
+  }
+
   return (
     <div className={formGroupClass}>
-      <label htmlFor={props.id}>
-        {props.label}
-      </label>
+      <label htmlFor={props.id}>{props.label}</label>
 
       <div className="input-group">
         <input
@@ -58,6 +73,16 @@ export default function PasswordInput(props: IPasswordInputProps) {
             {icon}
           </button>
         </span>
+      </div>
+      <div className="progress">
+        <div
+          className={`progress-bar ${strengthIndicatorColor}`}
+          style={strengthIndicatorStyle}
+          role="progressbar"
+          aria-valuenow={passwordScore}
+          aria-valuemin="0"
+          aria-valuemax="100"
+        />
       </div>
 
       <ValidationErrorMessage messages={props.validationErrors} />
