@@ -25,7 +25,7 @@ import "./SitePage.css";
 interface ISitePageProps extends RouteComponentProps<any> {
   readonly viewModel: SiteViewModel;
   readonly groups: ReadonlyArray<IGroup>;
-  readonly groupOptions: ReadonlyArray<ISelectOption>;
+  readonly groupOptions: ReadonlyArray<ISelectOption<string>>;
   updateSite: (
     site: ISite,
     oldGroup?: IGroup,
@@ -78,9 +78,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
           <div className="card">
             <div className="card-header">
               {title}
-              <h1 className="sr-only">
-                {title}
-              </h1>
+              <h1 className="sr-only">{title}</h1>
             </div>
             <div className="card-body">
               <SiteFrom
