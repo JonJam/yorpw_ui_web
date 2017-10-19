@@ -78,9 +78,7 @@ class SitePage extends React.Component<ISitePageProps, ISitePageState> {
           <div className="card">
             <div className="card-header">
               {title}
-              <h1 className="sr-only">
-                {title}
-              </h1>
+              <h1 className="sr-only">{title}</h1>
             </div>
             <div className="card-body">
               <SiteFrom

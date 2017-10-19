@@ -2,7 +2,18 @@ export default {
   footer: {
     add: "Expand to add",
     addGroup: "Add group",
-    addSite: "Add site"
+    addSite: "Add site",
+    generatePassword: "Generate password"
+  },
+  generatePasswordForm: {
+    cancelButton: "Cancel",
+    generateButton: "Generate",
+    lengthLabel: "Password length",
+    memorableLabel: "Memorable password",
+    passwordPlaceholder: "Generated password"
+  },
+  generatePasswordPage: {
+    title: "Generate password"
   },
   group: {
     editButton: "Edit group",

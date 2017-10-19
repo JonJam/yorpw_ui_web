@@ -8,10 +8,8 @@ interface IInputProps {
   readonly type: string;
   readonly placeholder: string;
   readonly value: any;
-  readonly validationErrors: ReadonlyArray<string> | undefined;
-  handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
+  readonly validationErrors?: ReadonlyArray<string>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Input(props: IInputProps) {
@@ -24,9 +22,7 @@ export default function Input(props: IInputProps) {
 
   return (
     <div className={formGroupClass}>
-      <label htmlFor={props.id}>
-        {props.label}
-      </label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         type={props.type}
         className={inputClass}
@@ -35,7 +31,9 @@ export default function Input(props: IInputProps) {
         value={props.value}
         onChange={props.handleChange}
       />
-      <ValidationErrorMessage messages={props.validationErrors} />
+      {props.validationErrors !== undefined ? (
+        <ValidationErrorMessage messages={props.validationErrors} />
+      ) : null}
     </div>
   );
 }

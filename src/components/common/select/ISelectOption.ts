@@ -1,4 +1,4 @@
 export default interface ISelectOption {
-  value: string;
+  value: number | string;
   display: string;
 };

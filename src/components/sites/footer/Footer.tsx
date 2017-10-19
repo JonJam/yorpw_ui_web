@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { groupPath, sitePath } from "../../../routes/paths";
+import {
+  generatePasswordPath,
+  groupPath,
+  sitePath
+} from "../../../routes/paths";
 import strings from "../../../strings";
 
 import "./Footer.css";
@@ -31,6 +35,9 @@ export default function Footer() {
                 </Link>
                 <Link to={sitePath} className="dropdown-item">
                   {strings.footer.addSite}
+                </Link>
+                <Link to={generatePasswordPath} className="dropdown-item">
+                  {strings.footer.generatePassword}
                 </Link>
               </div>
             </div>

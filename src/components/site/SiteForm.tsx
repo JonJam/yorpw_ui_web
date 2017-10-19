@@ -4,9 +4,9 @@ import SiteViewModel from "../../models/SiteViewModel";
 import strings from "../../strings";
 import { nameOf } from "../../utilities";
 import Input from "../common/Input";
+import PasswordInput from "../common/passwordInput/PasswordInput";
 import ISelectOption from "../common/select/ISelectOption";
 import Select from "../common/select/Select";
-import PasswordInput from "./passwordInput/PasswordInput";
 
 interface ISiteFormProps {
   readonly site: SiteViewModel;
@@ -43,6 +43,7 @@ export default function SiteForm(props: ISiteFormProps) {
           options={props.groupOptions}
           handleChange={props.handleValueChange}
           validationErrors={props.validationErrors[groupId]}
+          includeEmptyOption={true}
         />
       </div>
 
@@ -110,18 +111,18 @@ export default function SiteForm(props: ISiteFormProps) {
             {strings.siteForm.saveButton}
           </button>
         </div>
-        {props.isNewSite
-          ? null
-          : <div className="col-1">
-              <button
-                disabled={props.actionInProgress}
-                type="button"
-                className="btn btn-danger float-right"
-                onClick={props.handleDeleteClick}
-              >
-                {strings.siteForm.deleteButton}
-              </button>
-            </div>}
+        {props.isNewSite ? null : (
+          <div className="col-1">
+            <button
+              disabled={props.actionInProgress}
+              type="button"
+              className="btn btn-danger float-right"
+              onClick={props.handleDeleteClick}
+            >
+              {strings.siteForm.deleteButton}
+            </button>
+          </div>
+        )}
       </div>
     </form>
   );
