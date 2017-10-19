@@ -30,7 +30,7 @@ export default function GeneratePasswordForm(
     <form noValidate={true}>
       <div className="form-row">
         <PasswordInput
-          className="col-sm-12"
+          className="col-12"
           id={password}
           label={strings.siteForm.passwordLabel}
           placeholder={strings.generatePasswordForm.passwordPlaceholder}
