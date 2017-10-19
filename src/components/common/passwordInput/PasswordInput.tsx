@@ -1,7 +1,7 @@
 import * as React from "react";
 import zxcvbn from "zxcvbn";
 import strings from "../../../strings";
-import ValidationErrorMessage from "../../common/ValidationErrorMessage";
+import ValidationErrorMessage from "../ValidationErrorMessage";
 
 import "./PasswordInput.css";
 
@@ -12,9 +12,10 @@ interface IPasswordInputProps {
   readonly placeholder: string;
   readonly value: any;
   readonly showClear: boolean;
-  readonly validationErrors: ReadonlyArray<string> | undefined;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleToggleClick: () => void;
+  readonly isReadonly?: boolean;
+  readonly validationErrors?: ReadonlyArray<string>;
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleToggleClick?: () => void;
 }
 
 export default function PasswordInput(props: IPasswordInputProps) {
@@ -50,6 +51,16 @@ export default function PasswordInput(props: IPasswordInputProps) {
     strengthIndicatorColor = "bg-warning";
   }
 
+  const isReadonly = props.isReadonly !== undefined ? props.isReadonly : false;
+
+  /* tslint:disable:no-empty */
+  const handleInputChange =
+    props.handleInputChange !== undefined ? props.handleInputChange : () => {};
+
+  /* tslint:disable:no-empty */
+  const handleToggleClick =
+    props.handleToggleClick !== undefined ? props.handleToggleClick : () => {};
+
   return (
     <div className={formGroupClass}>
       <label htmlFor={props.id}>{props.label}</label>
@@ -61,18 +72,21 @@ export default function PasswordInput(props: IPasswordInputProps) {
           id={props.id}
           placeholder={props.placeholder}
           value={props.value}
-          onChange={props.handleInputChange}
+          onChange={handleInputChange}
+          readOnly={isReadonly}
         />
-        <span className="input-group-btn">
-          <button
-            className="btn btn-light"
-            type="button"
-            aria-label={label}
-            onClick={props.handleToggleClick}
-          >
-            {icon}
-          </button>
-        </span>
+        {isReadonly ? null : (
+          <span className="input-group-btn">
+            <button
+              className="btn btn-light"
+              type="button"
+              aria-label={label}
+              onClick={handleToggleClick}
+            >
+              {icon}
+            </button>
+          </span>
+        )}
       </div>
       <div className="progress">
         <div
@@ -84,8 +98,9 @@ export default function PasswordInput(props: IPasswordInputProps) {
           aria-valuemax="100"
         />
       </div>
-
-      <ValidationErrorMessage messages={props.validationErrors} />
+      {props.validationErrors !== undefined ? (
+        <ValidationErrorMessage messages={props.validationErrors} />
+      ) : null}
     </div>
   );
 }

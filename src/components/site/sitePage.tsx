@@ -25,7 +25,7 @@ import "./SitePage.css";
 interface ISitePageProps extends RouteComponentProps<any> {
   readonly viewModel: SiteViewModel;
   readonly groups: ReadonlyArray<IGroup>;
-  readonly groupOptions: ReadonlyArray<ISelectOption<string>>;
+  readonly groupOptions: ReadonlyArray<ISelectOption>;
   updateSite: (
     site: ISite,
     oldGroup?: IGroup,

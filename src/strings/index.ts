@@ -7,7 +7,10 @@ export default {
   },
   generatePasswordForm: {
     cancelButton: "Cancel",
-    generateButton: "Generate"
+    generateButton: "Generate",
+    lengthLabel: "Password length",
+    memorableLabel: "Memorable password",
+    passwordPlaceholder: "Generated password"
   },
   generatePasswordPage: {
     title: "Generate password"

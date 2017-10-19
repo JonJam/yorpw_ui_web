@@ -1,13 +1,11 @@
+import * as generatePassword from "password-generator";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import strings from "../../strings";
-import GeneratePasswordForm from "./GeneratePasswordForm";
-import * as generatePassword from "password-generator";
 import ISelectOption from "../common/select/ISelectOption";
+import GeneratePasswordForm from "./GeneratePasswordForm";
 
 import "./GeneratePasswordPage.css";
-
-interface IGeneratePasswordPageProps extends RouteComponentProps<any> {}
 
 interface IGeneratePasswordPageState {
   readonly length: number;
@@ -16,25 +14,24 @@ interface IGeneratePasswordPageState {
 }
 
 export default class GeneratePasswordPage extends React.Component<
-  IGeneratePasswordPageProps,
+  RouteComponentProps<any>,
   IGeneratePasswordPageState
 > {
-  private readonly lengthOptions: ReadonlyArray<ISelectOption<number>>;
+  private readonly lengthOptions: ReadonlyArray<ISelectOption>;
 
-  constructor(props: IGeneratePasswordPageProps) {
+  constructor(props: RouteComponentProps<any>) {
     super(props);
 
     // Generating list of numbers from 5 - 100.
-    this.lengthOptions = Array(100)
-      .map((_value, index) => {
-        const option: ISelectOption<number> = {
-          display: index.toString(),
-          value: index
-        };
+    /* tslint:disable:variable-name */
+    this.lengthOptions = Array.from(new Array(101), (_value, index) => {
+      const option: ISelectOption = {
+        display: index.toString(),
+        value: index
+      };
 
-        return option;
-      })
-      .slice(4);
+      return option;
+    }).slice(5);
 
     const length = 10;
     const memorable = false;
@@ -80,9 +77,11 @@ export default class GeneratePasswordPage extends React.Component<
   private handleValueChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
-    // TODO Test
     const propertyName = e.target.id;
-    const updatedValue = e.target.value;
+    const updatedValue =
+      e.target.type === "checkbox"
+        ? (e.target as HTMLInputElement).checked
+        : e.target.value;
 
     const updatedState = {
       ...this.state,
@@ -92,11 +91,14 @@ export default class GeneratePasswordPage extends React.Component<
     this.setState(updatedState);
   }
 
-  private async handleGenerateClick() {
-    // TODO Implement this
-    console.log("Clicked handleGenerateClick");
+  private async handleGenerateClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
 
-    // TODO Update state
+    const password = generatePassword(this.state.length, this.state.memorable);
+
+    this.setState({
+      password
+    });
   }
 
   private handleCancelClick() {

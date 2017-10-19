@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface IValidationErrorMessageProps {
-  readonly messages: ReadonlyArray<string> | undefined;
+  readonly messages: ReadonlyArray<string>;
 }
 
 export default function ValidationErrorMessage(
@@ -9,15 +9,11 @@ export default function ValidationErrorMessage(
 ) {
   let element: JSX.Element | null = null;
 
-  if (props.messages !== undefined && props.messages.length > 0) {
+  if (props.messages.length > 0) {
     element = (
       <div className="invalid-feedback">
         <ul className="list-unstyled">
-          {props.messages.map(m =>
-            <li key={m}>
-              {m}
-            </li>
-          )}
+          {props.messages.map(m => <li key={m}>{m}</li>)}
         </ul>
       </div>
     );

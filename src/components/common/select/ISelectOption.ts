@@ -1,4 +1,4 @@
-export default interface ISelectOption<T> {
-  value: T;
+export default interface ISelectOption {
+  value: number | string;
   display: string;
 };

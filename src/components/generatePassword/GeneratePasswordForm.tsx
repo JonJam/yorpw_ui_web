@@ -1,19 +1,17 @@
 import * as React from "react";
 import strings from "../../strings";
 import { nameOf } from "../../utilities";
-import Input from "../common/Input";
+import Checkbox from "../common/Checkbox";
+import PasswordInput from "../common/passwordInput/PasswordInput";
 import ISelectOption from "../common/select/ISelectOption";
 import Select from "../common/select/Select";
 
-// TODO Add validation / in progress disabling (Use SiteForm as basis)
-
-// TODO Add required props
 interface IGeneratePasswordFormProps {
   readonly length: number;
-  readonly lengthOptions: ReadonlyArray<ISelectOption<number>>;
+  readonly lengthOptions: ReadonlyArray<ISelectOption>;
   readonly memorable: boolean;
   readonly password: string;
-  handleGenerateClick: () => void;
+  handleGenerateClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleCancelClick: () => void;
   handleValueChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -25,13 +23,22 @@ export default function GeneratePasswordForm(
 ) {
   const length = nameOf<IGeneratePasswordFormProps>("length");
   const memorable = nameOf<IGeneratePasswordFormProps>("memorable");
+  const password = nameOf<IGeneratePasswordFormProps>("password");
 
   return (
     // Disabling browser default feedback tooltips using novalidate
     <form noValidate={true}>
-      {/*
-      TODO Add output (not sure whether here or at page level)
-      TODO Add inputs */}
+      <div className="form-row">
+        <PasswordInput
+          className="col-sm-12"
+          id={password}
+          label={strings.siteForm.passwordLabel}
+          placeholder={strings.generatePasswordForm.passwordPlaceholder}
+          value={props.password}
+          showClear={true}
+          isReadonly={true}
+        />
+      </div>
       <div className="form-row">
         <Select
           className="col-12"
@@ -40,30 +47,16 @@ export default function GeneratePasswordForm(
           label={strings.generatePasswordForm.lengthLabel}
           options={props.lengthOptions}
           handleChange={props.handleValueChange}
-          validationErrors={props.validationErrors[groupId]}
         />
       </div>
 
       <div className="form-row">
-        <Input
-          className="col-6"
-          id={name}
-          label={strings.siteForm.nameLabel}
-          type="text"
-          placeholder={strings.siteForm.namePlaceholder}
-          value={props.site.name}
+        <Checkbox
+          className="col-12"
+          id={memorable}
+          label={strings.generatePasswordForm.memorableLabel}
+          value={props.memorable}
           handleChange={props.handleValueChange}
-          validationErrors={props.validationErrors[name]}
-        />
-        <Input
-          className="col-6"
-          id={url}
-          label={strings.siteForm.urlLabel}
-          type="url"
-          placeholder={strings.siteForm.urlPlaceholder}
-          value={props.site.url}
-          handleChange={props.handleValueChange}
-          validationErrors={props.validationErrors[url]}
         />
       </div>
 
@@ -77,7 +70,6 @@ export default function GeneratePasswordForm(
             {strings.generatePasswordForm.cancelButton}
           </button>
           <button
-            /* disabled={props.actionInProgress} */
             type="submit"
             className="btn btn-primary ml-1"
             onClick={props.handleGenerateClick}
