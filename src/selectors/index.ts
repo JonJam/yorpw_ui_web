@@ -5,6 +5,7 @@ import IGroupWithSites from "../models/IGroupWithSites";
 import ISite from "../models/ISite";
 import IStoreState from "../store/IStoreState";
 
+// Derived data selectors = using reselect
 const pendingActionsSelector = (state: IStoreState) => state.pendingActions;
 const groupsSelector = (state: IStoreState) => state.groups;
 const sitesSelector = (state: IStoreState) => state.sites;
@@ -43,7 +44,6 @@ const getGroupsWithSitesSelector = createSelector(
   }
 );
 
-// Derived data selectors = using reselect.
 export const isBusy = createSelector(
   [pendingActionsSelector],
   pendingActions => pendingActions > 0
@@ -53,7 +53,6 @@ export const filterGroupsAndSites = createSelector(
   [getGroupsWithSitesSelector, searchTermSelector],
   (groups, searchTerm) => {
     if (searchTerm.trim() !== "") {
-      // Search term populated;
       return groups
         .filter(group => {
           return group.sites.some(site => site.name.includes(searchTerm));
