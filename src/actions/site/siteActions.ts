@@ -31,17 +31,16 @@ import {
   IUpdateSiteSuccessAction
 } from "./update";
 
-export function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
-  return async (dispatch: Dispatch<IStoreState>) => {
-    // Signal work in progress.
-    dispatch(getSitesInProgress());
-
-    try {
-      const sites: ISite[] = await getSitesFromApi();
-
-      dispatch(getSitesSuccess(sites));
-    } catch (err) {
-      dispatch(getSitesFail(err));
+export function getSitesIfNeeded(): (
+  dispatch: Dispatch<IStoreState>,
+  getState: () => IStoreState
+) => Promise<void> {
+  return async (
+    dispatch: Dispatch<IStoreState>,
+    getState: () => IStoreState
+  ) => {
+    if (shouldGetSites(getState())) {
+      await dispatch(getSites());
     }
   };
 }
@@ -136,6 +135,31 @@ export function addSite(
       dispatch(addSiteSuccess(addedSite));
     } catch (err) {
       dispatch(addSiteFail(err));
+    }
+  };
+}
+
+function shouldGetSites(state: IStoreState) {
+  const sites = state.sites;
+  if (sites.items.length === 0) {
+    // This may lead to still calling API multiple times if sites is empty.
+    return true;
+  } else {
+    return !sites.isFetching;
+  }
+}
+
+function getSites(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(getSitesInProgress());
+
+    try {
+      const sites: ISite[] = await getSitesFromApi();
+
+      dispatch(getSitesSuccess(sites));
+    } catch (err) {
+      dispatch(getSitesFail(err));
     }
   };
 }

@@ -1,7 +1,14 @@
-export default {
+import IStoreState from "../store/IStoreState";
+
+const defaultState: IStoreState = {
   groups: [],
   isAuthenticated: false,
   pendingActions: 0,
   searchTerm: "",
-  sites: []
+  sites: {
+    isFetching: false,
+    items: []
+  }
 };
+
+export default defaultState;

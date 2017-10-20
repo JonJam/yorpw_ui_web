@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
-import { getSites as getSitesAction } from "../../actions/site/siteActions";
+import { getSitesIfNeeded as getSitesIfNeededAction } from "../../actions/site/siteActions";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import { groupPath, sitePath } from "../../routes/paths";
 import { filterGroupsAndSites, isBusy } from "../../selectors";
@@ -16,7 +16,10 @@ interface ISitePagesProps extends RouteComponentProps<any> {
   readonly groups: ReadonlyArray<IGroupWithSites>;
   readonly isBusy: boolean;
   getGroups: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
-  getSites: () => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  getSitesIfNeeded: () => (
+    dispatch: Dispatch<IStoreState>,
+    getState: () => IStoreState
+  ) => Promise<void>;
 }
 
 class SitesPage extends React.Component<ISitePagesProps> {
@@ -30,7 +33,9 @@ class SitesPage extends React.Component<ISitePagesProps> {
   public componentDidMount() {
     // TODO improve this so not calling everytime page loads ?
     this.props.getGroups();
-    this.props.getSites();
+
+    // TODO test this
+    this.props.getSitesIfNeeded();
   }
 
   public render() {
@@ -67,7 +72,7 @@ function mapStateToProps(state: IStoreState) {
 function mapDispatchToProps(dispatch: Dispatch<IStoreState>) {
   return {
     getGroups: bindActionCreators(getGroupsAction, dispatch),
-    getSites: bindActionCreators(getSitesAction, dispatch)
+    getSitesIfNeeded: bindActionCreators(getSitesIfNeededAction, dispatch)
   };
 }
 
