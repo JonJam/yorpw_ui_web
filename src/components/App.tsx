@@ -65,7 +65,7 @@ class App extends React.Component<IAppProps> {
 function mapStateToProps(state: IStoreState) {
   return {
     isAuthenticated: state.isAuthenticated,
-    isBusy: isBusy(state.pendingActions),
+    isBusy: isBusy(state),
     searchTerm: state.searchTerm
   };
 }

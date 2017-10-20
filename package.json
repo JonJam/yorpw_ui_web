@@ -21,6 +21,7 @@
     "react-scripts-ts": "2.7.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "toastr": "^2.1.2",
     "zxcvbn": "^4.4.2"
   },

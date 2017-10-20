@@ -1,83 +1,94 @@
+import { createSelector } from "reselect";
 import ISelectOption from "../components/common/select/ISelectOption";
 import IGroup from "../models/IGroup";
 import IGroupWithSites from "../models/IGroupWithSites";
 import ISite from "../models/ISite";
+import IStoreState from "../store/IStoreState";
 
-// TODO Refactor these to use reselect see http://redux.js.org/docs/recipes/ComputingDerivedData.html
+const pendingActionsSelector = (state: IStoreState) => state.pendingActions;
+const groupsSelector = (state: IStoreState) => state.groups;
+const sitesSelector = (state: IStoreState) => state.sites;
+const searchTermSelector = (state: IStoreState) => state.searchTerm;
+const getGroupsWithSitesSelector = createSelector(
+  [groupsSelector, sitesSelector],
+  (
+    groupsFromState: ReadonlyArray<IGroup>,
+    sitesFromState: ReadonlyArray<ISite>
+  ) => {
+    const sortedGroups = [...groupsFromState].sort(groupCompare);
 
+    return sortedGroups.map(group => {
+      const { id, name } = group;
+      const sites: ISite[] = [];
+
+      group.siteIds.forEach(siteId => {
+        const site = sitesFromState.find(s => s.id === siteId);
+
+        if (site !== undefined) {
+          sites.push({ ...site });
+        }
+      });
+
+      sites.sort(siteCompare);
+
+      const groupWithSites: IGroupWithSites = {
+        id,
+        name,
+        siteIds: group.siteIds,
+        sites
+      };
+
+      return groupWithSites;
+    }) as ReadonlyArray<IGroupWithSites>;
+  }
+);
+
+// Derived data selectors = using reselect.
+export const isBusy = createSelector(
+  [pendingActionsSelector],
+  pendingActions => pendingActions > 0
+);
+
+export const filterGroupsAndSites = createSelector(
+  [getGroupsWithSitesSelector, searchTermSelector],
+  (groups, searchTerm) => {
+    if (searchTerm.trim() !== "") {
+      // Search term populated;
+      return groups
+        .filter(group => {
+          return group.sites.some(site => site.name.includes(searchTerm));
+        })
+        .map(group => {
+          return {
+            ...group,
+            sites: group.sites.filter(site => site.name.includes(searchTerm))
+          };
+        });
+    } else {
+      return groups;
+    }
+  }
+);
+
+export const getGroupOptions = createSelector(
+  [groupsSelector],
+  groupsFromState => {
+    const sortedGroups = [...groupsFromState].sort(groupCompare);
+
+    return sortedGroups.map(g => {
+      const option: ISelectOption = {
+        display: g.name,
+        value: g.id
+      };
+
+      return option;
+    }) as ReadonlyArray<ISelectOption>;
+  }
+);
+
+// Non-derived data selectors.
 export function getSiteById(sites: ReadonlyArray<ISite>, siteId: string) {
   return sites.find(s => s.id === siteId);
-}
-
-export function isBusy(pendingActions: number) {
-  return pendingActions > 0;
-}
-
-export function filterGroupsAndSites(
-  groups: ReadonlyArray<IGroupWithSites>,
-  searchTerm: string
-): ReadonlyArray<IGroupWithSites> {
-  if (searchTerm.trim() !== "") {
-    // Search term populated;
-    return groups
-      .filter(group => {
-        return group.sites.some(site => site.name.includes(searchTerm));
-      })
-      .map(group => {
-        return {
-          ...group,
-          sites: group.sites.filter(site => site.name.includes(searchTerm))
-        };
-      });
-  } else {
-    return groups;
-  }
-}
-
-export function getGroupsWithSites(
-  groupsFromState: ReadonlyArray<IGroup>,
-  sitesFromState: ReadonlyArray<ISite>
-): ReadonlyArray<IGroupWithSites> {
-  const sortedGroups = [...groupsFromState].sort(groupCompare);
-
-  return sortedGroups.map(group => {
-    const { id, name } = group;
-    const sites: ISite[] = [];
-
-    group.siteIds.forEach(siteId => {
-      const site = sitesFromState.find(s => s.id === siteId);
-
-      if (site !== undefined) {
-        sites.push({ ...site });
-      }
-    });
-
-    sites.sort(siteCompare);
-
-    const groupWithSites: IGroupWithSites = {
-      id,
-      name,
-      siteIds: group.siteIds,
-      sites
-    };
-
-    return groupWithSites;
-  });
-}
-
-export function getGroupOptions(
-  groupsFromState: ReadonlyArray<IGroup>
-): ReadonlyArray<ISelectOption> {
-  const sortedGroups = [...groupsFromState].sort(groupCompare);
-
-  return sortedGroups.map(g => {
-    const option: ISelectOption = {
-      display: g.name,
-      value: g.id
-    };
-
-    return option;
-  });
 }
 
 export function getGroupForSite(
