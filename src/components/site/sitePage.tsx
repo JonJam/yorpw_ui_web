@@ -231,7 +231,7 @@ function mapStateToProps(
   }
 
   return {
-    groupOptions: getGroupOptions(state.groups),
+    groupOptions: getGroupOptions(state),
     groups: state.groups,
     viewModel: siteViewModel
   };

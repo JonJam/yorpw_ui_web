@@ -6,11 +6,7 @@ import { getGroups as getGroupsAction } from "../../actions/group/groupActions";
 import { getSites as getSitesAction } from "../../actions/site/siteActions";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import { groupPath, sitePath } from "../../routes/paths";
-import {
-  filterGroupsAndSites,
-  getGroupsWithSites,
-  isBusy
-} from "../../selectors";
+import { filterGroupsAndSites, isBusy } from "../../selectors";
 import IStoreState from "../../store/IStoreState";
 import strings from "../../strings";
 import Footer from "./footer/Footer";
@@ -40,9 +36,7 @@ class SitesPage extends React.Component<ISitePagesProps> {
   public render() {
     return (
       <div>
-        <h1 className="sr-only">
-          {strings.sitesPage.title}
-        </h1>
+        <h1 className="sr-only">{strings.sitesPage.title}</h1>
         <GroupList
           groups={this.props.groups}
           isBusy={this.props.isBusy}
@@ -65,11 +59,8 @@ class SitesPage extends React.Component<ISitePagesProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    groups: filterGroupsAndSites(
-      getGroupsWithSites(state.groups, state.sites),
-      state.searchTerm
-    ),
-    isBusy: isBusy(state.pendingActions)
+    groups: filterGroupsAndSites(state),
+    isBusy: isBusy(state)
   };
 }
 
