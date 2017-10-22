@@ -30,19 +30,16 @@ import {
   IUpdateGroupSuccessAction
 } from "./update";
 
-export function getGroups(): (
-  dispatch: Dispatch<IStoreState>
+export function getGroupssIfNeeded(): (
+  dispatch: Dispatch<IStoreState>,
+  getState: () => IStoreState
 ) => Promise<void> {
-  return async (dispatch: Dispatch<IStoreState>) => {
-    // Signal work in progress.
-    dispatch(getGroupsInProgress());
-
-    try {
-      const groups: IGroup[] = await getGroupsFromApi();
-
-      dispatch(getGroupsSuccess(groups));
-    } catch (err) {
-      dispatch(getGroupsFail(err));
+  return async (
+    dispatch: Dispatch<IStoreState>,
+    getState: () => IStoreState
+  ) => {
+    if (shouldGetGroups(getState())) {
+      await dispatch(getGroups());
     }
   };
 }
@@ -101,6 +98,32 @@ export function deleteGroup(
       dispatch(deleteGroupSuccess(group.id));
     } catch (err) {
       dispatch(deleteGroupFail(err));
+    }
+  };
+}
+
+function shouldGetGroups(state: IStoreState) {
+  const groupsState = state.sites;
+  if (groupsState.lastUpdated == null) {
+    return true;
+  } else if (groupsState.isFetching) {
+    return false;
+  } else {
+    return false;
+  }
+}
+
+function getGroups(): (dispatch: Dispatch<IStoreState>) => Promise<void> {
+  return async (dispatch: Dispatch<IStoreState>) => {
+    // Signal work in progress.
+    dispatch(getGroupsInProgress());
+
+    try {
+      const groups: IGroup[] = await getGroupsFromApi();
+
+      dispatch(getGroupsSuccess(groups));
+    } catch (err) {
+      dispatch(getGroupsFail(err));
     }
   };
 }

@@ -2,7 +2,7 @@ import IGroup from "../models/IGroup";
 import ISite from "../models/ISite";
 
 export default interface IStoreState {
-  readonly groups: ReadonlyArray<IGroup>;
+  readonly groups: IGroupsStoreState;
   readonly sites: ISitesStoreState;
   readonly pendingActions: number;
   readonly isAuthenticated: boolean;
@@ -12,5 +12,11 @@ export default interface IStoreState {
 export interface ISitesStoreState {
   isFetching: boolean;
   items: ReadonlyArray<ISite>;
+  lastUpdated: Date | null;
+}
+
+export interface IGroupsStoreState {
+  isFetching: boolean;
+  items: ReadonlyArray<IGroup>;
   lastUpdated: Date | null;
 }

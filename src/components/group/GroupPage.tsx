@@ -66,9 +66,7 @@ class GroupPage extends React.Component<IGroupPageProps, IGroupPageState> {
           <div className="card">
             <div className="card-header">
               {title}
-              <h1 className="sr-only">
-                {title}
-              </h1>
+              <h1 className="sr-only">{title}</h1>
             </div>
             <div className="card-body">
               <GroupFrom
@@ -173,7 +171,7 @@ function mapStateToProps(
   let groupViewModel = new GroupViewModel();
 
   if (groupId !== undefined) {
-    const group = getGroupById(state.groups, groupId);
+    const group = getGroupById(state.groups.items, groupId);
 
     if (group !== undefined) {
       // We may get undefined as a result of:

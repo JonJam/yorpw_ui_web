@@ -4,11 +4,11 @@ import { IAddGroupSuccessAction } from "../actions/group/add";
 import { IDeleteGroupSuccessAction } from "../actions/group/delete";
 import { IGetGroupsSuccessAction } from "../actions/group/get";
 import { IUpdateGroupSuccessAction } from "../actions/group/update";
-import IGroup from "../models/IGroup";
+import { IGroupsStoreState } from "../store/IStoreState";
 import initialState from "./initialState";
 
 export default function groupsReducer(
-  state: ReadonlyArray<IGroup> = initialState.groups,
+  state: IGroupsStoreState = initialState.groups,
   action: ActionTypes
 ) {
   switch (action.type) {
@@ -20,35 +20,64 @@ export default function groupsReducer(
       return onAddGroupSuccess(action, state);
     case ActionTypeKeys.DELETE_GROUP_SUCCESS:
       return onDeleteGroupSuccess(action, state);
+    case ActionTypeKeys.GET_GROUPS_INPROGRESS:
+      return onGetGroupsInProgress(state);
     default:
       return state;
   }
 }
 
 function onGetGroupsSuccess(action: IGetGroupsSuccessAction) {
-  return action.payload.groups;
+  return {
+    isFetching: false,
+    items: action.payload.groups,
+    lastUpdated: Date.now()
+  };
 }
 
 function onUpdateGroupSuccess(
   action: IUpdateGroupSuccessAction,
-  currentState: ReadonlyArray<IGroup>
+  currentState: IGroupsStoreState
 ) {
-  return [
-    ...currentState.filter(group => group.id !== action.payload.group.id),
-    { ...action.payload.group }
-  ];
+  return {
+    ...currentState,
+    items: [
+      ...currentState.items.filter(
+        group => group.id !== action.payload.group.id
+      ),
+      { ...action.payload.group }
+    ],
+    lastUpdated: Date.now()
+  };
 }
 
 function onAddGroupSuccess(
   action: IAddGroupSuccessAction,
-  currentState: ReadonlyArray<IGroup>
+  currentState: IGroupsStoreState
 ) {
-  return [...currentState, { ...action.payload.group }];
+  return {
+    ...currentState,
+    items: [...currentState.items, { ...action.payload.group }],
+    lastUpdated: Date.now()
+  };
 }
 
 function onDeleteGroupSuccess(
   action: IDeleteGroupSuccessAction,
-  currentState: ReadonlyArray<IGroup>
+  currentState: IGroupsStoreState
 ) {
-  return [...currentState.filter(group => group.id !== action.payload.groupId)];
+  return {
+    ...currentState,
+    items: [
+      ...currentState.items.filter(group => group.id !== action.payload.groupId)
+    ],
+    lastUpdated: Date.now()
+  };
+}
+
+function onGetGroupsInProgress(currentState: IGroupsStoreState) {
+  return {
+    ...currentState,
+    isFetching: true
+  };
 }

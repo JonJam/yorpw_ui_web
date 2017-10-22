@@ -1,7 +1,11 @@
 import IStoreState from "../store/IStoreState";
 
 const defaultState: IStoreState = {
-  groups: [],
+  groups: {
+    isFetching: false,
+    items: [],
+    lastUpdated: null
+  },
   isAuthenticated: false,
   pendingActions: 0,
   searchTerm: "",
