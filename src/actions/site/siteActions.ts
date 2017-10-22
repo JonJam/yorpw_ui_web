@@ -140,12 +140,13 @@ export function addSite(
 }
 
 function shouldGetSites(state: IStoreState) {
-  const sites = state.sites;
-  if (sites.items.length === 0) {
-    // This may lead to still calling API multiple times if sites is empty.
+  const sitesState = state.sites;
+  if (sitesState.lastUpdated == null) {
     return true;
+  } else if (sitesState.isFetching) {
+    return false;
   } else {
-    return !sites.isFetching;
+    return false;
   }
 }
 

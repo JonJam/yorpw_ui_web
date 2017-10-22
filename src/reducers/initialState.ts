@@ -7,7 +7,8 @@ const defaultState: IStoreState = {
   searchTerm: "",
   sites: {
     isFetching: false,
-    items: []
+    items: [],
+    lastUpdated: null
   }
 };
 

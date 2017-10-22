@@ -9,8 +9,8 @@ export default interface IStoreState {
   readonly searchTerm: string;
 };
 
-// TODO may need to add null to items ?
 export interface ISitesStoreState {
   isFetching: boolean;
   items: ReadonlyArray<ISite>;
+  lastUpdated: Date | null;
 }

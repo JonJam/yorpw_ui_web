@@ -4,8 +4,8 @@ import { IAddSiteSuccessAction } from "../actions/site/add";
 import { IDeleteSiteSuccessAction } from "../actions/site/delete";
 import { IGetSitesSuccessAction } from "../actions/site/get";
 import { IUpdateSiteSuccessAction } from "../actions/site/update";
-import initialState from "./initialState";
 import { ISitesStoreState } from "../store/IStoreState";
+import initialState from "./initialState";
 
 export default function sitesReducer(
   state: ISitesStoreState = initialState.sites,
@@ -30,7 +30,8 @@ export default function sitesReducer(
 function onGetSitesSuccess(action: IGetSitesSuccessAction) {
   return {
     isFetching: false,
-    items: action.payload.sites
+    items: action.payload.sites,
+    lastUpdated: Date.now()
   };
 }
 
@@ -43,7 +44,8 @@ function onUpdateSiteSuccess(
     items: [
       currentState.items.filter(site => site.id !== action.payload.site.id),
       { ...action.payload.site }
-    ]
+    ],
+    lastUpdated: Date.now()
   };
 }
 
@@ -55,7 +57,8 @@ function onDeleteSiteSuccess(
     ...currentState,
     items: [
       ...currentState.items.filter(site => site.id !== action.payload.siteId)
-    ]
+    ],
+    lastUpdated: Date.now()
   };
 }
 
@@ -65,7 +68,8 @@ function onAddSiteSuccess(
 ) {
   return {
     ...currentState,
-    items: [...currentState.items, { ...action.payload.site }]
+    items: [...currentState.items, { ...action.payload.site }],
+    lastUpdated: Date.now()
   };
 }
 

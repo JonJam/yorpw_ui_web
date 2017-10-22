@@ -8,7 +8,7 @@ import IStoreState from "../store/IStoreState";
 // Derived data selectors = using reselect
 const pendingActionsSelector = (state: IStoreState) => state.pendingActions;
 const groupsSelector = (state: IStoreState) => state.groups;
-const sitesSelector = (state: IStoreState) => state.sites;
+const sitesSelector = (state: IStoreState) => state.sites.items;
 const searchTermSelector = (state: IStoreState) => state.searchTerm;
 const getGroupsWithSitesSelector = createSelector(
   [groupsSelector, sitesSelector],

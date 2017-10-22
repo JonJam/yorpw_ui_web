@@ -217,7 +217,7 @@ function mapStateToProps(
   let siteViewModel = new SiteViewModel();
 
   if (siteId !== undefined) {
-    const site = getSiteById(state.sites, siteId);
+    const site = getSiteById(state.sites.items, siteId);
     const group = getGroupForSite(state.groups, siteId);
 
     if (site !== undefined && group !== undefined) {
