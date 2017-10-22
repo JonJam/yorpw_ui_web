@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
-import { getGroupssIfNeeded as getGroupsIfNeededAction } from "../../actions/group/groupActions";
+import { getGroupsIfNeeded as getGroupsIfNeededAction } from "../../actions/group/groupActions";
 import { getSitesIfNeeded as getSitesIfNeededAction } from "../../actions/site/siteActions";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import { groupPath, sitePath } from "../../routes/paths";

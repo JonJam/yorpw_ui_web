@@ -30,7 +30,7 @@ import {
   IUpdateGroupSuccessAction
 } from "./update";
 
-export function getGroupssIfNeeded(): (
+export function getGroupsIfNeeded(): (
   dispatch: Dispatch<IStoreState>,
   getState: () => IStoreState
 ) => Promise<void> {
