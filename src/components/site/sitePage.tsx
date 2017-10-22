@@ -217,8 +217,8 @@ function mapStateToProps(
   let siteViewModel = new SiteViewModel();
 
   if (siteId !== undefined) {
-    const site = getSiteById(state.sites, siteId);
-    const group = getGroupForSite(state.groups, siteId);
+    const site = getSiteById(state.sites.items, siteId);
+    const group = getGroupForSite(state.groups.items, siteId);
 
     if (site !== undefined && group !== undefined) {
       // We may get undefined as a result of:
@@ -232,7 +232,7 @@ function mapStateToProps(
 
   return {
     groupOptions: getGroupOptions(state),
-    groups: state.groups,
+    groups: state.groups.items,
     viewModel: siteViewModel
   };
 }
