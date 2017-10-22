@@ -104,7 +104,7 @@ export function deleteGroup(
 
 function shouldGetGroups(state: IStoreState) {
   const groupsState = state.sites;
-  if (groupsState.lastUpdated == null) {
+  if (groupsState.lastUpdated === null) {
     return true;
   } else if (groupsState.isFetching) {
     return false;

@@ -141,7 +141,7 @@ export function addSite(
 
 function shouldGetSites(state: IStoreState) {
   const sitesState = state.sites;
-  if (sitesState.lastUpdated == null) {
+  if (sitesState.lastUpdated === null) {
     return true;
   } else if (sitesState.isFetching) {
     return false;
