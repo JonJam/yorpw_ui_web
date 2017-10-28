@@ -4,8 +4,8 @@ import Error404Page from "../components/errors/Error404Page";
 import GeneratePasswordPage from "../components/generatePassword/GeneratePasswordPage";
 import GroupPage from "../components/group/GroupPage";
 import HomePage from "../components/home/HomePage";
-import SignUpPage from "../components/signUp/SignUpPage";
-import SitePage from "../components/site/SitePage";
+import SignUpPage from "../components/signup/SignUpPage";
+import SitePage from "../components/site/sitePage";
 import SitesPage from "../components/sites/SitesPage";
 import AuthenticateRoute from "./AuthenticateRoute";
 import {

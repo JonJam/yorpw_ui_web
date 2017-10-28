@@ -2,7 +2,7 @@ import * as React from "react";
 import IGroupWithSites from "../../models/IGroupWithSites";
 import strings from "../../strings";
 import EmptyMessage from "../common/EmptyMessage";
-import Group from "./group/Group";
+import Group from "./Group/Group";
 
 interface IGroupListProps {
   readonly groups: ReadonlyArray<IGroupWithSites>;
@@ -27,11 +27,7 @@ function GroupList(props: IGroupListProps) {
       );
     });
 
-    element = (
-      <div data-children=".item">
-        {groupItems}
-      </div>
-    );
+    element = <div data-children=".item">{groupItems}</div>;
   } else if (!props.isBusy) {
     element = (
       <EmptyMessage
@@ -43,9 +39,7 @@ function GroupList(props: IGroupListProps) {
 
   return (
     <div className="row">
-      <div className="col-12 mt-3">
-        {element}
-      </div>
+      <div className="col-12 mt-3">{element}</div>
     </div>
   );
 }
